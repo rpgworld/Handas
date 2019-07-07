@@ -110,6 +110,20 @@ padding: 2.5625rem;
 }
 }
 </style>
+<script>
+$('document').ready(function(){
+   
+    /* 전체 메뉴 토글 버튼 이벤트 */
+    $('.menu_toggle_btn').click(function(){
+        var name = $('.menu_toggle_btn').attr('class');
+        alert(name);
+        $('.sub_info_cart').stop().slideToggle('fast');
+        // stop() : 현재 실행중인 효과를 모두 중지, slideToggle : 숨겨진 요소를 펴고 접는 기능
+    });
+});
+
+
+</script>
 </head>
 <body>
 <div id="wrap">
@@ -148,6 +162,8 @@ padding: 2.5625rem;
                 <li><a href="#">고객센터</a></li>
             </ul>
         </div>
+
+        <span class="menu_toggle_btn">후호</span>
     </div>
     <div class="slider_section">
         <img src="./images/s_images/bxslider1.png" alt="광고1">
