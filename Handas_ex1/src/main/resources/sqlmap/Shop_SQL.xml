@@ -6,9 +6,13 @@
 <mapper namespace="com.spring.handas.dao.ShopDao">
 	
 	<select id="shopList" resultType="com.spring.handas.dto.ShopDto">
-		SELECT * FROM (SELECT ROWNUM rnum, snum, name, item, price, item_desc, img1, img2, write_date 
-		FROM ( SELECT * FROM handas_shop ORDER BY snum desc ) handas_shop) 
+		SELECT * FROM (SELECT ROWNUM rnum, pnum, pname, item, price, pdesc, img1, img2, write_date 
+		FROM ( SELECT * FROM handas_shop ORDER BY pnum desc ) handas_shop) 
 		WHERE rnum &gt;= 1 and rnum &lt;= 10
 	</select>
+	
+	<insert id="shopWrite" parameterType="map">
+		INSERT INTO handas_shop VALUES(handas_shop_seq.nextval, #{pname}, #{item}, #{price}, #{pdesc}, #{img1}, #{img2}, sysdate)
+	</insert>
 
 </mapper>

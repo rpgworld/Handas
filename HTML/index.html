@@ -2,68 +2,161 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, mininum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HANDAS</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+    <link rel="stylesheet" href="./css/reset.css">
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>Handas</title>
 <style>
+/* 모바일 css */
+/* 기본 css */
+#wrap {
+width: 90%;
+margin: 0 auto;
+max-width: 1200px;
+display: flex;
+flex-flow: column;
+}
+/* 헤더 영역 */
+.header{
+display: flex;
+flex-flow: column;
+}
+.logo {
+width: 300px;
+height: 100px;
+}
+.gnb {
+display: flex;
+flex-flow: column;
+}
+.gnb li{
+padding: 30px;
+}
+.sub_info_cart, .sub_info_user, .sub_info_search {
+display: none;
+}
+/* 슬라이더영역 */
+.slider_section img{
+width: 100%;
+}
 
+/* 태블릿 css */
+@media all and (min-width: 600px) {
+/* 인포 영역 */
+.info_section {
+height: 70px;
+position: absolute;
+right: 10%;
+top: 2px;
+z-index: 30;
+display: flex;
+}
+.info1 {
+display: flex;
+align-items: flex-end;
+}
+.info1 a{
+border: 1px solid #d9d9d9;
+border-radius: 4px;
+padding: 10px;
+text-align: center;
+margin-right: 10px;
+}
+.info1 img{
+width: 20px;
+margin-right: 2px;
+}
+.info2 ul {
+text-align: right;
+margin: 7px;
+}
+.info2 ul li{
+display: inline;
+}
+.info2 .info_search {
+padding: 8px;
+background-image : url('./images/s_images/cart_18dp.png'); 
+background-position:center; 
+background-repeat:no-repeat;
+background-size: 20px;
+background-position-x: 5px;
+text-indent: 20px;
+}
+/* 헤더영역 */
+.logo {
+width: 300px;
+height: 100px;
+}
+.gnb {
+flex-flow: row nowrap;
+}
+.gnb li{
+flex-flow: row;
+font-size: 1.15em;
+font-size: 1.15rem;
+}
+}
+
+/* PC css */
+@media all and (min-width: 1140px) {
+/* 헤더영역 */
+.header{
+flex-flow: row;
+}
+.gnb li {
+padding: 41px;
+padding: 2.5625rem;
+}
+}
 </style>
-<script>
-$('document').ready(function(){
-    
-});
-</script>
 </head>
 <body>
-    <div id="wrap">
-        <header class="header">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
-                <a class="navbar-brand" href="#">HANDAS</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarsExample09">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">메인 <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">상품목록</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">고객센터</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" href="#">관리자</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="flag-icon flag-icon-us"> </span> 접속하기</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown09">
-                                <a class="dropdown-item" href="#fr">로그인</a>
-                                <a class="dropdown-item" href="#it">회원가입</a>
-                            </div>
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-md-0">
-                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                    </form>
-                </div>
-            </nav>
-        </header>
-        
-        <section class="content_section">
-            <div class="container">
-                <!-- 여기에 작성해주셈 -->
-
-            </div>
-        </section>
+<div id="wrap">
+    <div class="info_section">
+        <div class="info1">
+            <a href="#"><img src="./images/s_images/cart_18dp.png">Cart</a>
+        </div>
+        <div class="info2">
+            <ul>
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+            </ul>
+            <input class="info_search" type="search" name="search" placeholder="검색">
+        </div>
     </div>
-    
+    <div class="header">
+        <div class="logo">
+            <img src="images/s_images/Handas.png">
+        </div>
+        <div class="sub_info_section">
+            <div class="sub_info_cart">
+                <p>Empty</p>
+            </div>
+            <ul class="sub_info_user">
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+            </ul>
+            <div class="sub_info_search">
+                <input class="info_search" type="search" name="search" placeholder="검색">
+            </div>
+        </div>
+        <div class="nav">
+            <ul class="gnb">
+                <li><a href="#">메뉴</a></li>
+                <li><a href="#">상품목록</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="slider_section">
+        <img src="./images/s_images/bxslider1.png" alt="광고1">
+    </div>
+    <div class="items_section">
+    </div>
+    <footer class="footer">
+
+    </footer>
+</div>
 </body>
 </html>

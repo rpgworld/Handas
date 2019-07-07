@@ -101,32 +101,14 @@ text-align: left;
     	<hr>
     	
     	<section class="content_section">
-    		<table class="shop_table">
-    			<thead>
-    				<tr>
-    					<td>글번호</td>
-    					<td>썸네일</td>
-    					<td>펜이름</td>
-    					<td>분류</td>
-    					<td>가격</td>
-    					<td>날짜</td>
-    				</tr>
-    			</thead>
-    			<tbody>
-    				<c:forEach items="${shopList }" var="list">
-    					<tr>
-	    					<td>${list.pnum }</td>
-	    					<td class="shop_name"><img src="resources/images/${list.img1 }"></td>
-	    					<td>${list.pname }</td>
-	    					<td>${list.item }</td>
-	    					<td>${list.price }원</td>
-	    					<td>${list.writeDate }</td>
-		    			</tr>
-    				</c:forEach>
-
-    			</tbody>
-    		</table>
-    		<a href="shopWriteForm">글쓰기</a>
+    		<form action="shopWrite" method="post" enctype="multipart/form-data">
+    			상품명 : <input type="text" name="pname"> <br>
+    			옵션 : <input type="text" name="item"> <br>
+    			가격 : <input type="text" name="price"> <br>
+    			상세설명 : <textarea name="pdesc"></textarea> <br>
+    			이미지1 : <input type="file" name="file" > <br>
+				<input type="submit" value="글쓰기">
+    		</form>
     	</section> 	
     	<footer class="footer">
     	

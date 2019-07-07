@@ -6,7 +6,7 @@
 <mapper namespace="com.spring.handas.dao.BbsDao">
 
 	<select id="bbsList" resultType="com.spring.handas.dto.BbsDto">
-		SELECT * FROM (SELECT ROWNUM rnum, bnum, name, title, content, write_date, hit, ref, step, lev 
+		SELECT * FROM (SELECT ROWNUM rnum, bnum, writer, title, content, write_date, hit, ref, step, lev 
 		FROM ( SELECT * FROM handas_bbs ORDER BY ref desc, step asc ) handas_bbs) 
 		WHERE rnum &gt;= 1 and rnum &lt;= 10
 	</select>

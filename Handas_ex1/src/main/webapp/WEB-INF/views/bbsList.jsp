@@ -117,7 +117,7 @@ text-align: left;
     					<tr>
 	    					<td>${list.bnum }</td>
 	    					<td class="bbs_title">${list.title }</td>
-	    					<td>${list.name }</td>
+	    					<td>${list.writer }</td>
 	    					<td>${list.writeDate }</td>
 	    					<td>${list.hit }</td>
 		    			</tr>

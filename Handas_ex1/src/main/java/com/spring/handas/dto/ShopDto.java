@@ -5,26 +5,27 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 
 public class ShopDto {
-	private int snum;
-	private String name;
+	private int pnum;
+	private String pname;
 	private String item;
 	private int price;
-	private String itemDesc;
+	private String pdesc;
 	private String img1;
 	private String img2;
 	private Date writeDate;
 	
-	public int getSnum() {
-		return snum;
+	
+	public int getPnum() {
+		return pnum;
 	}
-	public void setSnum(int snum) {
-		this.snum = snum;
+	public void setPnum(int pnum) {
+		this.pnum = pnum;
 	}
-	public String getName() {
-		return name;
+	public String getPname() {
+		return pname;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setPname(String pname) {
+		this.pname = pname;
 	}
 	public String getItem() {
 		return item;
@@ -39,11 +40,12 @@ public class ShopDto {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getItemDesc() {
-		return itemDesc;
+	
+	public String getPdesc() {
+		return pdesc;
 	}
-	public void setItemDesc(String itemDesc) {
-		this.itemDesc = itemDesc;
+	public void setPdesc(String pdesc) {
+		this.pdesc = pdesc;
 	}
 	public String getImg1() {
 		return img1;

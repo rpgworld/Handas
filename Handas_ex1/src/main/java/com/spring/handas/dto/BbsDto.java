@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 
 public class BbsDto {
 	private int bnum;
-	private String name;
+	private String writer;
 	private String title;
 	private String content;
 	private Date writeDate;
@@ -20,11 +20,11 @@ public class BbsDto {
 	public void setBnum(int bnum) {
 		this.bnum = bnum;
 	}
-	public String getName() {
-		return name;
+	public String getWriter() {
+		return writer;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	public String getTitle() {
 		return title;

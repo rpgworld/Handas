@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+li {
+list-style-type: none;
+}
+a {
+text-decoration: none;
+color: #000000;
+}
+.info_section {
+width: 300px;
+height: 150px;
+display: flex;
+}
+.info1 {
+background: red;
+width: 50%;
+height: 150px;
+}
+.info2 {
+width: 50%;
+display: flex;
+flex-flow: column;
+}
+.info_cart span {
+display: none;
+}
+.info_user {
+background: blue;
+width: 100%;
+height: 50%;
+}
+.info_search {
+background: yellow;
+width: 100%;
+height: 50%;
+}
+.info_search input{
+width: 140px;
+padding: 8px;
+background-image : url('./images/s_images/search_18dp.png'); 
+background-position:center; 
+background-repeat:no-repeat;
+background-size: 20px;
+background-position-x: 5px;
+text-indent: 20px;
+}
+/* 모바일 */
+@media all and (max-width: 600px) {
+.info1 {
+width: 33.333%;
+height: 75px;
+}
+.info2 {
+width: 66.666%;
+flex-flow: row;
+}
+.info_section span {
+display: block;
+width: 50%;
+height: 50%;
+text-indent: -9999px;
+margin: 15px auto;
+}
+.info_cart span {
+background: url('./images/s_images/cart_18dp.png') center center no-repeat;
+}
+.info_user span {
+background: url('./images/s_images/login_18dp.png') center center no-repeat;
+}
+.info_search span {
+background: url('./images/s_images/search_18dp.png') center center no-repeat;
+}
+.info_cart a:nth-child(2) {
+display: none;
+}
+.info_user {
+width: 50%;
+}
+.info_search {
+width: 50%;
+}
+}
+</style>
+</head>
+<body>
+    <div class="info_section">
+        <div class="info1 info_cart">
+            <a href="#"><span class="sub_info_cart">하위 메뉴 토글 버튼</span></a>
+            <a href="#"><img src="./images/s_images/cart_18dp.png">Cart</a>
+        </div>
+        <div class="info2">
+            <div class="info_user">
+                <a href="#"><span class="sub_info_cart">하위 메뉴 토글 버튼</span></a>
+                <ul>
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                </ul>
+            </div>
+            <div class="info_search">
+                <a href="#"><span class="sub_info_cart">하위 메뉴 토글 버튼</span></a>
+                <input type="search" name="search" placeholder="검색">
+            </div>
+        </div>
+    </div>
+</body>
+</html>
