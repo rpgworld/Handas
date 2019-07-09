@@ -9,8 +9,8 @@
 	</settings>
 	
 	<typeAliases>
-		<typeAlias alias="BbsDto" type="com.spring.handas.dto.BbsDto"/>
-		<typeAlias alias="ShopDto" type="com.spring.handas.dto.ShopDto"/>
+		<typeAlias alias="BbsDto" type="com.spring.handas.bbs.BbsDto"/>
+		<typeAlias alias="ShopDto" type="com.spring.handas.shop.ShopDto"/>
 	</typeAliases>
 	
 	

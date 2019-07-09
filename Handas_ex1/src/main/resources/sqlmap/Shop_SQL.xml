@@ -3,9 +3,9 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.handas.dao.ShopDao">
+<mapper namespace="com.spring.handas.shop.ShopDao">
 	
-	<select id="shopList" resultType="com.spring.handas.dto.ShopDto">
+	<select id="shopList" resultType="com.spring.handas.shop.ShopDto">
 		SELECT * FROM (SELECT ROWNUM rnum, pnum, pname, item, price, pdesc, img1, img2, write_date 
 		FROM ( SELECT * FROM handas_shop ORDER BY pnum desc ) handas_shop) 
 		WHERE rnum &gt;= 1 and rnum &lt;= 10

@@ -3,9 +3,9 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.spring.handas.dao.BbsDao">
+<mapper namespace="com.spring.handas.bbs.BbsDao">
 
-	<select id="bbsList" resultType="com.spring.handas.dto.BbsDto">
+	<select id="bbsList" resultType="com.spring.handas.bbs.BbsDto">
 		SELECT * FROM (SELECT ROWNUM rnum, bnum, writer, title, content, write_date, hit, ref, step, lev 
 		FROM ( SELECT * FROM handas_bbs ORDER BY ref desc, step asc ) handas_bbs) 
 		WHERE rnum &gt;= 1 and rnum &lt;= 10

@@ -12,6 +12,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <title>Join</title>
+<script>
+$('document').ready(function(){
+    
+    
+    document.getElementsByClassName('form-control')[0].value
+});
+function id_check() {
+    var name = $('.join_id').val();
+    alert(name);
+}
+</script>
 </head>
 <body>
     <div class="container">
@@ -96,7 +107,7 @@
                             </tr>
                         </table>
                         <div class="join_btn_group">
-                            <input type="submit" class="btn btn-primary" value="가입하기">
+                            <input type="submit" class="btn btn-primary" id="join_btn" value="가입하기">
                         </div>
                     </form>
                 </div>
