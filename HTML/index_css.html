@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./css/reset.css">
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <title>Handas</title>
+<style>
+/* 모바일 css */
+/* 기본 css */
+#wrap {
+width: 90%;
+margin: 0 auto;
+max-width: 1200px;
+display: flex;
+flex-flow: column;
+position: relative;
+}
+/* 인포 영역 */
+.info_section {
+display: flex;
+width: 120px;
+position: absolute;
+top: 20px;
+right: 10px;
+z-index: 30;
+}
+.info1 {
+width: 33.333%;
+height: 50px;
+}
+.info2 {
+display: flex;
+width: 66.666%;
+}
+.info_section span {
+display: block;
+width: 50%;
+height: 50%;
+text-indent: -9999px;
+margin: 15px auto;
+}
+.info_cart span {
+background: url('./images/s_images/cart_18dp.png') center center no-repeat;
+background-size: 20px;
+}
+.info_user span {
+background: url('./images/s_images/login_18dp.png') center center no-repeat;
+background-size: 20px;
+}
+.info_search span {
+background: url('./images/s_images/search_18dp.png') center center no-repeat;
+background-size: 20px;
+}
+.info_cart a:nth-child(2), .info_user ul, .info_search input {
+display: none;
+}
+.info_user {
+width: 50%;
+}
+.info_search {
+width: 50%;
+}
+/* 헤더 영역 */
+.header{
+display: flex;
+flex-flow: column;
+}
+.logo {
+/* width: 300px;
+height: 100px; */
+width: 180px;
+height: 100px;
+background: url('./images/s_images/Handas_mobile.png') center center no-repeat;
+}
+.gnb {
+display: flex;
+flex-flow: row wrap;
+border-top: 1px solid #d9d9d9;
+}
+.gnb li{
+padding: 20px 10px;
+}
+.sub_info_cart, .sub_info_user, .sub_info_search {
+display: none;
+}
+/* 슬라이더영역 */
+.slider_section img{
+width: 100%;
+}
+
+/* 푸터영역 */
+.footer {
+display: flex;
+flex-flow: row wrap;
+}
+.footer div {
+width: 100%;
+height: 100px;
+}
+
+/* 태블릿 css */
+@media all and (min-width: 640px) {
+/* 인포 영역 */
+.info1 span, .info2 span {
+display: none;
+}
+.info_cart a:nth-child(2), .info_user ul, .info_search input {
+display: table-cell;
+}
+.info_section {
+height: 80px;
+width: 250px;
+top: 0px;
+z-index: 30;
+display: flex;
+}
+.info1 {
+display: flex;
+width: 40%;
+height: 80px;
+justify-content: center;
+align-items: flex-end;
+}
+.info1 a:nth-child(2) {
+border: 1px solid #d9d9d9;
+border-radius: 4px;
+padding: 10px;
+text-align: center;
+height: 20px;
+}
+.info1 img {
+width: 20px;
+margin-right: 2px;
+}
+.info2 {
+flex-flow: column;
+width: 60%;
+}
+.info2 .info_user{
+width: 100%;
+height: 50%;
+}
+.info_user ul {
+height: 100%;
+justify-content: flex-end;
+margin-top: 15px;
+}
+.info_user ul{
+display: flex;
+}
+.info_user ul li{
+margin-left: 5px;
+font-size: 0.9em;
+font-size: 0.9rem;
+}
+.info2 .info_search {
+width: 100%;
+height: 50%;
+}
+.info2 .info_search input {
+padding: 6px;
+background-image : url('./images/s_images/search_18dp.png'); 
+background-position:center; 
+background-repeat:no-repeat;
+background-size: 20px;
+background-position-x: 5px;
+text-indent: 20px;
+}
+/* 헤더영역 */
+.logo {
+width: 300px;
+height: 100px;
+background: url('./images/s_images/Handas.png') center center no-repeat;
+}
+.gnb {
+flex-flow: row nowrap;
+margin-top: 5px;
+}
+.gnb li{
+flex-flow: row;
+font-size: 1.15em;
+font-size: 1.15rem;
+padding: 30px;
+}
+.footer div {
+width: 33.333%;
+height: 100px;
+}
+.sub_info_section {
+display: none;
+}
+}
+
+/* PC css */
+@media all and (min-width: 1140px) {
+/* 인포영역 */
+.info_section {
+top: 0px;
+right: 30px;
+right: 1.875rem;
+}
+/* 헤더영역 */
+.header{
+flex-flow: row;
+}
+.gnb {
+border-top: none;
+margin-top: 0px;
+}
+.gnb li {
+padding: 41px;
+padding: 2.5625rem;
+}
+.footer div {
+width: 20%;
+height: 100px;
+}
+}
+</style>
+<script>
+$('document').ready(function(){
+   
+    /* 전체 메뉴 토글 버튼 이벤트 */
+    $('.sub_info_cart_btn').click(function(){
+        var name = $('.menu_toggle_btn').attr('class');
+        $('.sub_info_cart').stop().slideToggle('fast');
+        // stop() : 현재 실행중인 효과를 모두 중지, slideToggle : 숨겨진 요소를 펴고 접는 기능
+    });
+});
+
+
+</script>
+</head>
+<body>
+<div id="wrap">
+    <div class="info_section">
+        <div class="info1 info_cart">
+            <a href="#"><span class="sub_info_cart_btn">하위 메뉴 토글 버튼</span></a>
+            <a href="#"><img src="./images/s_images/cart_18dp.png">Cart</a>
+        </div>
+        <div class="info2">
+            <div class="info_user">
+                <a href="#"><span class="sub_info_cart_btn">하위 메뉴 토글 버튼</span></a>
+                <ul>
+                    <li><a href="#">로그인</a></li>
+                    <li><a href="#">회원가입</a></li>
+                </ul>
+            </div>
+            <div class="info_search">
+                <a href="#"><span class="sub_info_cart_btn">하위 메뉴 토글 버튼</span></a>
+                <input type="search" name="search" placeholder="검색">
+            </div>
+        </div>
+    </div>
+    <div class="header">
+        <div class="logo">
+            
+        </div>
+        <div class="sub_info_section">
+            <div class="sub_info_cart">
+                <p>Empty</p>
+            </div>
+            <ul class="sub_info_user">
+                <li><a href="#">로그인</a></li>
+                <li><a href="#">회원가입</a></li>
+            </ul>
+            <div class="sub_info_search">
+                <input class="info_search" type="search" name="search" placeholder="검색">
+            </div>
+        </div>
+        <div class="nav">
+            <ul class="gnb">
+                <li><a href="#">메뉴</a></li>
+                <li><a href="#">상품목록</a></li>
+                <li><a href="#">고객센터</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="slider_section">
+        <img src="./images/s_images/2019pig960x400.png" alt="광고1">
+    </div>
+    <div class="items_section">
+    </div>
+    <footer class="footer">
+        <div style="background: red;">
+
+        </div>
+        <div style="background: yellow;">
+            
+        </div>
+        <div style="background: green;">
+            
+        </div>
+        <div style="background: blue;">
+            
+        </div>
+        <div style="background: gray;">
+            
+        </div>
+    </footer>
+    
+</body>
+</html>

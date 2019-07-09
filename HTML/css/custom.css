@@ -1,0 +1,174 @@
+/* pc css */
+/* 기본 css */
+/* 헤더 영역 css */
+.navbar {
+width: 100%;
+margin: 0;
+}
+.navbar-collapse {
+display: flex;
+justify-content: space-between;
+}
+.navbar-toggler span img{
+width: 30px;
+}
+
+/* index 컨텐츠 영역 css */
+.carousel-inner img {
+width: 100%;
+}
+
+/* login 컨텐츠 영역 css */
+.login_form {
+width: 40%;
+margin: 0 auto;
+padding-top: 30px;
+padding-bottom: 20px;
+}
+.login_id, .login_pw {
+width: 90%;
+height: 25px;
+}
+/* join 컨텐츠 영역 css */
+.join_form {
+width: 70%;
+margin: 0 auto;
+padding-top: 30px;
+padding-bottom: 20px;
+}
+.join_form .join_addr3, .id_check_btn, .addr_check_btn {
+margin-left: 10px;
+}
+.join_form input {
+height: 25px;
+}
+.join_form tr th{
+text-align: center;
+vertical-align: middle;
+}
+.join_btn_group {
+display: flex;
+justify-content: flex-end;
+}
+
+/* shopList 컨텐츠 영역 css */
+.items_list ul{
+display: flex;
+flex-flow: row wrap;
+width: 100%;
+}
+.items_list ul li{
+width: 25%;
+margin-top: 20px;
+margin-left: 6.2%;
+}
+.card-body {
+text-align: center;
+}
+.card-body p{
+margin-bottom: 5px;
+}
+
+/* shopRead 컨텐츠 영역 css */
+.item_read {
+display: flex;
+}
+.item_read div:first-child {
+background: red;
+height: 400px;
+width: 50%;
+}
+.item_read div:nth-child(2) {
+background: blue;
+height: 400px;
+width: 50%;
+}
+
+/* 모달 css */
+#myModal {
+top: 80px;
+}
+
+#myModal .modal-header h4{
+width: 57%;
+text-align: right;
+font-size: 1.5em;
+font-size: 1.5rem;
+font-weight: bold;
+}
+#myModal .modal-body{
+padding: 30px;
+text-align: center;
+}
+
+/* 태블릿 css */
+@media all and (max-width: 768px) {
+.header img{
+width: 250px;
+}
+.items_list ul li{
+width: 40%;
+margin-top: 20px;
+margin-left: 6.67%;
+}
+/* login 컨텐츠 영역 css */
+.login_form {
+width: 60%;
+}
+/* join 컨텐츠 영역 css */
+.join_form {
+width: 95%;
+}
+.join_form table th {
+font-size: 0.85em;
+}
+.join_form table .join_addr3 {
+width: 90%;
+}
+.join_form table input, .join_btn_group input{
+height: 18px;
+font-size: 0.85em;
+}
+.join_form table tr td:first-child {
+width: 20%;
+}
+.join_form table tr td:nth-child(2) {
+width: 40%;
+}
+.join_form table tr td:last-child {
+width: 40%;
+}
+.join_form table .btn {
+font-size: 0.7em;
+}
+
+}
+
+/* 모바일 css */
+@media all and (max-width: 380px) {
+.header .logo{
+content: url('../images/s_images/Handas_mobile.png');
+width: 170px;
+}
+.navbar-collapse {
+flex-flow: column nowrap;
+justify-content: flex-start;
+}
+.items_list ul li{
+width: 70%;
+margin-top: 20px;
+margin-left: 15%;
+}
+/* login 컨텐츠 영역 css */
+.login_form {
+width: 90%;
+}
+/* join 컨텐츠 영역 css */
+.join_form table th {
+font-size: 0.7em;
+}
+.join_form table input, .join_btn_group input{
+height: 15px;
+font-size: 0.7em;
+}
+}

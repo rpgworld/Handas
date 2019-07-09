@@ -12,7 +12,7 @@
 	</select>
 	
 	<insert id="shopWrite" parameterType="map">
-		INSERT INTO handas_shop VALUES(handas_shop_seq.nextval, #{pname}, #{item}, #{price}, #{pdesc}, #{img1}, #{img2}, sysdate)
+		INSERT INTO handas_shop VALUES(handas_shop_seq.nextval, #{pname}, #{item}, #{price}, #{pdesc}, #{img1}, #{img2}, sysdate, 0)
 	</insert>
 
 </mapper>

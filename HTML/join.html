@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/reset.css?ver=1.0">
+    <link rel="stylesheet" href="./css/custom.css?ver=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <title>Join</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 header" style="padding: 0;">
+                <div class="navbar navbar-expand-md navbar-dark">
+                    <!-- Brand -->
+                    <a class="navbar-brand logo" href="index"><img src="./images/s_images/Handas.png"></a>
+                    
+                    <!-- Toggler/collapsibe Button -->
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                        <span><img src="./images/s_images/menu_18dp.png" alt=""></span>
+                    </button>
+                    
+                    <!-- Navbar links -->
+                    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                        <ul class="nav">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="index">메인</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="shopList">상품목록</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="bbsList">고객센터</a>
+                            </li>
+                        </ul>
+                        <!-- Dropdown -->
+                        <div class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                            접속하기
+                            </a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">로그인</a>
+                                <a class="dropdown-item" href="#">회원가입</a>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                
+            </div>
+        </div>
+        <div class="row" style="margin-top: 50px;">
+            <div class="col-sm-12" style="padding: 0;">
+                <div class="jumbotron join_form">
+                    <h1 style="font-size: 1.6em; font-weight: bold; text-align: center; padding-bottom: 10px;">회원가입</h1>
+                    <form action="join" method="post"> 
+                        <table class="table table-hover">
+                            <tr>
+                                <th>아이디</th>
+                                <td><input type="text" class="form-control join_id" name="userID" id="text"></td>
+                                <td><input type="button" class="btn btn-primary id_check_btn" onclick="id_check()" value="중복체크"></td>
+                            </tr>
+                            <tr>
+                                <th>비밀번호</th>
+                                <td><input type="password" class="form-control join_pw1" name="userPW" id="text"></td>
+                            </tr>
+                            <tr>
+                                <th>비밀번호 확인</th>
+                                <td><input type="password" class="form-control join_pw2" id="text"></td>
+                            </tr>
+                            <tr>
+                                <th>이름</th>
+                                <td><input type="text" class="form-control join_name" name="userName" id="text"></td>
+                            </tr>
+                            <tr>
+                                <th rowspan="2">주소</th>
+                                <td><input type="text" class="form-control join_addr1" name="address1" id="text" placeholder="우편번호"></td>
+                                <td><input type="button" class="btn btn-primary addr_check_btn" onclick="" value="우편번호찾기"></td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" class="form-control join_addr2" name="address2" id="text" placeholder="주소"></td>
+                                <td><input type="text" class="form-control join_addr3" name="address3" id="text" placeholder="상세주소"></td>
+                            </tr>
+                            <tr>
+                                <th>이메일</th>
+                                <td><input type="email" class="form-control join_email" name="userEmail" id="text"></td>
+                            </tr>
+                        </table>
+                        <div class="join_btn_group">
+                            <input type="submit" class="btn btn-primary" value="가입하기">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+            </div>
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+        
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+        
+            <!-- Modal body -->
+            <div class="modal-body">
+            </div>
+        
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        
+            </div>
+        </div>
+    </div>
+</body>
+</html>
