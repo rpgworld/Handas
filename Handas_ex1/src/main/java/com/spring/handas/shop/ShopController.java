@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
@@ -28,6 +28,15 @@ public class ShopController {
 	@Resource(name = "uploadPath")
 	private String uploadPath;
 	
+	@RequestMapping(value="/shop")
+	public String bbs(HttpSession session) {
+		logger.info("shop()");
+		
+		session.setAttribute("menu", "shop");
+		
+		return "redirect:/shop/list";
+	}
+	
 	@RequestMapping(value="/shop/list")
 	public String shopList(Model model) {
 		logger.info("shopList()");
@@ -47,21 +56,18 @@ public class ShopController {
 	}
 	
 	@RequestMapping(value = "/shop/write", method = RequestMethod.POST)
-	public String uploadForm(HttpServletRequest request, MultipartFile file, Model model) throws Exception {
-		
-		String pname = request.getParameter("pname");
-		String item = request.getParameter("item");
-		String price = request.getParameter("price");
-		String pdesc = request.getParameter("pdesc");
+	public String uploadForm(ShopDto dto, MultipartFile file, Model model) throws Exception {
+	
 		
 		logger.info("originalName: " + file.getOriginalFilename());
 		logger.info("size: " + file.getSize());
 		logger.info("contentType: " + file.getContentType());
 
-		String img1 = uploadFile(file.getOriginalFilename(), file.getBytes());
+		dto.setImg1(uploadFile(file.getOriginalFilename(), file.getBytes()));
+		dto.setImg2("nono");
 		
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
-		dao.shopWrite(pname, item, Integer.parseInt(price), pdesc, img1, "nono");
+		dao.shopWrite(dto);
 		
 		return "redirect:shopList";
 	}

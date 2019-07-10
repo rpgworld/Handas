@@ -1,5 +1,7 @@
 package com.spring.handas.bbs;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,15 @@ public class BbsController {
 	
 	@Autowired
 	SqlSession sqlSession;
+	
+	@RequestMapping(value="/bbs")
+	public String bbs(HttpSession session) {
+		logger.info("bbs()");
+		
+		session.setAttribute("menu", "bbs");
+		
+		return "redirect:/bbs/list";
+	}
 	
 	@RequestMapping(value="/bbs/list")
 	public String bbsList(Model model) {

@@ -41,7 +41,7 @@ var msgContent = '${msgContent}';
                                 <input class="form-check-input" type="checkbox"> 아이디 기억하기
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-primary form-control">로그인하기</button>
+                        <button type="button" onclick="login()" class="btn btn-primary form-control login_btn">로그인하기</button>
                     </form>
                 </div>
             </div>

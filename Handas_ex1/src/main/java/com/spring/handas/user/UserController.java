@@ -22,61 +22,64 @@ public class UserController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 	
+	@RequestMapping(value="/user")
+	public String bbs(HttpSession session) {
+		logger.info("user()");
+		
+		session.setAttribute("menu", "user");
+		
+		return "redirect:login";
+	}
+	
 	@RequestMapping(value="/user/loginForm")
-	public String loginForm() {
+	public String loginForm(HttpSession session) {
 		logger.info("loginForm()");
+		
+		session.setAttribute("menu", "user");
 		
 		return "user/login";
 	}
 	
 	@RequestMapping(value="/user/login", method=RequestMethod.POST)
-	public String login(HttpServletRequest request, RedirectAttributes redirect) {
+	@ResponseBody
+	public int login(HttpServletRequest request) {
 		logger.info("login()");
 		
 		String userID= request.getParameter("userID");
 		String userPW = request.getParameter("userPW");
-		
+		System.out.println(userID);
 		String pwChk = null; // 실제(DB) 회원 비밀번호
 		
-		String msgType="";
-		String msgContent="";
-		
-		String viewPage = "";
+		int result = 0;
 		
 		UserDao dao = sqlSession.getMapper(UserDao.class);
 		pwChk = dao.login(userID);
 		
 		HttpSession session = request.getSession();
 		
+		logger.info("login() 끝");
 		if(pwChk != null) {
 			if(pwChk.equals(userPW)) { // 로그인 성공
-				msgType = "성공";
-				msgContent = userID + "님 환영합니다.";
 				session.setAttribute("userID", userID);
-				viewPage = "redirect:/index";
-				
+				session.setAttribute("role", dao.roleCheck(userID));
+				result = 100;
+			
 			} else { // 비밀번호 불일치
-				
-				msgType = "경고창";
-				msgContent = "비밀번호가 일치하지 않습니다.";
-				viewPage = "redirect:loginForm";
+				result = -100;
 			}
 		} else { // 아이디가 존재하지 않음
+			result = -200;
 			
-			msgType = "경고창";
-			msgContent = "아이디가 존재하지 않습니다.";
-			viewPage = "redirect:loginForm";
 		}
 		
-		redirect.addFlashAttribute("msgType", msgType);
-		redirect.addFlashAttribute("msgContent", msgContent);
-		return viewPage;
+		return result;
 	}
 	
 	@RequestMapping(value="/user/logout")
 	public String logout(HttpSession session) {
 		
 		session.removeAttribute("userID");
+		session.removeAttribute("role");
 		return "redirect:/index";
 	}
 	
@@ -94,8 +97,10 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/user/joinForm")
-	public String joinForm() {
+	public String joinForm(HttpSession session) {
 		logger.info("joinForm()");
+		
+		session.setAttribute("menu", "user");
 		
 		return "user/join";
 	}
@@ -104,7 +109,7 @@ public class UserController {
 	public String join(UserDto dto, RedirectAttributes redirect) {
 		
 		UserDao dao = sqlSession.getMapper(UserDao.class);
-		dao.join(dto.getUserID(), dto.getUserPW(), dto.getUserName(), dto.getAddress1(), dto.getAddress2(), dto.getAddress3(), dto.getUserEmail());
+		dao.join(dto);
 		
 		redirect.addFlashAttribute("msgType", "성공");
 		redirect.addFlashAttribute("msgContent", "회원가입에 성공하셨습니다.");
@@ -114,6 +119,8 @@ public class UserController {
 	@RequestMapping(value="/user/read")
 	public String readForm(HttpSession session, Model model) {
 		logger.info("user/readForm()");
+		
+		session.setAttribute("menu", "user");
 		
 		if(session.getAttribute("userID") == null) {
 			return "redirect:/index";
@@ -129,6 +136,8 @@ public class UserController {
 	public String updateForm(HttpSession session, Model model) {
 		logger.info("user/updateForm()");
 		
+		session.setAttribute("menu", "user");
+		
 		if(session.getAttribute("userID") == null) {
 			return "redirect:/index";
 		}
@@ -143,12 +152,15 @@ public class UserController {
 	public String update(HttpSession session, UserDto dto, RedirectAttributes redirect) {
 		logger.info("user/update()");
 		
-		String userID = (String) session.getAttribute("userID");
+		if(session.getAttribute("userID") == null) {
+			return "redirect:/index";
+		}
+		dto.setUserID((String) session.getAttribute("userID"));
 		UserDao dao = sqlSession.getMapper(UserDao.class);
-		dao.update(dto.getUserPW(), dto.getUserName(), dto.getAddress1(), dto.getAddress2(), dto.getAddress3(), dto.getUserEmail(), userID);
+		dao.update(dto);
 		
 		redirect.addFlashAttribute("msgType", "성공");
 		redirect.addFlashAttribute("msgContent", "회원 정보 수정이 완료되었습니다.");
-		return "redirect:updateForm";
+		return "redirect:read";
 	}
 }

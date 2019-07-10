@@ -29,7 +29,7 @@ var msgContent = '${msgContent}';
                 	<c:forEach items="${list }" var="dto">
                 		<li>
 	                        <div class="card" style="border: none;">
-	                            <a href="#"><img class="card-img-top rounded" src="/handas/resources/images/s_images/pen1.png" alt="Card image"></a>
+	                            <a href="#"><img class="card-img-top rounded" src="${path }/resources/images/s_images/pen1.png" alt="Card image"></a>
 	                            <div class="card-body">
 	                                <a href="#"><h4 class="card-title">${dto.pname }</h4></a>
 	                                <p class="card-text">${dto.getPriceFormat() }원</p>

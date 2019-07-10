@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <%@ include file="../header.jsp" %>
     <title>Handas</title>
+
 </head>
 <body>
 	<div class="container">
@@ -46,11 +47,11 @@
                             </tr>
                             <tr>
                                 <th rowspan="3">주소</th>
-                                <td><input type="text" class="form-control join_addr1" name="address1" id="text" placeholder="우편번호"></td>
-                                <td><input type="button" class="btn btn-primary addr_check_btn" onclick="addr_check()" value="우편번호찾기"></td>
+                                <td><input type="text" class="form-control join_addr1" name="address1" id="address1" placeholder="우편번호"></td>
+                                <td><input type="button" class="btn btn-primary addr_check_btn" onclick="addr_check()" id="addr_btn" value="우편번호찾기"></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><input type="text" class="form-control join_addr2" name="address2" id="text" placeholder="주소"></td>
+                                <td colspan="2"><input type="text" class="form-control join_addr2" name="address2" id="address2" placeholder="주소"></td>
                             </tr>
                             <tr>
                             	<td colspan="2"><input type="text" class="form-control join_addr3" name="address3" id="text" placeholder="상세주소"></td>

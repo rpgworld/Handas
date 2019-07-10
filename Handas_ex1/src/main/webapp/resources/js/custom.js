@@ -1,13 +1,47 @@
-var idCheck = false;
-var pwCheck = false;
 
 $('document').ready(function(){
-    if (msgType != '') {
-        modal_alert(msgType, msgContent);
-    }
-    
-   
+	var idCheck = false;
+	var pwCheck = false;
+	
+	msgCheck();
+
 });
+
+function msgCheck() {
+	
+	if(msgType != '') {
+		modal_alert(msgType, msgContent);
+	}
+}
+
+// 로그인
+function login() {
+	var userID = $('.login_form input[name=userID]').val();
+	var userPW = $('.login_form input[name=userPW]').val();
+	
+	$.ajax({
+		type : 'POST',
+		data : {'userID' : userID, 'userPW' : userPW},
+		url : '/handas/user/login',
+		dataType : 'json',
+		success : function(result) {
+			if (result > 0) { // 아이디가 존재한다면
+				location.href="/handas/index";
+			} else {
+				if(result == -100) {
+					modal_alert('경고창', '비밀번호가 일치하지 않습니다.');
+				} else if(result == -200) {
+					modal_alert('경고창', '아이디가 존재하지 않습니다.');
+				} else {
+					modal_alert('경고창', '데이터베이스 오류');
+				}
+			}
+		},
+		error : function(error) {
+			alert('error : ' + error);
+		}
+	});
+}
 
 // 아이디 중복체크 후 아이디를 변경시 처리
 function id_check_reset() {
@@ -67,6 +101,7 @@ var pw2 = $('.join_pw2').val();
 		pwCheck = true;
 	}
 }
+
 // 다음 주소 API 사용하기
 function addr_check() {
 	new daum.Postcode({

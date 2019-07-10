@@ -7,128 +7,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" href="resources/css/reset.css?ver=1.0">
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <%@ include file="../header.jsp" %>
     <title>Handas</title>
-<style>
-#wrap {
-width: 90%;
-margin: 0 auto;
-max-width: 1200px;
-}
-
-/* 헤더영역 */
-.header {
-width: 100%;
-display: flex;
-}
-.gnb {
-margin-left: 20px;
-}
-.gnb li {
-display: inline-block;
-}
-
-/* 컨텐츠영역 */
-.content_section {
-width: 80%;
-margin: 0 auto;
-}
-.bbs_table {
-width: 100%;
-}
-.bbs_table td:first-child {
-width: 10%;
-}
-.bbs_table td:nth-child(2), .bbs_table td:nth-child(4) {
-width: 30%;
-}
-.bbs_table td:nth-child(3), .bbs_table td:nth-child(5) {
-width: 15%;
-}
-.bbs_table, tr, td {
-border: 1px solid black;
-border-collapse: collapse;
-text-align: center;
-}
-.bbs_title {
-text-align: left;
-}
-</style>
 <script>
-	var msgType = '${msgType}';
-	var msgContent = '${msgContent}';
-	
-	if(msgType != '') {
-		alert(msgContent);
-	}
+var msgType = '${msgType}';
+var msgContent = '${msgContent}';
+
 </script>
 </head>
 <body>
-	<c:if test="${sessionScope.userId != null }">
-		<c:set var="userId" value="${sessionScope.userId }" />
-	</c:if>
+	<div class="container">
+		<%@ include file="../menu.jsp" %>
+		<div class="row">
+            <div class="col-sm-12">
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+            	<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" href="#">전체</a>
+					</li>
+					<li class="nav-item">
+				    	<a class="nav-link" href="#">배송</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">환불</a>
+					</li>
+				</ul>
+	    		<table class="table table-striped">
+	    			<thead>
+	    				<tr>
+	    					<th>글번호</th>
+	    					<th>제목</th>
+	    					<th>작성자</th>
+	    					<th>작성일</th>
+	    					<th>조회수</th>
+	    				</tr>
+	    			</thead>
+	    				<c:forEach items="${bbsList }" var="list">
+	    					<tr>
+		    					<td>${list.bnum }</td>
+		    					<td class="bbs_title">${list.title }</td>
+		    					<td>${list.writer }</td>
+		    					<td>${list.writeDate }</td>
+		    					<td>${list.hit }</td>
+			    			</tr>
+	    				</c:forEach>
 	
-    <div id="wrap">
-    	<div class="info_section">
-    		<c:choose>
-    			<c:when test="${userId == null }">
-    				<a href="loginForm">로그인</a>
-    				<a href="joinForm">회원가입</a>
-    			</c:when>
-    			<c:otherwise>
-    				<a href="loginForm">회원정보수정</a>
-    				<a href="logout">로그아웃</a>
-    			</c:otherwise>
-    		</c:choose>
-    	</div>
-    	
-    	<hr>
-    	
-    	<header class="header">
-    		<h1 class="logo"><a href="index">Handas</a></h1>
-    		<nav class="nav">
-    			<ul class="gnb">
-    				<li><a href="index">메인</a></li>
-    				<li><a href="shopList">상품목록</a></li>
-    				<li><a href="bbsList">고객센터</a></li>
-    				<li><a href="#">Contact</a></li>
-    				<li><a href="#">관리자</a></li>
-    			</ul>
-    		</nav>
-    	</header>
-    	
-    	<hr>
-    	
-    	<section class="content_section">
-    		<table class="bbs_table">
-    			<thead>
-    				<tr>
-    					<td>글번호</td>
-    					<td>제목</td>
-    					<td>글쓴이</td>
-    					<td>날짜</td>
-    					<td>조회수</td>
-    				</tr>
-    			</thead>
-    			<tbody>
-    				
-    				<c:forEach items="${bbsList }" var="list">
-    					<tr>
-	    					<td>${list.bnum }</td>
-	    					<td class="bbs_title">${list.title }</td>
-	    					<td>${list.writer }</td>
-	    					<td>${list.writeDate }</td>
-	    					<td>${list.hit }</td>
-		    			</tr>
-    				</c:forEach>
-
-    			</tbody>
-    		</table>
-    	</section> 	
-    	<footer class="footer">
-    	
-    	</footer>
+	    			</tbody>
+	    		</table>
+	    	</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+            </div>
+        </div>
     </div>
+    <%@ include file="../modal.jsp" %>
 </body>
 </html>

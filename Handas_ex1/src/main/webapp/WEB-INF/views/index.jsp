@@ -9,16 +9,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <%@ include file="header.jsp" %>
     <title>Handas</title>
-<script>
-var msgType = '${msgType}';
-var msgContent = '${msgContent}';
-</script>
 </head>
+<script>
+var msgType='${msgType}';
+var msgContent='${msgContent}';
+</script>
 <body>
 	<div class="container">
+		<div class="row message">
+        </div>
 		<%@ include file="menu.jsp" %>
 		<div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12" id="test">
                 
             </div>
         </div>
@@ -36,13 +38,13 @@ var msgContent = '${msgContent}';
                     <!-- The slideshow -->
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                        <img src="resources/images/s_images/2019_Golden_pig_960x400.png" alt="">
+                        <img src="${path }/resources/images/s_images/2019_Golden_pig_960x400.png" alt="">
                         </div>
                         <div class="carousel-item">
-                        <img src="resources/images/s_images/bxslider2.png" alt="">
+                        <img src="${path }/resources/images/s_images/bxslider2.png" alt="">
                         </div>
                         <div class="carousel-item">
-                        <img src="resources/images/s_images/bxslider3.png" alt="">
+                        <img src="${path }/resources/images/s_images/bxslider3.png" alt="">
                         </div>
                     </div>
                     

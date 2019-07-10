@@ -9,11 +9,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <%@ include file="../header.jsp" %>
     <title>Handas</title>
-<script>
-var msgType = '${msgType}';
-var msgContent = '${msgContent}';
-
-</script>
+	<script>
+		var msgType = '${msgType}';
+		var msgContent = '${msgContent}';
+		alert(msgType);
+	</script>
 </head>
 <body>
 	<div class="container">

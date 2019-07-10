@@ -61,7 +61,10 @@ public class ShopDto {
 	public void setImg2(String img2) {
 		this.img2 = img2;
 	}
-	public String getWriteDate() {
+	public Date getWriteDate() {
+		return writeDate;
+	}
+	public String getWriteDateFormat() {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 		
 		return dateFormat.format(writeDate);

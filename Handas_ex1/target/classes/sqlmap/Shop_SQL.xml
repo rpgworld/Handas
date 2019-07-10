@@ -11,7 +11,7 @@
 		WHERE rnum &gt;= 1 and rnum &lt;= 10
 	</select>
 	
-	<insert id="shopWrite" parameterType="map">
+	<insert id="shopWrite" parameterType="com.spring.handas.shop.ShopDto">
 		INSERT INTO handas_shop VALUES(handas_shop_seq.nextval, #{pname}, #{item}, #{price}, #{pdesc}, #{img1}, #{img2}, sysdate, 0)
 	</insert>
 
