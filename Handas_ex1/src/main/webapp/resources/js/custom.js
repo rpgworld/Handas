@@ -1,24 +1,14 @@
 
-$('document').ready(function(){
-	var idCheck = false;
-	var pwCheck = false;
-	
-	msgCheck();
-
-});
-
-function msgCheck() {
-	
-	if(msgType != '') {
-		modal_alert(msgType, msgContent);
-	}
-}
-
 // 로그인
 function login() {
 	var userID = $('.login_form input[name=userID]').val();
 	var userPW = $('.login_form input[name=userPW]').val();
 	
+	
+	
+	/*
+	// 로그인을 ajax 로 하는 방식
+	// POST 방식일 경우, contentType:'application/json; charset=utf-8' 로 하면 컨트롤러에서 값을 못받음
 	$.ajax({
 		type : 'POST',
 		data : {'userID' : userID, 'userPW' : userPW},
@@ -40,7 +30,7 @@ function login() {
 		error : function(error) {
 			alert('error : ' + error);
 		}
-	});
+	});*/
 }
 
 // 아이디 중복체크 후 아이디를 변경시 처리
@@ -108,7 +98,7 @@ function addr_check() {
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
             // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-        	$('.join_addr1').val(data.postcode);
+        	$('.join_addr1').val(data.zonecode);
         	$('.join_addr2').val(data.address);
         }
     }).open();

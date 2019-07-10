@@ -27,17 +27,17 @@
                         <table class="table table-hover">
                             <tr>
                                 <th>아이디</th>
-                                <td><input type="text" class="form-control join_id" onKeyUp="id_check_reset()" name="userID" id="join_id"></td>
+                                <td><input type="text" class="form-control join_id" onkeyup="id_check_reset()" name="userID" id="join_id"></td>
                                 <td><input type="button" class="btn btn-primary id_check_btn" onclick="id_check()" value="중복체크"></td>
                             </tr>
                             <tr>
                                 <th>비밀번호</th>
-                                <td><input type="password" class="form-control join_pw1" name="userPW" onKeyUp="pw_check()" id="text"></td>
+                                <td><input type="password" class="form-control join_pw1" name="userPW" onkeyup="pw_check()" id="text"></td>
                             	<td></td>
                             </tr>
                             <tr>
                                 <th>비밀번호 확인</th>
-                                <td><input type="password" class="form-control join_pw2" onKeyUp="pw_check()" id="text"></td>
+                                <td><input type="password" class="form-control join_pw2" onkeyup="pw_check()" id="text"></td>
                                 <td class="pw_check"></td>
                             </tr>
                             <tr>

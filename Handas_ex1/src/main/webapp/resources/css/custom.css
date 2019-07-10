@@ -8,6 +8,11 @@ margin: 0;
 .navbar-collapse {
 display: flex;
 justify-content: space-between;
+margin-top: 20px;
+}
+.navbar-collapse a{
+color: #000000;
+font-size: 1.05em;
 }
 .navbar-toggler span img{
 width: 30px;
@@ -100,17 +105,21 @@ margin-bottom: 5px;
 /* shopRead 컨텐츠 영역 css */
 .item_read {
 display: flex;
+flex-flow: row wrap;
 }
-.item_read div:first-child {
-background: red;
-height: 400px;
-width: 50%;
+.item_read .item_image {
+
+width: 48%;
+margin-right: 4%;
 }
-.item_read div:nth-child(2) {
-background: blue;
-height: 400px;
-width: 50%;
+.item_read .item_info {
+width: 48%;
 }
+
+.item_setCart_btn, .item_setLike_btn, .card-img-top {
+border: 1px solid #d9d9d9;
+}
+
 
 /* 모달 css */
 #myModal {
@@ -174,7 +183,7 @@ width: 70%;
 }
 
 /* 모바일 css */
-@media all and (max-width: 380px) {
+@media all and (max-width: 390px) {
 .header .logo{
 content: url('../images/s_images/Handas_mobile.png');
 width: 170px;

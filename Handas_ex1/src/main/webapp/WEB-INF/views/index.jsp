@@ -10,10 +10,6 @@
     <%@ include file="header.jsp" %>
     <title>Handas</title>
 </head>
-<script>
-var msgType='${msgType}';
-var msgContent='${msgContent}';
-</script>
 <body>
 	<div class="container">
 		<div class="row message">
@@ -38,7 +34,7 @@ var msgContent='${msgContent}';
                     <!-- The slideshow -->
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                        <img src="${path }/resources/images/s_images/2019_Golden_pig_960x400.png" alt="">
+                        <img src="${path }/resources/images/s_images/bxslider1.png" alt="">
                         </div>
                         <div class="carousel-item">
                         <img src="${path }/resources/images/s_images/bxslider2.png" alt="">

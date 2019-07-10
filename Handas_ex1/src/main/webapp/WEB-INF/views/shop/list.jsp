@@ -9,11 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <%@ include file="../header.jsp" %>
     <title>Handas</title>
-<script>
-var msgType = '${msgType}';
-var msgContent = '${msgContent}';
-
-</script>
 </head>
 <body>
 	<div class="container">
@@ -29,9 +24,9 @@ var msgContent = '${msgContent}';
                 	<c:forEach items="${list }" var="dto">
                 		<li>
 	                        <div class="card" style="border: none;">
-	                            <a href="#"><img class="card-img-top rounded" src="${path }/resources/images/s_images/pen1.png" alt="Card image"></a>
+	                            <a href="${path }/shop/read"><img class="card-img-top rounded" style="border: 1px solid #d9d9d9" src="${path }/resources/images/s_images/pen1.png" alt="Card image"></a>
 	                            <div class="card-body">
-	                                <a href="#"><h4 class="card-title">${dto.pname }</h4></a>
+	                                <a href="${path }/shop/read"><h4 class="card-title">${dto.pname }</h4></a>
 	                                <p class="card-text">${dto.getPriceFormat() }원</p>
 	                            </div>
 	                        </div>

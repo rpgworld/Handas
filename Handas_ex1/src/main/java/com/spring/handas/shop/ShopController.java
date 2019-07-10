@@ -48,6 +48,13 @@ public class ShopController {
 		return "shop/list";
 	}
 	
+	@RequestMapping(value="/shop/read")
+	public String shopRead() {
+		logger.info("shopRead()");
+		
+		return "shop/read";
+	}
+	
 	@RequestMapping(value="/shop/writeForm")
 	public String shopWriteForm() {
 		logger.info("shopWriteForm()");

@@ -41,38 +41,46 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/user/login", method=RequestMethod.POST)
-	@ResponseBody
-	public int login(HttpServletRequest request) {
+	public String login(HttpServletRequest request, RedirectAttributes redirect) {
 		logger.info("login()");
 		
 		String userID= request.getParameter("userID");
 		String userPW = request.getParameter("userPW");
-		System.out.println(userID);
+		
 		String pwChk = null; // 실제(DB) 회원 비밀번호
 		
-		int result = 0;
+		String msgType = "";
+		String msgContent = "";
+		String viewPage = "";
 		
 		UserDao dao = sqlSession.getMapper(UserDao.class);
 		pwChk = dao.login(userID);
 		
 		HttpSession session = request.getSession();
-		
-		logger.info("login() 끝");
+
 		if(pwChk != null) {
 			if(pwChk.equals(userPW)) { // 로그인 성공
 				session.setAttribute("userID", userID);
 				session.setAttribute("role", dao.roleCheck(userID));
-				result = 100;
+				msgType = "성공";
+				msgContent = userID + "님 환영합니다.";
+				viewPage = "redirect:/index";
 			
 			} else { // 비밀번호 불일치
-				result = -100;
+				msgType = "경고창";
+				msgContent = "비밀번호가 일치하지 않습니다.";
+				viewPage = "redirect:/user/loginForm";
 			}
 		} else { // 아이디가 존재하지 않음
-			result = -200;
-			
+			msgType = "경고창";
+			msgContent = "아이디가 존재하지 않습니다.";
+			viewPage = "redirect:/user/loginForm";
 		}
 		
-		return result;
+		
+		redirect.addFlashAttribute("msgType", msgType);
+		redirect.addFlashAttribute("msgContent", msgContent);
+		return viewPage;
 	}
 	
 	@RequestMapping(value="/user/logout")

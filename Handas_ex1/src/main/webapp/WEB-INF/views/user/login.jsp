@@ -9,11 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <%@ include file="../header.jsp" %>
     <title>Handas</title>
-<script>
-var msgType = '${msgType}';
-var msgContent = '${msgContent}';
-
-</script>
 </head>
 <body>
 	<div class="container">
@@ -41,7 +36,7 @@ var msgContent = '${msgContent}';
                                 <input class="form-check-input" type="checkbox"> 아이디 기억하기
                             </label>
                         </div>
-                        <button type="button" onclick="login()" class="btn btn-primary form-control login_btn">로그인하기</button>
+                        <button type="submit" onclick="login()" class="btn btn-primary form-control login_btn">로그인하기</button>
                     </form>
                 </div>
             </div>
