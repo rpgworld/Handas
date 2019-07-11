@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.handas.user.UserDao">
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="java.lang.String">
+		SELECT userPW FROM handas_user WHERE userID = #{userID} 
+	</select>
+	
+	<!-- 회원 등급 체크 -->
+	<select id="roleCheck" resultType="java.lang.String">
+		SELECT role FROM handas_user WHERE userID = #{userID} 
+	</select>
+	
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" resultType="int">
+		SELECT COUNT(*) FROM handas_user WHERE userID = #{userID} 
+	</select>
+	
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="com.spring.handas.user.UserDto">
+		INSERT INTO handas_user VALUES(handas_user_seq.nextval, #{userID}, #{userPW}, #{userName}, #{address1}, #{address2}, #{address3}, #{userEmail}, 'user')
+	</insert>
+	
+	<!-- 회원 정보(수정폼) 가져오기 -->
+	<select id="read" resultType="com.spring.handas.user.UserDto">
+		SELECT * FROM handas_user WHERE userID = #{userID} 
+	</select>
+	
+	<!-- 회원 정보 수정  --> 
+	<update id="update" parameterType="com.spring.handas.user.UserDto">
+		UPDATE handas_user SET userPW = #{userPW}, userName = #{userName}, address1 = #{address1}, address2 = #{address2}, address3 = #{address3}, userEmail = #{userEmail} WHERE userID = #{userID}
+	</update>
+	
+</mapper>

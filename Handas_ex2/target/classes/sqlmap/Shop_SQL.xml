@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.handas.shop.ShopDao">
+	
+	<select id="shopList" resultType="com.spring.handas.shop.ShopDto" parameterType="com.spring.handas.PageMaker">
+		SELECT * FROM (SELECT ROWNUM rnum, handas_shop.* FROM handas_shop ORDER BY pnum DESC) handas_shop WHERE rnum BETWEEN #{start} AND #{end}
+	</select>
+	
+	<insert id="shopWrite" parameterType="com.spring.handas.shop.ShopDto">
+		INSERT INTO handas_shop VALUES(handas_shop_seq.nextval, #{pname}, #{item}, #{price}, #{pdesc}, #{img}, sysdate, 0)
+	</insert>
+	
+	<select id="shopRead" resultType="com.spring.handas.shop.ShopDto">
+		SELECT * FROM handas_shop WHERE pnum = #{pnum}
+	</select>
+	
+	<select id="shopCnt" resultType="int">
+		SELECT COUNT(*) as num FROM handas_shop
+	</select>
+	
+	<update id="shopUpdate" parameterType="com.spring.handas.shop.ShopDto">
+		UPDATE handas_shop SET pname = #{pname}, item = #{item}, price = #{price}, pdesc = #{pdesc}, img = #{img} WHERE pnum = #{pnum}
+	</update>
+	
+	<select id="shopImgName" resultType="String">
+		SELECT img FROM handas_shop WHERE pnum = #{pnum}
+	</select>
+	
+	<delete id="shopDelete">
+		DELETE handas_shop WHERE pnum = #{pnum}
+	</delete>
+
+</mapper>
