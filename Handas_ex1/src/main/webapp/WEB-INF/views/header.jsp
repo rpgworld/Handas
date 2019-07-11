@@ -16,13 +16,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="${path }/resources/js/custom.js"></script>
+<script src="${path }/resources/js/user.js"></script>
+<script src="${path }/resources/js/shop.js"></script>
 <script>
 
 // 경고, 성공 메시지 pop-up
 var msgType='${msgType}';
 var msgContent='${msgContent}';
-
 
 $('document').ready(function(){
 	// 회원가입 - 아이디, 비밀번호 체크 유무

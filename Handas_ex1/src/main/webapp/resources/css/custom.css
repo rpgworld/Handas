@@ -127,8 +127,9 @@ top: 80px;
 }
 
 #myModal .modal-header h4{
-width: 54%;
-text-align: right;
+width: 100%;
+padding-left: 30px;
+text-align: center;
 font-size: 1.5em;
 font-size: 1.5rem;
 font-weight: bold;

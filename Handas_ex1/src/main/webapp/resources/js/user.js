@@ -33,6 +33,8 @@ function login() {
 	});*/
 }
 
+
+
 // 아이디 중복체크 후 아이디를 변경시 처리
 function id_check_reset() {
 	idCheck = false;
@@ -98,8 +100,8 @@ function addr_check() {
         oncomplete: function(data) {
             // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분입니다.
             // 예제를 참고하여 다양한 활용법을 확인해 보세요.
-        	$('.join_addr1').val(data.zonecode);
-        	$('.join_addr2').val(data.address);
+        	$('table input[name=address1]').val(data.zonecode);
+        	$('table input[name=address2]').val(data.address);
         }
     }).open();
 }

@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.handas.user.UserDao;
+
 @Controller
 public class ShopController {
 	
@@ -77,6 +79,20 @@ public class ShopController {
 		dao.shopWrite(dto);
 		
 		return "redirect:shopList";
+	}
+	
+	@RequestMapping(value="/shop/purchase")
+	public String readForm(HttpSession session, Model model) {
+		logger.info("shop/purchase()");
+		
+		if(session.getAttribute("userID") == null) {
+			return "redirect:/index";
+		}
+		String userID = (String) session.getAttribute("userID");
+		UserDao dao = sqlSession.getMapper(UserDao.class);
+		model.addAttribute("dto", dao.read(userID));
+		
+		return "shop/purchase";
 	}
 	
 	// 업로드 메서드

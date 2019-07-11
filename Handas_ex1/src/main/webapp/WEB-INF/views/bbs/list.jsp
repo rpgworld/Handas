@@ -34,11 +34,11 @@
 	    		<table class="table table-striped">
 	    			<thead>
 	    				<tr>
-	    					<th>글번호</th>
-	    					<th>제목</th>
-	    					<th>작성자</th>
-	    					<th>작성일</th>
-	    					<th>조회수</th>
+	    					<th style="border-top: none; border-bottom: none;">글번호</th>
+	    					<th style="border-top: none; border-bottom: none;">제목</th>
+	    					<th style="border-top: none; border-bottom: none;">작성자</th>
+	    					<th style="border-top: none; border-bottom: none;">작성일</th>
+	    					<th style="border-top: none; border-bottom: none;">조회수</th>
 	    				</tr>
 	    			</thead>
 	    				<c:forEach items="${bbsList }" var="list">
@@ -50,7 +50,34 @@
 		    					<td>${list.hit }</td>
 			    			</tr>
 	    				</c:forEach>
-	
+	    					<tr>
+		    					<td>${bbsList[0].bnum }</td>
+		    					<td class="bbs_title">${bbsList[0].title }</td>
+		    					<td>${bbsList[0].writer }</td>
+		    					<td>${bbsList[0].writeDate }</td>
+		    					<td>${bbsList[0].hit }</td>
+			    			</tr>
+			    			<tr>
+		    					<td>${bbsList[0].bnum }</td>
+		    					<td class="bbs_title">${bbsList[0].title }</td>
+		    					<td>${bbsList[0].writer }</td>
+		    					<td>${bbsList[0].writeDate }</td>
+		    					<td>${bbsList[0].hit }</td>
+			    			</tr>
+			    			<tr>
+		    					<td>${bbsList[0].bnum }</td>
+		    					<td class="bbs_title">${bbsList[0].title }</td>
+		    					<td>${bbsList[0].writer }</td>
+		    					<td>${bbsList[0].writeDate }</td>
+		    					<td>${bbsList[0].hit }</td>
+			    			</tr>
+			    			<tr>
+		    					<td>${bbsList[0].bnum }</td>
+		    					<td class="bbs_title">${bbsList[0].title }</td>
+		    					<td>${bbsList[0].writer }</td>
+		    					<td>${bbsList[0].writeDate }</td>
+		    					<td>${bbsList[0].hit }</td>
+			    			</tr>
 	    			</tbody>
 	    		</table>
 	    	</div>
