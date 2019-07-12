@@ -9,8 +9,9 @@ import org.springframework.util.FileCopyUtils;
 
 public class Upload {
 	String ps = File.pathSeparator;
-	String uploadPath = "C:\\Desktop\\Spring\\Handas\\Handas_ex2\\src\\main\\webapp\\resources\\images\\shop_images";
 	
+	//String uploadPath = "C:\\Users\\Data\\Desktop\\Spring\\Handas\\Handas_ex2\\src\\main\\webapp\\resources\\images\\shop_images";
+	String uploadPath ="C:\\Users\\Data\\oxyzen_eclipse\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Handas_ex2\\resources\\images\\shop_images";
 	
 	
 	// 업로드 메서드

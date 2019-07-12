@@ -15,16 +15,18 @@ public class PageMaker {
 	
 	
 	public PageMaker(int curPage, int total, int pageView) {
-		this.totalPage = total / pageView;
+		this.totalPage = (int) Math.ceil(1.0 * total / pageView);
 		this.curPage = curPage;
 		
 		this.endPage = (int) Math.ceil(curPage / 10.0) * 10;
 		if(this.endPage > this.totalPage) { this.endPage = this.totalPage; }
 		this.startPage = endPage - 9;
+		if(this.startPage < 0) { this.startPage = 1; }
 		
 		this.end = curPage * pageView;
 		if(this.end > total) { this.end = total; }
 		this.start = end - pageView  + 1;
+		if(this.start < 0) { this.start = 1; }
 	}
 
 

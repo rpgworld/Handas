@@ -12,6 +12,7 @@ public class ShopDto {
 	private String pdesc;
 	private String img;
 	private Date writeDate;
+	private int volume;
 	
 	
 	public int getPnum() {     
@@ -76,6 +77,14 @@ public class ShopDto {
 	}
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
+	}
+
+	public int getVolume() {
+		return volume;
+	}
+
+	public void setVolume(int volume) {
+		this.volume = volume;
 	}
 	
 }

@@ -10,7 +10,7 @@
 	</select>
 	
 	<insert id="shopWrite" parameterType="com.spring.handas.shop.ShopDto">
-		INSERT INTO handas_shop VALUES(handas_shop_seq.nextval, #{pname}, #{item}, #{price}, #{pdesc}, #{img}, sysdate, 0)
+		INSERT INTO handas_shop VALUES(handas_shop_seq.nextval, #{pname}, #{item}, #{price}, #{pdesc}, #{img}, sysdate, #{volume})
 	</insert>
 	
 	<select id="shopRead" resultType="com.spring.handas.shop.ShopDto">

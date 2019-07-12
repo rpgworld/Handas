@@ -42,7 +42,7 @@ public class ShopController {
 		
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
 		
-		int pageView = 5; // 한 페이지당 보여줄 게시물 수
+		int pageView = 6; // 한 페이지당 보여줄 게시물 수
 		int total = dao.shopCnt(); // 전체 게시물 수
 		PageMaker paging = new PageMaker(curPage, total, pageView);
 		
@@ -124,7 +124,7 @@ public class ShopController {
 		
 		redirect.addAttribute("msgType", "성공");
 		redirect.addAttribute("msgContent", "상품등록이 완료되었습니다.");
-		return "redirect:shopList";
+		return "redirect:/shop/list";
 	}
 	
 	@RequestMapping(value="/shop/purchase")

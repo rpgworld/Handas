@@ -55,6 +55,12 @@ $('document').ready(function(){
 		total_price();
 	});
 	
+	$('.item_info .cart_btn').click(function(){
+		$('.toast strong').html('장바구니 담기 성공!');
+	    $('.toast .toast-body').html('<a href="${path}/shop/cart" style="color: #000000;">장바구니 페이지로 이동하시겠습니까?</a>');
+		$('.toast').toast('show');
+	});
+	
 });
 
 function total_price() {
@@ -74,7 +80,7 @@ function total_price() {
         <div class="row">
             <div class="col-sm-12 item_read">
 				<div class="item_image">
-					<img class="card-img-top rounded" src="${path }/resources/images/s_images/pen1.png" alt="">
+					<img class="card-img-top rounded" src="${path }/resources/images/shop_images/${dto.img }" alt="">
 				</div>
            		<div class="item_info">
            			<ul>
@@ -90,7 +96,7 @@ function total_price() {
            				<li class="total_group">
            					<div>
 								<h3 class="total_price" style="display: inline-block;"></h3>
-								<button type="button" class="btn item_setCart_btn">장바구니&nbsp;<i class="fas fa-cart-plus"></i></button>
+								<button type="button" class="btn cart_btn" style="border: 1px solid #d9d9d9">장바구니&nbsp;<i class="fas fa-cart-plus"></i></button>
 								<button type="button" class="btn item_setLike_btn">찜&nbsp;<i class="fas fa-heart"></i></button>
 							</div>
            				</li>

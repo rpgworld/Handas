@@ -116,7 +116,7 @@ margin-right: 4%;
 width: 48%;
 }
 
-.item_setCart_btn, .item_setLike_btn, .card-img-top {
+.item_info cart_btn, .item_setLike_btn, .card-img-top {
 border: 1px solid #d9d9d9;
 }
 
