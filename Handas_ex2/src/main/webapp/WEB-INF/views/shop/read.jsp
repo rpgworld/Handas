@@ -62,7 +62,7 @@ $('document').ready(function(){
 	// 장바구니 버튼 클릭 이벤트
 	$('.item_info .cart_btn').click(function(){
 		$('.toast strong').html('장바구니 담기 성공!');
-	    $('.toast .toast-body').html('<a href="${path}/shop/cart" style="color: #000000;">장바구니 페이지로 이동하시겠습니까?</a>');
+	    $('.toast .toast-body').html('장바구니 페이지로 <a href="${path}/shop/cart">이동</a>하시겠습니까?');
 	    
 	    var left = $('#baguni').offset().left;
 	    var top = $('#baguni').offset().top;
@@ -120,7 +120,7 @@ function total_price() {
            					<div>
 								<h3 class="total_price" style="display: inline-block;"></h3>
 								<button type="button" class="btn cart_btn" id="baguni" style="border: 1px solid #d9d9d9">장바구니&nbsp;<i class="fas fa-cart-plus"></i></button>
-								<button type="button" class="btn like_btn" id="like">찜&nbsp;<i class="fas fa-heart"></i></button>
+								<button type="button" style="border: 1px solid #d9d9d9" class="btn like_btn" id="like">찜&nbsp;<i class="fas fa-heart"></i></button>
 							</div>
            				</li>
            				<li>

@@ -25,6 +25,9 @@
 						<a class="nav-link active" href="#">전체</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link" href="#">상품</a>
+					</li>
+					<li class="nav-item">
 				    	<a class="nav-link" href="#">배송</a>
 					</li>
 					<li class="nav-item">
