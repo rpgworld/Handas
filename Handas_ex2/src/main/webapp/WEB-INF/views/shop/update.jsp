@@ -72,35 +72,35 @@ padding-right: 10px;
 					
 					<table class="table table-striped">
 						<tr>
-							<td colspan="2" class="table-primary"><h1>상품등록</h1></td>
+							<td colspan="2" class="table-primary"><h1>상품수정</h1></td>
 						</tr>
 						<tr>
 							<th>상품명</th>
-							<td><input type="text" class="form-control" id="pname" name="pname"></td>
+							<td><input type="text" class="form-control" id="pname" name="pname" value=${dto.pname }></td>
 						</tr>
 						<tr>
 							<th>옵션</th>
-							<td><input type="text" class="form-control" id="item" name="item"></td>
+							<td><input type="text" class="form-control" id="item" name="item" value=${dto.item }></td>
 						</tr>
 						<tr>
 							<th>가격</th>
-							<td><input type="text" class="form-control" id="price" name="price"></td>
+							<td><input type="text" class="form-control" id="price" name="price" value=${dto.price }></td>
 						</tr>
 						<tr>
 							<th>재고수량</th>
-							<td><input type="text" class="form-control" id="volume" name="volume"></td>
+							<td><input type="text" class="form-control" id="volume" name="volume" value=${dto.volume }></td>
 						</tr>
 						<tr>
 							<th>이미지</th>
-							<td><input type="file" class="form-control" id="file" name="file"></td>
+							<td><a href="${path }/images/shop_images/${dto.img }">${dto.img }</a></td>
 						</tr>
 						<tr>
 							<th>상세설명</th>
-							<td><textarea class="form-control" id="pdesc" name="pdesc" style="resize: none;"></textarea></td>
+							<td><textarea class="form-control" id="pdesc" name="pdesc" style="resize: none;">${dto.pdesc }</textarea></td>
 						</tr>
 					</table>
 					<div class="write_btn" >
-						<button type="submit" class="btn btn-primary">상품등록</button>
+						<button type="submit" class="btn btn-primary">상품수정</button>
 					</div>
 				</form>
 	        </div>

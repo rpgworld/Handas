@@ -12,6 +12,14 @@
 <script>
 var curPage = ${paging.curPage};
 
+$('document').ready(function(){
+	
+	if(msgType != '') {
+		modal_alert(msgType, msgContent);
+	}
+
+});
+
 </script>
 </head>
 <body>

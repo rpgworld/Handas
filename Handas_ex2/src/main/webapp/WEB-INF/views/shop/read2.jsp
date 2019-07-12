@@ -51,8 +51,6 @@
             </div>
         </div>
     </div>
-    
-    
     <%@ include file="../modal.jsp" %>
 </body>
 </html>

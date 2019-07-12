@@ -64,8 +64,22 @@ public class ShopController {
 		return "shop/read";
 	}
 	
+	@RequestMapping(value = "/shop/updateForm", method = RequestMethod.GET)
+	public String updateForm(HttpServletRequest request, Model model) {
+		
+		String pnum = request.getParameter("pnum");
+		
+		ShopDao dao = sqlSession.getMapper(ShopDao.class);
+		ShopDto dto = dao.shopRead(Integer.parseInt(pnum));
+		System.out.println(dto.getImg());
+		model.addAttribute("dto", dao.shopRead(Integer.parseInt(pnum)));
+		
+		
+		return "shop/update";
+	}
+	
 	@RequestMapping(value = "/shop/update", method = RequestMethod.POST)
-	public String uploadForm(ShopDto dto, @RequestParam(value="file", defaultValue="img") MultipartFile file, RedirectAttributes redirect) throws Exception {
+	public String update(ShopDto dto, @RequestParam(value="file", defaultValue="img") MultipartFile file, RedirectAttributes redirect) throws Exception {
 
 		logger.info("originalName: " + file.getOriginalFilename());
 		logger.info("size: " + file.getSize());

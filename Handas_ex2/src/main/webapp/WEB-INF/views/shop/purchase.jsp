@@ -48,7 +48,7 @@
                             </tr>
                             <tr>
                             	<th>배송메시지</th>
-                            	<td colspan="2"><input type="text" class="form-control join_addr3" name="address3" id="text" placeholder=""></td>
+                            	<td colspan="2"><input type="text" class="form-control join_addr3" name="address3" id="text" placeholder="택배기사님께 30자 이내로 메세지를 적어주세요" maxlength="30"></td>
                             </tr>
                         </table>
                         <div class="join_btn_group">

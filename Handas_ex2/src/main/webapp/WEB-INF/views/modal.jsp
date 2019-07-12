@@ -35,7 +35,7 @@
     </div>
     
     
-	<div class="toast " data-autohide="false" style="z-index: 30; position: absolute; top:250px; right: 120px;">
+	<div class="toast " data-autohide="false" style="z-index: 30; position: absolute;">
 		<div class="toast-header">
 			<strong class="mr-auto text-primary"></strong>
     		<button type="button" class="ml-2 mb-1 close" data-dismiss="toast">&times;</button>

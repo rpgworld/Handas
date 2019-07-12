@@ -11,13 +11,16 @@
     <title>Handas</title>
 <script>
 var count = 1;
+var maxCnt = ${dto.volume};
 var price = ${dto.price}; // 임시
 var userID = '${sessionScope.userID}';
+var like = false; // 찜 등록 여부
 
 $('document').ready(function(){
 	
 	total_price();
 	
+	// 구매 버튼 클릭시 이벤트
 	$('#purchase').click(function(){
 		if(userID == '') {
 			msgType = '구매해주셔서 감사합니다.';
@@ -30,9 +33,10 @@ $('document').ready(function(){
 		window.location.href = '${path}/shop/purchase';
 	});
 	
+	// 개수 버튼 이벤트
 	$('.count_up').click(function(){
 		// 재고 개수만큼, 임시: 10000
-		if(count == 10000) {
+		if(count == maxCnt) {
 			return false;
 		}
 		
@@ -55,10 +59,29 @@ $('document').ready(function(){
 		total_price();
 	});
 	
+	// 장바구니 버튼 클릭 이벤트
 	$('.item_info .cart_btn').click(function(){
 		$('.toast strong').html('장바구니 담기 성공!');
 	    $('.toast .toast-body').html('<a href="${path}/shop/cart" style="color: #000000;">장바구니 페이지로 이동하시겠습니까?</a>');
+	    
+	    var left = $('#baguni').offset().left;
+	    var top = $('#baguni').offset().top;
+
+	    $('.toast').css('left', left - 40);
+	    $('.toast').css('top', top + 35);
+	    
 		$('.toast').toast('show');
+	});
+	
+	// 찜 버튼 눌렀을때 이벤트
+	$('#like').click(function(){
+		if(like == false) {
+			$('#like').css('color', '#ff0000');
+			like = true;
+		} else {
+			$('#like').css('color', '#000000');
+			like = false;
+		}
 	});
 	
 });
@@ -96,14 +119,19 @@ function total_price() {
            				<li class="total_group">
            					<div>
 								<h3 class="total_price" style="display: inline-block;"></h3>
-								<button type="button" class="btn cart_btn" style="border: 1px solid #d9d9d9">장바구니&nbsp;<i class="fas fa-cart-plus"></i></button>
-								<button type="button" class="btn item_setLike_btn">찜&nbsp;<i class="fas fa-heart"></i></button>
+								<button type="button" class="btn cart_btn" id="baguni" style="border: 1px solid #d9d9d9">장바구니&nbsp;<i class="fas fa-cart-plus"></i></button>
+								<button type="button" class="btn like_btn" id="like">찜&nbsp;<i class="fas fa-heart"></i></button>
 							</div>
            				</li>
            				<li>
            					<input type="button" id="purchase" class="btn btn-primary" value="바로구매">
            				</li>
            			</ul>
+           		</div>
+           		<div style="width: 100%; display:flex; justify-content: flex-end; padding-right: 10px;">
+           			<c:if test="${sessionScope.role == 'admin' }">
+           				<a href="${path }/shop/updateForm?pnum=${dto.pnum}" class="btn btn-primary">수정</a>
+           			</c:if>
            		</div>
            		<div class="item_comment">
            			

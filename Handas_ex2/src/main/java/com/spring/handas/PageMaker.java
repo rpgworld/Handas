@@ -18,11 +18,13 @@ public class PageMaker {
 		this.totalPage = (int) Math.ceil(1.0 * total / pageView);
 		this.curPage = curPage;
 		
+		// 총 페이지 10 개만 출력될수 있도록
 		this.endPage = (int) Math.ceil(curPage / 10.0) * 10;
 		if(this.endPage > this.totalPage) { this.endPage = this.totalPage; }
 		this.startPage = endPage - 9;
 		if(this.startPage < 0) { this.startPage = 1; }
 		
+		// 글번호 시작 번호, 끝번호 구하기
 		this.end = curPage * pageView;
 		if(this.end > total) { this.end = total; }
 		this.start = end - pageView  + 1;
