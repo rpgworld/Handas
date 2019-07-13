@@ -92,7 +92,7 @@ padding-right: 10px;
 						</tr>
 						<tr>
 							<th>이미지</th>
-							<td><a href="${path }/images/shop_images/${dto.img }">${dto.img }</a></td>
+							<td style="display:flex; justify-content: space-between;"><a style="width: 90%; padding-top: 12px; padding-left: 2px;" href="${path }/resources/images/shop_images/${dto.img }">${dto.img }</a><input type="button" id="change_file" style="width: 10%;" class="btn btn-primary" value="변경"></td>
 						</tr>
 						<tr>
 							<th>상세설명</th>
