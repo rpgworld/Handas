@@ -30,7 +30,7 @@ $('document').ready(function(){
 		}
 		
 		// 데이터도 함께 전송 해야됨
-		window.location.href = '${path}/shop/purchase';
+		window.location.href = '${path}/shop/purchaseForm';
 	});
 	
 	// 개수 버튼 이벤트

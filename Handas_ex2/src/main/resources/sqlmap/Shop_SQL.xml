@@ -6,7 +6,9 @@
 <mapper namespace="com.spring.handas.shop.ShopDao">
 	
 	<select id="shopList" resultType="com.spring.handas.shop.ShopDto" parameterType="com.spring.handas.PageMaker">
-		SELECT * FROM (SELECT ROWNUM rnum, handas_shop.* FROM handas_shop ORDER BY pnum DESC) handas_shop WHERE rnum BETWEEN #{start} AND #{end}
+		SELECT * 
+		FROM (SELECT ROWNUM rnum, handas_shop.* FROM handas_shop ORDER BY pnum DESC) handas_shop 
+		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
 	
 	<insert id="shopWrite" parameterType="com.spring.handas.shop.ShopDto">

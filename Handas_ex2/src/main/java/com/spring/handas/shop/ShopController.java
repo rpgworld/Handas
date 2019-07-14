@@ -141,9 +141,9 @@ public class ShopController {
 		return "redirect:/shop/list";
 	}
 	
-	@RequestMapping(value="/shop/purchase")
+	@RequestMapping(value="/shop/purchaseForm")
 	public String readForm(HttpSession session, Model model) {
-		logger.info("shop/purchase()");
+		logger.info("shop/purchaseForm()");
 		
 		if(session.getAttribute("userID") == null) {
 			return "redirect:/index";
@@ -153,5 +153,13 @@ public class ShopController {
 		model.addAttribute("dto", dao.read(userID));
 		
 		return "shop/purchase";
+	}
+	
+	// 장바구니
+	@RequestMapping(value="/shop/cartForm")
+	public String cartForm() {
+		logger.info("shop/cartForm");
+		
+		return "shop/cart";
 	}
 }

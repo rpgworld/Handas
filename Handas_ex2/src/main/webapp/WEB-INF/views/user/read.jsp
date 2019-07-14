@@ -21,9 +21,11 @@
         <div class="row" style="margin-top: 50px;">
             <div class="col-sm-12" style="padding: 0;">
                 <div class="userRead_form" style="border: 1px solid #d9d9d9">
-                    <h1 style="font-size: 1.6em; font-weight: bold; text-align: center; padding-bottom: 10px;">회원정보</h1>
                     <form action="update" method="post"> 
                         <table class="table table-hover">
+                            <tr>
+                            	<td class="table-primary" colspan="2"><h1 style="font-size: 1.6em; font-weight: bold; text-align: center; padding: 0;">회원정보</h1></td>
+                            </tr>
                             <tr>
                                 <th>아이디</th>
                                 <td><input type="text" class="form-control join_id" name="userID" id="join_id" value="${dto.userID }" readOnly></td>
