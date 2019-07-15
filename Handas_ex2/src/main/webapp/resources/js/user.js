@@ -170,3 +170,18 @@ function modal_alert(msgType, msgContent) {
     
     $('#myModal').modal();
 }
+
+// 토스트 메시지 팝업
+function toast_alert(target, top_value, left_value, msgTop, msgBody) {
+	// 장바구니 메세지 출력
+	$('.toast strong').html(msgTop);
+    $('.toast .toast-body').html(msgBody);
+    
+    var left = $(target).offset().left;
+    var top = $(target).offset().top;
+
+    $('.toast').css('left', left + left_value);
+    $('.toast').css('top', top + top_value);
+    
+	$('.toast').toast('show');
+}

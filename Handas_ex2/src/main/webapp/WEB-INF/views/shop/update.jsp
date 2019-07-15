@@ -30,10 +30,12 @@ $('document').ready(function(){
 	$('#change_file').click(function(){
 		
 		if(fileChange == false) {
-			$('#update_img').html('<input type="file" class="form-control" id="file" name="file">');
+			$('#update_img').html('<input style="width: 90%;" type="file" class="form-control" id="file" name="file">');
+			$('#update_img').css('padding-top', '0');
 			fileChange = true;
 		} else {
-			$('#update_img').html('<a style="width: 90%; padding-top: 12px; padding-left: 2px;" href="${path }/resources/images/shop_images/${dto.img }">${dto.img }</a>');
+			$('#update_img').html('<input type="file" name="file" style="visibility:hidden; position:absolute; z-index: 1000"><a style="width: 90%; padding-top: 12px; padding-left: 2px;" href="${path }/resources/images/shop_images/${dto.img }">${dto.img }</a>');
+			$('#update_img').css('padding-top', '10px');
 			fileChange = false;
 		}
 	});
@@ -58,6 +60,10 @@ font-weight: bold;
 .writeForm th {
 text-align: center;
 vertical-align: middle;
+width: 30%;
+}
+.writeForm td {
+width: 70%;
 }
 .writeForm td input {
 height: 27px;
@@ -84,8 +90,9 @@ padding-right: 10px;
         </div>
         <div class="row">
          	<div class="col-sm-12 shop">
-				<form action="write" method="post" enctype="multipart/form-data" class="writeForm">
-					
+				<form action="update" method="post" enctype="multipart/form-data" class="writeForm">
+					<input type="hidden" name="pnum" value="${dto.pnum }">
+					<input type="hidden" name="img" value="${dto.img }">
 					<table class="table table-striped">
 						<tr>
 							<td colspan="2" class="table-primary"><h1>상품수정</h1></td>
@@ -108,7 +115,7 @@ padding-right: 10px;
 						</tr>
 						<tr>
 							<th>이미지</th>
-							<td style="display:flex; justify-content: space-between;"><div id="update_img"><a style="width: 90%; padding-top: 12px; padding-left: 2px;" href="${path }/resources/images/shop_images/${dto.img }">${dto.img }</a></div><input type="button" id="change_file" style="width: 10%;" class="btn btn-primary" value="변경"></td>
+							<td style=" width: 100%; display:flex; justify-content: space-between;"><div id="update_img" style="padding-top: 10px;"><input type="file" name="file" style="visibility:hidden; position:absolute; z-index: 1000"><a style="width: 90%; padding-top: 12px; padding-left: 2px;" href="${path }/resources/images/shop_images/${dto.img }">${dto.img }</a></div><input type="button" id="change_file" style="width: 10%;" class="btn btn-primary" value="변경"></td>
 						</tr>
 						<tr>
 							<th>상세설명</th>

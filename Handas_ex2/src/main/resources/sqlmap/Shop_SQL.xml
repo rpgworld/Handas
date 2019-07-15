@@ -23,6 +23,7 @@
 		SELECT COUNT(*) as num FROM handas_shop
 	</select>
 	
+	<!-- 상품정보 수정 -->
 	<update id="shopUpdate" parameterType="com.spring.handas.shop.ShopDto">
 		UPDATE handas_shop SET pname = #{pname}, item = #{item}, price = #{price}, pdesc = #{pdesc}, img = #{img} WHERE pnum = #{pnum}
 	</update>
@@ -34,6 +35,11 @@
 	<delete id="shopDelete">
 		DELETE handas_shop WHERE pnum = #{pnum}
 	</delete>
+	
+	<!-- 장바구니 넣기 전에 같은 제품이 존재하는지 체크 -->
+	<select id="cartCheck" resultType="int">
+		SELECT COUNT(*) AS NUM FROM handas_cart WHERE userID = #{param1} and pnum = #{param2}
+	</select>
 	
 	<!-- 장바구니 넣기 -->
 	<select id="cartWrite" parameterType="com.spring.handas.shop.CartDto">

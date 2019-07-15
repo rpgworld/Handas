@@ -20,7 +20,7 @@
 <script src="${path }/resources/js/shop.js"></script>
 <script>
 
-// 경고, 성공 메시지 pop-up
+// 경공, 성공 메시지 pop-up
 var msgType='${msgType}';
 var msgContent='${msgContent}';
 

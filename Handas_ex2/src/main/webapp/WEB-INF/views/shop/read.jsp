@@ -65,16 +65,7 @@ $('document').ready(function(){
 		if(userID == '') { // 로그인 하지 않았다면
 			
 			// 로그인 필요 메세지 출력
-			$('.toast strong').html('장바구니는 로그인한 회원만 이용 가능합니다.');
-		    $('.toast .toast-body').html('로그인 페이지로 <a href="${path}/user/loginForm">이동</a>하시겠습니까?');
-		    
-		    var left = $('#baguni').offset().left;
-		    var top = $('#baguni').offset().top;
-
-		    $('.toast').css('left', left - 40);
-		    $('.toast').css('top', top + 35);
-		    
-			$('.toast').toast('show');
+		    toast_alert('#baguni', 35, -40, '장바구니는 로그인한 회원만 이용 가능합니다.', '로그인 페이지로 <a href="${path}/user/loginForm">이동</a>하시겠습니까?');
 			
 		} else {
 			var pnum = ${dto.pnum};
@@ -92,17 +83,15 @@ $('document').ready(function(){
 				url : '${path}/shop/cart',
 				dataType : 'json',
 				success : function(result) {
-					// 장바구니 메세지 출력
-					$('.toast strong').html('장바구니 담기 성공!');
-				    $('.toast .toast-body').html('장바구니 페이지로 <a href="${path}/shop/cartForm">이동</a>하시겠습니까?');
-				    
-				    var left = $('#baguni').offset().left;
-				    var top = $('#baguni').offset().top;
-
-				    $('.toast').css('left', left - 40);
-				    $('.toast').css('top', top + 35);
-				    
-					$('.toast').toast('show');
+					
+					if(result == true) {
+						// 장바구니 담기 성공 메세지
+						toast_alert('#baguni', 35, -40, '장바구니 담기 성공!', '장바구니 페이지로 <a href="${path}/shop/cartForm">이동</a>하시겠습니까?');
+					} else {
+						// 장바구니 제품 중복
+						toast_alert('#baguni', 35, -40, '해당 제품이 이미 장바구니에 존재합니다.', '장바구니 페이지로 <a href="${path}/shop/cartForm">이동</a>하시겠습니까?');
+					}
+					
 				},
 				error : function(error) {
 					alert('error : ' + error);
@@ -171,7 +160,8 @@ function total_price() {
            		</div>
            		<div style="width: 100%; display:flex; justify-content: flex-end; padding-right: 10px;">
            			<c:if test="${sessionScope.role == 'admin' }">
-           				<a href="${path }/shop/updateForm?pnum=${dto.pnum}" class="btn btn-primary">수정</a>
+           				<a href="${path }/shop/updateForm?pnum=${dto.pnum}" class="btn btn-primary">수정하기</a>
+           				<a href="${path }/shop/delete?pnum=${dto.pnum}" class="btn btn-primary" style="margin-left: 10px;">삭제하기</a>
            			</c:if>
            		</div>
            		<div class="item_comment">

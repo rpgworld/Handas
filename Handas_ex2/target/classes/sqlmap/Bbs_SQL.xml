@@ -4,11 +4,41 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.spring.handas.bbs.BbsDao">
-
-	<select id="bbsList" resultType="com.spring.handas.bbs.BbsDto">
-		SELECT * FROM (SELECT ROWNUM rnum, bnum, writer, title, content, write_date, hit, ref, step, lev 
-		FROM ( SELECT * FROM handas_bbs ORDER BY ref desc, step asc ) handas_bbs) 
-		WHERE rnum &gt;= 1 and rnum &lt;= 10
+	
+	<!-- 글목록 -->
+	<select id="bbsList" resultType="com.spring.handas.bbs.BbsDto" parameterType="com.spring.handas.PageMaker">
+		SELECT * 
+		FROM (SELECT ROWNUM rnum, handas_bbs.* FROM handas_bbs ORDER BY bnum DESC, step ASC) handas_bbs 
+		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
 	
+	<!-- 글 총개수 -->
+	<select id="bbsCnt" resultType="int">
+		SELECT COUNT(*) AS num FROM handas_bbs
+	</select>
+	
+	<!-- 글쓰기 -->
+	<insert id="bbsWrite" parameterType="BbsDto">
+		INSERT INTO handas_bbs VALUES(handas_bbs_seq.nextval, #{writer}, #{title}, #{content}, sysdate, 0, handas_bbs_seq.currval, 0, 0)
+	</insert>
+	
+	<!-- 글읽기 -->
+	<select id="bbsRead" resultType="com.spring.handas.bbs.BbsDto">
+		SELECT * FROM handas_bbs WHERE bnum = #{bnum}
+	</select>
+	
+	<!-- 조회수 올리기 -->
+	<update id="bbsCntUp">
+		UPDATE handas_bbs SET hit = hit + 1 WHERE bnum = #{bnum}
+	</update>
+	
+	<!-- 글삭제 -->
+	<delete id="bbsDelete">
+		DELETE handas_bbs WHERE bnum = #{bnum}
+	</delete>
+	
+	<!-- 글수정 -->
+	<update id="bbsUpdate" parameterType="com.spring.handas.bbs.BbsDto">
+		UPDATE handas_bbs SET title = #{title}, content = #{content} WHERE bnum = #{bnum}
+	</update>
 </mapper>

@@ -81,9 +81,11 @@ public class ShopController {
 		return "shop/update";
 	}
 	
+	// 상품 정보 수정
 	@RequestMapping(value = "/shop/update", method = RequestMethod.POST)
-	public String update(ShopDto dto, @RequestParam(value="file", defaultValue="img") MultipartFile file, RedirectAttributes redirect) throws Exception {
-
+	public String update(ShopDto dto, @RequestParam(value="file", defaultValue = "file") MultipartFile file, RedirectAttributes redirect) throws Exception {
+		logger.info("shopUpdate()");
+		
 		logger.info("originalName: " + file.getOriginalFilename());
 		logger.info("size: " + file.getSize());
 		logger.info("contentType: " + file.getContentType());
@@ -91,28 +93,43 @@ public class ShopController {
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
 		
 		Upload upload = new Upload();
-		String savedName = upload.uploadFile(dto.getPname(), file.getOriginalFilename(), file.getBytes());
-		dto.setImg(savedName);
+		
+		System.out.println(file.getOriginalFilename());
+		// 파일이 비어있지 않을 경우
+		if(file.getOriginalFilename() != "") {
+			 String savedName = upload.uploadFile(dto.getPname(), file.getOriginalFilename(), file.getBytes());
+			 dto.setImg(savedName);
+		}
 		
 		dao.shopUpdate(dto);
 		
-		redirect.addAttribute("msgType", "성공");
-		redirect.addAttribute("msgContent", "수정이 완료되었습니다.");
+		redirect.addFlashAttribute("msgType", "성공");
+		redirect.addFlashAttribute("msgContent", "수정이 완료되었습니다.");
 		
 		return "redirect:/shop/list";
 	}
 	
 	@RequestMapping(value="/shop/delete")
-	public String shopDelete(HttpServletRequest request, RedirectAttributes redirect) {
+	public String shopDelete(HttpServletRequest request, RedirectAttributes redirect, HttpSession session) {
 		logger.info("shopDelete()");
 		
 		String pnum = request.getParameter("pnum");
 		
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
+		
+		// 로그인이 되어있지 않거나, 관리자 계정이 아닌경우
+		String role = (String) session.getAttribute("role");
+		if(role == null || !role.equals("admin")) {
+			redirect.addFlashAttribute("msgType", "경고창");
+			redirect.addFlashAttribute("msgContent", "삭제 권한이 없습니다.");
+			
+			return "redirect:/shop/list";
+		} 
+		
 		dao.shopDelete(Integer.parseInt(pnum));
 		
-		redirect.addAttribute("msgType", "성공");
-		redirect.addAttribute("msgContent", "삭제가 완료되었습니다.");
+		redirect.addFlashAttribute("msgType", "성공");
+		redirect.addFlashAttribute("msgContent", "삭제가 완료되었습니다.");
 		
 		return "redirect:/shop/list";
 	}
@@ -148,11 +165,12 @@ public class ShopController {
 		
 		dao.shopWrite(dto);
 		
-		redirect.addAttribute("msgType", "성공");
-		redirect.addAttribute("msgContent", "상품등록이 완료되었습니다.");
+		redirect.addFlashAttribute("msgType", "성공");
+		redirect.addFlashAttribute("msgContent", "상품등록이 완료되었습니다.");
 		return "redirect:/shop/list";
 	}
 	
+	// 구매하기 페이지 이동
 	@RequestMapping(value="/shop/purchaseForm")
 	public String readForm(HttpServletRequest request, HttpSession session, Model model, @RequestParam("list") ArrayList<CartDto> list) {
 		logger.info("shop/purchaseForm()");	
@@ -192,6 +210,11 @@ public class ShopController {
 		dto.setUserID(userID);
 		
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
+		// 해당 아이디에 장바구니에 제품이 중복된다면
+		if(dao.cartCheck(userID, dto.getPnum()) > 0) {
+			return "false";
+		}
+		
 		dao.cartWrite(dto);
 		
 		return "true";
@@ -210,8 +233,6 @@ public class ShopController {
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
 		model.addAttribute("list", dao.cartList(userID));
 		
-		System.out.println(dao.cartList(userID).size());
-		System.out.println(dao.cartList(userID).get(0).getImg());
 		
 		return "shop/cart";
 	}

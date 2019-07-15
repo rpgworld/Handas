@@ -13,6 +13,8 @@ public interface ShopDao {
 	public String shopImgName(int pnum);
 	public void shopDelete(int pnum);
 	
+	// 장바구니 넣기 전에 같은 제품이 존재하는지 체크
+	public int cartCheck(String userID, int pnum);
 	// 장바구니 넣기
 	public void cartWrite(CartDto dto);
 	// 장바구니 정보 가져오기
