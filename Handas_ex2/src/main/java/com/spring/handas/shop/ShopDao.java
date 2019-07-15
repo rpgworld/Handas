@@ -12,4 +12,9 @@ public interface ShopDao {
 	public void shopUpdate(ShopDto dto);
 	public String shopImgName(int pnum);
 	public void shopDelete(int pnum);
+	
+	// 장바구니 넣기
+	public void cartWrite(CartDto dto);
+	// 장바구니 정보 가져오기
+	public ArrayList<CartDto> cartList(String userID);
 }

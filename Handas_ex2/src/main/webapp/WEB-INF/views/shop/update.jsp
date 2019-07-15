@@ -10,7 +10,12 @@
     <%@ include file="../header.jsp" %>
     <title>Handas</title>
 <script>
+
+// 올릴 수 있는 최대 파일용량
 var maxUploadSize = 10485760;
+
+//이미지 업로드 버튼 클릭
+var fileChange = false;
 
 $('document').ready(function(){
 	$('#file').change(function(){
@@ -19,6 +24,17 @@ $('document').ready(function(){
 				modal_alert('경고창', '첨부 파일 용량은 10메가 바이트 이내로 등록가능 합니다.');
 				$('#file')[0].value = '';
 			}
+		}
+	});
+	
+	$('#change_file').click(function(){
+		
+		if(fileChange == false) {
+			$('#update_img').html('<input type="file" class="form-control" id="file" name="file">');
+			fileChange = true;
+		} else {
+			$('#update_img').html('<a style="width: 90%; padding-top: 12px; padding-left: 2px;" href="${path }/resources/images/shop_images/${dto.img }">${dto.img }</a>');
+			fileChange = false;
 		}
 	});
 });
@@ -92,7 +108,7 @@ padding-right: 10px;
 						</tr>
 						<tr>
 							<th>이미지</th>
-							<td style="display:flex; justify-content: space-between;"><a style="width: 90%; padding-top: 12px; padding-left: 2px;" href="${path }/resources/images/shop_images/${dto.img }">${dto.img }</a><input type="button" id="change_file" style="width: 10%;" class="btn btn-primary" value="변경"></td>
+							<td style="display:flex; justify-content: space-between;"><div id="update_img"><a style="width: 90%; padding-top: 12px; padding-left: 2px;" href="${path }/resources/images/shop_images/${dto.img }">${dto.img }</a></div><input type="button" id="change_file" style="width: 10%;" class="btn btn-primary" value="변경"></td>
 						</tr>
 						<tr>
 							<th>상세설명</th>

@@ -19,6 +19,31 @@ margin: 0 auto;
 border: 1px solid #d9d9d9;
 }
 
+#purchase_form input{
+height: 25px;
+}
+
+#purchase_form input[type=text]{
+width: 90%;
+}
+
+/* 제품정보 */
+.purchase_table2 th{
+width: 70%;
+}
+.purchase_table2 td{
+width: 30%;
+}
+
+
+/* 결제정보 */
+.purchase_table3 th{
+width: 25%;
+}
+.purchase_table3 td{
+width: 75%;
+}
+
 .purchase_btn_group {
 margin-top: 20px;
 }
@@ -41,19 +66,19 @@ margin-top: 20px;
                     <table class="table table-hover purchase_table1">
                         <tr>
                             <th>받으시는분</th>
-                            <td><input type="text" class="form-control" name="userName" id="text"></td>
+                            <td><input type="text" class="form-control" name="userName" id="text" value="${user.userID }"></td>
                         	<td></td>
                         </tr>
                         <tr>
                             <th rowspan="3">주소</th>
-                            <td><input type="text" class="form-control" name="address1" id="address1" placeholder="우편번호"></td>
+                            <td><input type="text" class="form-control" name="address1" id="address1" placeholder="우편번호" value="${user.address1 }"></td>
                             <td><input type="button" class="btn btn-primary addr_check_btn" onclick="addr_check()" id="addr_btn" value="우편번호찾기"></td>
                         </tr>
                         <tr>
-                            <td colspan="2"><input type="text" class="form-control" name="address2" id="address2" placeholder="주소"></td>
+                            <td colspan="2"><input type="text" class="form-control" name="address2" id="address2" placeholder="주소" value="${user.address2 }"></td>
                         </tr>
                         <tr>
-                        	<td colspan="2"><input type="text" class="form-control" name="address3" id="text" placeholder="상세주소"></td>
+                        	<td colspan="2"><input type="text" class="form-control" name="address3" id="text" placeholder="상세주소" value="${user.address3 }"></td>
                         </tr>
                         <tr>
                             <th>전화번호</th>
@@ -69,8 +94,8 @@ margin-top: 20px;
                     <h1 style="font-size: 1.6em; font-weight: bold; padding-bottom: 10px; margin-top: 30px;">제품 정보</h1>
                     <table class="table table-hover purchase_table2">
                         <tr>
-                            <th>제품이름</th>
-                            <td>수량 1개 / 무료배송</td>
+                            <th>${shop.pname }</th>
+                            <td>수량 ${shop.volume }개 / 무료배송</td>
                         </tr>
                         <tr>
                             <th>제품이름</th>
@@ -82,7 +107,7 @@ margin-top: 20px;
                     <table class="table table-hover purchase_table3">
                         <tr>
                             <th>총상품가격</th>
-                            <td>0원</td>
+                            <td>${shop.price * shop.volume }원</td>
                         </tr>
 						<tr>
 							<th>할인쿠폰</th>
@@ -94,7 +119,7 @@ margin-top: 20px;
 						</tr>
 						<tr>
 							<th>총결제금액</th>
-							<td>0원</td>
+							<td>${shop.price * shop.volume }원</td>
 						</tr>
 						<tr>
 							<th>결제방법</th>
@@ -105,7 +130,7 @@ margin-top: 20px;
 							</td>
 						</tr>
                     </table>
-                    <div class="form-check">
+                    <div class="form-check-inline">
 						<label class="form-check-label">
 							<input type="checkbox" class="form-check-input" value=""> 위 주문 내용을 확인하였으며, 회원 본인은 결제에 동의합니다.
 						</label>

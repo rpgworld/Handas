@@ -66,6 +66,7 @@
 		                        회원관리
 		                        </a>
 		                        <div class="dropdown-menu">
+		                       	 	<a class="dropdown-item" href="${path }/shop/cartForm">장바구니</a>
 		                            <a class="dropdown-item" href="${path }/user/read">회원정보보기</a>
 		                            <a class="dropdown-item" href="${path }/user/logout">로그아웃</a>
 		                        </div>

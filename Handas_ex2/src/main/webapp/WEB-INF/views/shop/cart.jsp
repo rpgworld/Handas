@@ -29,6 +29,7 @@ border: 1px solid #d9d9d9;
             <div class="col-sm-12" style="padding: 0;">
                 <div class="cart_form">
                 	<form action="purchaseForm" action="get">
+                		<input type="hidden" name="list" value="${list }">
                 		<table class="table">
                 			<thead>
                 				<tr>
@@ -46,21 +47,23 @@ border: 1px solid #d9d9d9;
                 				</tr>
                 			</thead>
                 			<tbody>
-                				<tr>
-                					<td rowspan="2">
-                						<div class="form-check">
-											<label class="form-check-label">
-												<input type="checkbox" class="form-check-input" value="">
-											</label>
-										</div>
-                					</td>
-                					<td rowspan="2" style="width: 100px; height: 100px;"><img class="img-fluid" src="${path }/resources/images/shop_images/pen.png"></td>
-                					<td>씨게이트 백업 플러스 레스큐 srs 외장핟, 4tb, 골드</td>
-                					<td rowspan="2">155,500원</td>
-                				</tr>
-                				<tr>
-                					<td>내일 도착 7/15일 도착보장</td>
-                				</tr>
+                				<c:forEach items="${list}" var="dto">
+                					<tr>
+                						<td rowspan="2">
+	                						<div class="form-check">
+												<label class="form-check-label">
+													<input type="checkbox" class="form-check-input" value="">
+												</label>
+											</div>
+	                					</td>
+	                					<td rowspan="2" style="width: 100px; height: 100px;"><img class="img-fluid" src="${path }/resources/images/shop_images/${dto.img}"></td>
+	                					<td>${dto.pname }</td>
+	                					<td rowspan="2">${dto.price }원</td>
+	                				</tr>
+	                				<tr>
+	                					<td>내일 도착 7/15일 도착보장 &nbsp;&nbsp;&nbsp; ${dto.volume }</td>
+	                				</tr>
+                				</c:forEach>
                 			</tbody>
                 		</table>
                 		

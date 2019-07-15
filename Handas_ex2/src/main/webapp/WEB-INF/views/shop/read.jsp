@@ -21,7 +21,7 @@ $('document').ready(function(){
 	total_price();
 	
 	// 구매 버튼 클릭시 이벤트
-	$('#purchase').click(function(){
+	$('#purchase_btn').click(function(){
 		if(userID == '') {
 			msgType = '구매해주셔서 감사합니다.';
 			msgContent = '상품 구매는 로그인 상태에서 가능합니다. <br><br> 이동하시겠습니까?  <a href="${path}/user/loginForm">로그인페이지 이동하기</a>';
@@ -30,7 +30,7 @@ $('document').ready(function(){
 		}
 		
 		// 데이터도 함께 전송 해야됨
-		window.location.href = '${path}/shop/purchaseForm';
+		window.location.href = '${path}/shop/purchaseForm?pnum=${dto.pnum}&volume=' + count;
 	});
 	
 	// 개수 버튼 이벤트
@@ -61,16 +61,57 @@ $('document').ready(function(){
 	
 	// 장바구니 버튼 클릭 이벤트
 	$('.item_info .cart_btn').click(function(){
-		$('.toast strong').html('장바구니 담기 성공!');
-	    $('.toast .toast-body').html('장바구니 페이지로 <a href="${path}/shop/cart">이동</a>하시겠습니까?');
-	    
-	    var left = $('#baguni').offset().left;
-	    var top = $('#baguni').offset().top;
+		
+		if(userID == '') { // 로그인 하지 않았다면
+			
+			// 로그인 필요 메세지 출력
+			$('.toast strong').html('장바구니는 로그인한 회원만 이용 가능합니다.');
+		    $('.toast .toast-body').html('로그인 페이지로 <a href="${path}/user/loginForm">이동</a>하시겠습니까?');
+		    
+		    var left = $('#baguni').offset().left;
+		    var top = $('#baguni').offset().top;
 
-	    $('.toast').css('left', left - 40);
-	    $('.toast').css('top', top + 35);
-	    
-		$('.toast').toast('show');
+		    $('.toast').css('left', left - 40);
+		    $('.toast').css('top', top + 35);
+		    
+			$('.toast').toast('show');
+			
+		} else {
+			var pnum = ${dto.pnum};
+			var pname = '${dto.pname}';
+			var item = '${dto.item}';
+			var volume = count;
+			var price = ${dto.price};
+			var img = '${dto.img}';
+			
+			var query = {'pnum' : pnum, 'pname' : pname, 'item' : item, 'volume' : volume, 'price' : price, 'img' : img};
+			
+			$.ajax({
+				type : 'POST',
+				data : query,
+				url : '${path}/shop/cart',
+				dataType : 'json',
+				success : function(result) {
+					// 장바구니 메세지 출력
+					$('.toast strong').html('장바구니 담기 성공!');
+				    $('.toast .toast-body').html('장바구니 페이지로 <a href="${path}/shop/cartForm">이동</a>하시겠습니까?');
+				    
+				    var left = $('#baguni').offset().left;
+				    var top = $('#baguni').offset().top;
+
+				    $('.toast').css('left', left - 40);
+				    $('.toast').css('top', top + 35);
+				    
+					$('.toast').toast('show');
+				},
+				error : function(error) {
+					alert('error : ' + error);
+				}
+			});
+			
+			
+		}
+		
 	});
 	
 	// 찜 버튼 눌렀을때 이벤트
@@ -124,7 +165,7 @@ function total_price() {
 							</div>
            				</li>
            				<li>
-           					<input type="button" id="purchase" class="btn btn-primary" value="바로구매">
+           					<input type="button" id="purchase_btn" class="btn btn-primary" value="바로구매">
            				</li>
            			</ul>
            		</div>

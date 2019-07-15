@@ -34,5 +34,15 @@
 	<delete id="shopDelete">
 		DELETE handas_shop WHERE pnum = #{pnum}
 	</delete>
+	
+	<!-- 장바구니 넣기 -->
+	<select id="cartWrite" parameterType="com.spring.handas.shop.CartDto">
+		INSERT INTO handas_cart VALUES(handas_cart_seq.nextval, #{userID}, #{pnum}, #{pname}, #{item}, #{volume}, #{price}, #{img})
+	</select>
+	
+	<!-- 장바구니 정보 가져오기 -->
+	<select id="cartList" resultType="com.spring.handas.shop.CartDto">
+		SELECT * FROM handas_cart WHERE userID = #{userID} ORDER BY num DESC
+	</select>
 
 </mapper>
