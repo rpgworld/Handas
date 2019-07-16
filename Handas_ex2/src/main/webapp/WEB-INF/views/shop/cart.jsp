@@ -92,6 +92,21 @@ function toast_alert(target, top_value, left_value, msgTop, msgBody) {
 $('document').ready(function(){
 	cartCal();
 
+	// 구매하기 버튼 클릭 이벤트
+	$('.purchase_btn').click(function(){
+		var check = 0;
+		var checkArray = new Array();
+		$('input[name=check]').each(function(){
+		    checkArray.push($(this).val());
+		});
+		for(var i = 0; i < checkArray.length; i++ ) {
+			if(checkArray[i] == 1) check++;
+		}
+		if(check < 1) {
+			modal_alert('경고창', '선택된 상품이 없습니다.');
+			return false;
+		}
+	});
 	
 	// 전체선택 체크박스 선택 이벤트
 	$('#check_all').change(function() {
@@ -232,7 +247,7 @@ function cartCal() {
 	                                        </div>
 	                                    </td>
 	                                    <td rowspan="2" style="width: 100px; height: 100px;"><img class="img-fluid" src="${path }/resources/images/shop_images/${dto.img}"></td>
-	                                    <td style="display: flex; justify-content: space-between; border-top: none;"><span class="cart_pname">${dto.pname }</span><span class="cart_price">상품금액 : <fmt:formatNumber value="${dto.price }" pattern="#,###" /></span></td>
+	                                    <td style="display: flex; justify-content: space-between; border-top: none;"><span class="cart_pname"><a style="color: #000000; font-weight:bold; text-decoration: none;" href="${path }/shop/read?pnum=${dto.pnum}">${dto.pname }</a></span><span class="cart_price">상품금액 : <fmt:formatNumber value="${dto.price }" pattern="#,###" /></span></td>
 	                                    <td rowspan="2"><input type="text" name="total_price" value="" style="border:none; width: 150px; text-align: center;"></td>
 	                                    <td rowspan="2">무료배송</td>
 	                                </tr>
@@ -261,7 +276,7 @@ function cartCal() {
 	                    
 	                    <div class="cart_btn_group">
 	                        <a href="${path}/shop" class="btn btn-secondary" style="border: 1px soild #0000ff;">계속 쇼핑하기</a>
-	                        <input id="submit" type="submit" class="btn btn-primary" value="구매하기">
+	                        <input id="submit" type="submit" class="btn btn-primary purchase_btn" value="구매하기">
 	                    </div>
 	                </form>
 	            </div>
