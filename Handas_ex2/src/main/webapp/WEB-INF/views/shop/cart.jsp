@@ -89,9 +89,60 @@ function toast_alert(target, top_value, left_value, msgTop, msgBody) {
 	$('.toast').toast('show');
 }
 $('document').ready(function(){
+	
+	// 전체선택 체크박스 선택 이벤트
+	$('#check_all').change(function() {
+		if($(this).is(":checked") == true) {
+			$('.pcheck').attr('checked', 'checked');
+			$('.pcheck').val('1');
+		} else {
+			$('.pcheck').removeAttr('checked');
+			$('.pcheck').val('0');
+		}	
+	});
+	
+	// 체크박스 선택시 value = 1, 해제시 value = 0
 	$('.pcheck').change(function(){
-		alert($(this).is(":checked"));
+		if($(this).is(":checked") == true) {
+			$(this).val('1');
+		} else {
+			$(this).val('0');
+		}
 		
+	});
+	
+	$('.volume_minus').click(function(){
+		var vol = $(this).next().val();
+		if( vol > 1 ) {
+			$(this).next().val(vol - 1);
+		}
+	});
+	
+	$('.volume_plus').click(function(){
+		var vol = $(this).prev().val();
+		vol++;
+		$(this).prev().val(vol);
+	});
+	
+	// 장바구니 삭제 버튼 클릭 이벤트
+	$('#cartDelete').click(function(){
+		var pnum = $('#cartDelete').val();
+		
+		$.ajax({
+			type : 'POST',
+			data : {'pnum' : pnum},
+			url : '${path}/shop/cartDelete',
+			dataType : 'json',
+			success : function(result) {
+				
+				if(result == true) {
+					window.location.reload();
+				} 
+			},
+			error : function(error) {
+				alert('error : ' + error);
+			}
+		});
 	});
 });
 </script>
@@ -114,13 +165,13 @@ $('document').ready(function(){
 	                                <th>
 	                                    <div class="form-check">
 	                                        <label class="form-check-label">
-	                                            <input type="checkbox" class="form-check-input" />
+	                                            <input type="checkbox" class="form-check-input" id="check_all" />
 	                                        </label>
 	                                    </div>
 	                                </th>
 	                                <th style="padding-left: 0;">전체선택</th>
 	                                <th>상품정보</th>
-	                                <th>상품금액</th>
+	                                <th>상품총금액</th>
 	                                 <th>배송비</th>
 	                            </tr>
 	                        </thead>
@@ -130,22 +181,25 @@ $('document').ready(function(){
 	                                    <td rowspan="2">
 	                                        <div class="form-check">
 	                                            <label class="form-check-label">
-	                                                <input type="checkbox"  name="check" class="form-check-input pcheck" value="">
+	                                                <input type="checkbox"  name="check" class="form-check-input pcheck" value="0">
 	                                            </label>
 	                                        </div>
 	                                    </td>
 	                                    <td rowspan="2" style="width: 100px; height: 100px;"><img class="img-fluid" src="${path }/resources/images/shop_images/${dto.img}"></td>
-	                                    <td>${dto.pname }</td>
+	                                    <td style="display: flex; justify-content: space-between; border-top: none;"><span class="cart_pname">${dto.pname }</span><span class="cart_price">상품금액 : ${dto.price }</span></td>
 	                                    <td rowspan="2">${dto.price }원</td>
-	                                    <td rowspan="2">2500원</td>
+	                                    <td rowspan="2">무료배송</td>
 	                                </tr>
 	                                <tr>
-	                                    <td>내일 도착 7/15일 도착보장 &nbsp;&nbsp;&nbsp;
-	                                    <div class="btn-group btn-group-sm" style="float: right;">
-										    <input type="button" class="btn btn-primary" value="-">
-										    <input type="text" name="volume" style="width: 30px;" class="btn" value="${dto.volume }">
-										    <input type="button" class="btn btn-primary" value="+">
-										</div>
+	                                    <td style="display: flex; justify-content: space-between;"><div style="padding-top: 5px;"><h3>내일 도착 7/15일 도착보장</h3></div>
+		                                <div>
+		                                    <div class="btn-group btn-group-sm" style="margin-left: 10px;">
+											    <input style="width: 10px;" type="button" class="btn btn-primary volume_minus" value="-">
+											    <input type="text" name="volume" style="width: 30px;" class="btn" value="${dto.volume }">
+											    <input style="width: 10px;" type="button" class="btn btn-primary volume_plus" value="+">
+											</div>
+											<button type="button" class="btn btn-outline-primary btn-sm" id="cartDelete" style="margin-left: 10px;" value="${dto.pnum }">X</button>
+										</div>  
 										<input type="hidden" style="width: 5px;" name="pnum" value="${dto.pnum }">
 	                                    </td>
 	                                </tr>
@@ -154,7 +208,7 @@ $('document').ready(function(){
 	                    </table>
 	                    
 	                    <div class="total_price">
-	                        총 상품가격 <span class="total1"></span> 원 + 배송비 + 총 주문금액 <span class="total2"></span> 원
+	                        총 상품가격 <span class="total1"></span> 원 + 배송비 0원 = 총 주문금액 <span class="total2"></span> 원
 	                    </div>
 	                    
 	                    <div class="cart_btn_group">

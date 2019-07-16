@@ -210,7 +210,7 @@ public class ShopController {
 		return "true";
 	}
 	
-	// 장바구니
+	// 장바구니 페이지 이동
 	@RequestMapping(value="/shop/cartForm")
 	public String cartForm(HttpSession session, Model model) {
 		logger.info("shop/cartForm");
@@ -226,5 +226,22 @@ public class ShopController {
 		
 		
 		return "shop/cart";
+	}
+	
+	// 장바구니 삭제
+	@RequestMapping(value="/shop/cartDelete", method=RequestMethod.POST)
+	@ResponseBody
+	public String cartDelete(HttpServletRequest request, HttpSession session) {
+		logger.info("shop/cartDelete");
+		
+		String pnum = request.getParameter("pnum");
+		String userID = "";
+		if(session.getAttribute("userID") != null) {
+			userID = (String) session.getAttribute("userID");
+		}
+		ShopDao dao = sqlSession.getMapper(ShopDao.class);
+		dao.cartDelete(userID, Integer.parseInt(pnum));
+		
+		return "true";
 	}
 }

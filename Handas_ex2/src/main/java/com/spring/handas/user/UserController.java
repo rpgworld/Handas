@@ -124,6 +124,8 @@ public class UserController {
 		return "redirect:loginForm";
 	}
 	
+	// 회원 탈퇴
+	
 	@RequestMapping(value="/user/read")
 	public String readForm(HttpSession session, Model model) {
 		logger.info("user/readForm()");

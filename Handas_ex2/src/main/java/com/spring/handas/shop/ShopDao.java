@@ -22,4 +22,6 @@ public interface ShopDao {
 	public void cartWrite(CartDto dto);
 	// 장바구니 정보 가져오기
 	public ArrayList<CartDto> cartList(String userID);
+	// 장바구니 삭제
+	public void cartDelete(String userID, int pnum);
 }

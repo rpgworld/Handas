@@ -56,5 +56,9 @@
 	<select id="cartList" resultType="com.spring.handas.shop.CartDto">
 		SELECT * FROM handas_cart WHERE userID = #{userID} ORDER BY num DESC
 	</select>
+	
+	<delete id="cartDelete">
+		DELETE handas_cart WHERE userID = #{param1} AND pnum = #{param2}
+	</delete>
 
 </mapper>
