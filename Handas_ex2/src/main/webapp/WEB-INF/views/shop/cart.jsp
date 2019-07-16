@@ -256,7 +256,7 @@ function cartCal() {
 		                                <div>
 		                                    <div class="btn-group btn-group-sm" style="margin-left: 10px;">
 											    <input style="width: 10px;" type="button" class="btn btn-primary volume_minus" value="-">
-											    <input type="text" name="volume" style="width: 30px;" class="btn" value="${dto.volume }">
+											    <input type="text" name="volume" style="width: 30px;" class="btn" value="${dto.volume }" readOnly>
 											    <input style="width: 10px; border-top-right-radius:3px; border-bottom-right-radius:3px;" type="button" class="btn btn-primary volume_plus" value="+">
 											    <input type="hidden" value="${dto.totalVol }">
 											    <input type="hidden" name="price" value="${dto.price }">

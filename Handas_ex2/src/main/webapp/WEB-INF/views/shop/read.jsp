@@ -172,8 +172,8 @@ function total_price() {
            		<div class="item_info">
            			<h1>${dto.pname }</h1>
            			<ul>
+           				<li class="" style="margin-top: 10px">&nbsp;${dto.item }</li>
            				<li class="item_price">${dto.getPriceFormat() }원<button type="button" style="" class="btn like_btn" id="like"><i class="fas fa-heart"></i></button></li>
-           				<li class="">${dto.item }</li>
            				<li class="item_desc">${dto.pdesc }</li>
            				<li class="item_count">
            					<div class="btn-group btn-group-sm"> 

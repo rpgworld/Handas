@@ -81,7 +81,7 @@ $('document').ready(function(){
                     <table class="table table-hover purchase_table1">
                         <tr>
                             <th>받으시는분</th>
-                            <td><input type="text" class="form-control" name="userName" id="text" value="${userDto.userID }"></td>
+                            <td><input type="text" class="form-control" name="name" id="text" value="${userDto.userID }"></td>
                         	<td></td>
                         </tr>
                         <tr>
@@ -97,12 +97,12 @@ $('document').ready(function(){
                         </tr>
                         <tr>
                             <th>전화번호</th>
-                            <td><input type="text" class="form-control" name="userPhone" id="text"></td>
+                            <td><input type="text" class="form-control" name="phone" id="text"></td>
                         	<td></td>
                         </tr>
                         <tr>
                         	<th>배송메시지</th>
-                        	<td colspan="2"><input type="text" class="form-control" name="address3" id="text" placeholder="택배기사님께 30자 이내로 메세지를 적어주세요" maxlength="30"></td>
+                        	<td colspan="2"><input type="text" class="form-control" name="message" id="text" placeholder="택배기사님께 30자 이내로 메세지를 적어주세요" maxlength="30"></td>
                         </tr>
                     </table>
                     
@@ -138,9 +138,43 @@ $('document').ready(function(){
 						<tr>
 							<th>결제방법</th>
 							<td>
-								신용/체크카드, 무통장입금
-								카드종류 select 박스 ~~ nh농협카드
-								할부기간 select 박스 일시불 ~~
+								<div style="font-size: 0.9em;">
+									<div class="form-check-inline">
+									  <label class="form-check-label">
+									    <input type="radio" class="form-check-input" name="optradio" checked>신용/체크카드
+									  </label>
+									</div>
+									<div class="form-check-inline">
+									  <label class="form-check-label">
+									    <input type="radio" class="form-check-input" name="optradio">휴대폰
+									  </label>
+									</div>
+									<div class="form-check-inline">
+									  <label class="form-check-label">
+									    <input type="radio" class="form-check-input" name="optradio" disabled>무통장입금(가상계좌)
+									  </label>
+									</div>
+								</div>
+								<div style="margin-top: 5px;">
+									<div class="form-group form-inline">
+										<div>카드종류&nbsp;</div>
+									  <select class="form-control" id="sel1" style="height: 30px; width: 130px; font-size: 0.9em;">
+									    <option>NH농협카드</option>
+									    <option>신한카드</option>
+									    <option>현대카드</option>
+									    <option>삼성카드</option>
+									  </select>
+									</div>
+									<div class="form-group form-inline">
+									  <div>할부기간&nbsp;</div>
+									  <select class="form-control" id="sel1" style="height: 30px; width: 130px; font-size: 0.9em;">
+									    <option>일시불</option>
+									    <option>2개월</option>
+									    <option>3개월</option>
+									    <option>6개월</option>
+									  </select>
+									</div>
+								</div>
 							</td>
 						</tr>
                     </table>

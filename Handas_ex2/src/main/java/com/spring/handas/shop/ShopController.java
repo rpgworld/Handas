@@ -178,6 +178,9 @@ public class ShopController {
 			@RequestParam("volume")int[] volume_array,
 			@RequestParam(value="check", defaultValue="0")int[] check_array
 			) {
+		
+		logger.info("purchaseForm()");
+		
 		// 총가격
 		int total = 0;
 		String userID = (String) session.getAttribute("userID");
@@ -185,11 +188,8 @@ public class ShopController {
 		ShopDao shopDao = sqlSession.getMapper(ShopDao.class);
 		
 		ArrayList<ShopDto> list = new ArrayList<ShopDto>();
-		System.out.println(pnum_array.length);
 		for(int i = 0; i < pnum_array.length; i++) {
-			System.out.println("몇번째" + i);
 			if(check_array[i] == 1) { // 체크박스에 체크된것만
-				System.out.println("1인것만" + i);
 				ShopDto dto = shopDao.shopRead(pnum_array[i]);
 				dto.setVolume(volume_array[i]);
 				list.add(dto);
@@ -205,10 +205,17 @@ public class ShopController {
 		return "shop/purchase";
 	}
 	
+	@RequestMapping(value="/shop/purchase", method=RequestMethod.POST)
+	public String purchase() {
+		
+		return "";
+	}
+	
 	// 장바구니 넣기
 	@RequestMapping(value="/shop/cart", method=RequestMethod.POST)
 	@ResponseBody
 	public String cart(CartDto dto, HttpSession session) {
+		logger.info("cart()");
 		
 		String userID = "";
 		if(session.getAttribute("userID") != null) {
