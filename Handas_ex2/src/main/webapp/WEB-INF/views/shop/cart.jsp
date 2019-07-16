@@ -97,21 +97,24 @@ $('document').ready(function(){
 	$('#check_all').change(function() {
 		if($(this).is(":checked") == true) {
 			$('.pcheck').attr('checked', 'checked');
-			$('.pcheck').val('1');
+			$('.pcheck').next().val('1');
 		} else {
 			$('.pcheck').removeAttr('checked');
-			$('.pcheck').val('0');
+			$('.pcheck').next().val('0');
 		}	
+		
+		cartCal();
 	});
 	
 	// 체크박스 선택시 value = 1, 해제시 value = 0
 	$('.pcheck').change(function(){
 		if($(this).is(":checked") == true) {
-			$(this).val('1');
+			$(this).next().val('1');
 		} else {
-			$(this).val('0');
+			$(this).next().val('0');
 		}
 		
+		cartCal();
 	});
 	
 	// 수량 조절 버튼
@@ -161,18 +164,28 @@ function cartCal() {
 	var super_total = 0;
 	var priceArray = new Array();
 	var volArray = new Array();
+	var checkArray = new Array();
+	var totalArray = new Array();
+	
 	$('input[name=price]').each(function(){
 	    priceArray.push($(this).val());
 	});
 	$('input[name=volume]').each(function(){
 	    volArray.push($(this).val());
 	});
+	$('input[name=check]').each(function(){
+	    checkArray.push($(this).val());
+	});
 	$('input[name=total_price]').each(function(){
 		var total = priceArray.shift() * volArray.shift();
+		totalArray.push(total);
 		$(this).val(total);
-		
-		super_total += total;
 	});	
+	for(var i = 0; i < totalArray.length; i++) {
+		if (checkArray[i] == 1) {
+			super_total += totalArray[i];
+		}
+	}
 	
 	$('.total1').html(super_total.toLocaleString());
 	$('.total2').html(super_total.toLocaleString());
@@ -213,7 +226,8 @@ function cartCal() {
 	                                    <td rowspan="2">
 	                                        <div class="form-check">
 	                                            <label class="form-check-label">
-	                                                <input type="checkbox"  name="check" class="form-check-input pcheck" value="0">
+	                                                <input type="checkbox" class="form-check-input pcheck">
+	                                                <input type="hidden" name="check" value="0">
 	                                            </label>
 	                                        </div>
 	                                    </td>
@@ -246,7 +260,7 @@ function cartCal() {
 	                    </div>
 	                    
 	                    <div class="cart_btn_group">
-	                        <a href="${path}/shop/list" class="btn btn-secondary" style="border: 1px soild #0000ff;">계속 쇼핑하기</a>
+	                        <a href="${path}/shop" class="btn btn-secondary" style="border: 1px soild #0000ff;">계속 쇼핑하기</a>
 	                        <input id="submit" type="submit" class="btn btn-primary" value="구매하기">
 	                    </div>
 	                </form>

@@ -1,5 +1,7 @@
 package com.spring.handas.shop;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.handas.PageMaker;
 import com.spring.handas.Upload;
+import com.spring.handas.user.UserDao;
 
 @Controller
 public class ShopController {
@@ -172,19 +175,33 @@ public class ShopController {
 	@RequestMapping(value="/shop/purchaseForm", method=RequestMethod.GET)
 	public String readForm(HttpSession session, Model model, 
 			@RequestParam("pnum")int[] pnum_array, 
-			@RequestParam("volume")String[] volume_array,
-			@RequestParam("check")int[] check_array
+			@RequestParam("volume")int[] volume_array,
+			@RequestParam(value="check", defaultValue="0")int[] check_array
 			) {
+		// 총가격
+		int total = 0;
+		String userID = (String) session.getAttribute("userID");
+		UserDao userDao = sqlSession.getMapper(UserDao.class);
+		ShopDao shopDao = sqlSession.getMapper(ShopDao.class);
 		
-		
+		ArrayList<ShopDto> list = new ArrayList<ShopDto>();
+		System.out.println(pnum_array.length);
 		for(int i = 0; i < pnum_array.length; i++) {
-			if(check_array[i] == 1) {
-				System.out.println(pnum_array[i]);
-				System.out.println(check_array[i]);
+			System.out.println("몇번째" + i);
+			if(check_array[i] == 1) { // 체크박스에 체크된것만
+				System.out.println("1인것만" + i);
+				ShopDto dto = shopDao.shopRead(pnum_array[i]);
+				dto.setVolume(volume_array[i]);
+				list.add(dto);
 			}
 		}
-		System.out.println("끝났당");
-
+		for(int i = 0; i < list.size(); i++) {
+			total += list.get(i).getPrice() * list.get(i).getVolume();
+		}
+		
+		model.addAttribute("userDto", userDao.read(userID));
+		model.addAttribute("shopList", list);
+		model.addAttribute("total", total);
 		return "shop/purchase";
 	}
 	
