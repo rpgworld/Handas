@@ -9,6 +9,7 @@ public class CartDto {
 	private String pname;
 	private String item;
 	private int volume;
+	private int totalVol;
 	private int price;
 	private String img;
 	
@@ -57,6 +58,12 @@ public class CartDto {
 	}
 	public void setVolume(int volume) {
 		this.volume = volume;
+	}
+	public int getTotalVol() {
+		return totalVol;
+	}
+	public void setTotalVol(int totalVol) {
+		this.totalVol = totalVol;
 	}
 	public int getPrice() {
 		return price;

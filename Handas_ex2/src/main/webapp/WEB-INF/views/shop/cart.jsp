@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -89,6 +90,8 @@ function toast_alert(target, top_value, left_value, msgTop, msgBody) {
 	$('.toast').toast('show');
 }
 $('document').ready(function(){
+	cartCal();
+
 	
 	// 전체선택 체크박스 선택 이벤트
 	$('#check_all').change(function() {
@@ -111,17 +114,24 @@ $('document').ready(function(){
 		
 	});
 	
+	// 수량 조절 버튼
 	$('.volume_minus').click(function(){
 		var vol = $(this).next().val();
 		if( vol > 1 ) {
-			$(this).next().val(vol - 1);
+			vol--;
+			$(this).next().val(vol);
+			cartCal();
 		}
 	});
 	
 	$('.volume_plus').click(function(){
 		var vol = $(this).prev().val();
-		vol++;
-		$(this).prev().val(vol);
+		var totalVol = parseInt($(this).next().val());
+		if(vol < totalVol) {
+			vol++;
+			$(this).prev().val(vol);
+			cartCal();
+		}		
 	});
 	
 	// 장바구니 삭제 버튼 클릭 이벤트
@@ -145,6 +155,28 @@ $('document').ready(function(){
 		});
 	});
 });
+
+// 전체 금액, 상품별 금액 계산
+function cartCal() {
+	var super_total = 0;
+	var priceArray = new Array();
+	var volArray = new Array();
+	$('input[name=price]').each(function(){
+	    priceArray.push($(this).val());
+	});
+	$('input[name=volume]').each(function(){
+	    volArray.push($(this).val());
+	});
+	$('input[name=total_price]').each(function(){
+		var total = priceArray.shift() * volArray.shift();
+		$(this).val(total);
+		
+		super_total += total;
+	});	
+	
+	$('.total1').html(super_total.toLocaleString());
+	$('.total2').html(super_total.toLocaleString());
+}
 </script>
 </head>
 <body>
@@ -186,8 +218,8 @@ $('document').ready(function(){
 	                                        </div>
 	                                    </td>
 	                                    <td rowspan="2" style="width: 100px; height: 100px;"><img class="img-fluid" src="${path }/resources/images/shop_images/${dto.img}"></td>
-	                                    <td style="display: flex; justify-content: space-between; border-top: none;"><span class="cart_pname">${dto.pname }</span><span class="cart_price">상품금액 : ${dto.price }</span></td>
-	                                    <td rowspan="2">${dto.price }원</td>
+	                                    <td style="display: flex; justify-content: space-between; border-top: none;"><span class="cart_pname">${dto.pname }</span><span class="cart_price">상품금액 : <fmt:formatNumber value="${dto.price }" pattern="#,###" /></span></td>
+	                                    <td rowspan="2"><input type="text" name="total_price" value="" style="border:none; width: 150px; text-align: center;"></td>
 	                                    <td rowspan="2">무료배송</td>
 	                                </tr>
 	                                <tr>
@@ -196,7 +228,9 @@ $('document').ready(function(){
 		                                    <div class="btn-group btn-group-sm" style="margin-left: 10px;">
 											    <input style="width: 10px;" type="button" class="btn btn-primary volume_minus" value="-">
 											    <input type="text" name="volume" style="width: 30px;" class="btn" value="${dto.volume }">
-											    <input style="width: 10px;" type="button" class="btn btn-primary volume_plus" value="+">
+											    <input style="width: 10px; border-top-right-radius:3px; border-bottom-right-radius:3px;" type="button" class="btn btn-primary volume_plus" value="+">
+											    <input type="hidden" value="${dto.totalVol }">
+											    <input type="hidden" name="price" value="${dto.price }">
 											</div>
 											<button type="button" class="btn btn-outline-primary btn-sm" id="cartDelete" style="margin-left: 10px;" value="${dto.pnum }">X</button>
 										</div>  

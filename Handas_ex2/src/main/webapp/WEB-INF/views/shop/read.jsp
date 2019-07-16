@@ -105,10 +105,11 @@ $('document').ready(function(){
 			var pname = '${dto.pname}';
 			var item = '${dto.item}';
 			var volume = count;
+			var totalVol = ${dto.volume};
 			var price = ${dto.price};
 			var img = '${dto.img}';
 			
-			var query = {'pnum' : pnum, 'pname' : pname, 'item' : item, 'volume' : volume, 'price' : price, 'img' : img};
+			var query = {'pnum' : pnum, 'pname' : pname, 'item' : item, 'volume' : volume, 'totalVol' : totalVol, 'price' : price, 'img' : img};
 			
 			$.ajax({
 				type : 'POST',
