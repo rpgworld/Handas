@@ -24,11 +24,13 @@
 var msgType='${msgType}';
 var msgContent='${msgContent}';
 
+// 회원가입 - 아이디, 비밀번호 체크 유무
+var idCheck = false; 
+var pwCheck = false;
+
+
 $('document').ready(function(){
-	// 회원가입 - 아이디, 비밀번호 체크 유무
-	var idCheck = false; 
-	var pwCheck = false;
-	
+
 	if(msgType != '') {
 		modal_alert(msgType, msgContent);
 	}

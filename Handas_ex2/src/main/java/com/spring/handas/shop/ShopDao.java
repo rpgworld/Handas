@@ -12,6 +12,9 @@ public interface ShopDao {
 	public void shopUpdate(ShopDto dto);
 	public String shopImgName(int pnum);
 	public void shopDelete(int pnum);
+	// 상품 삭제시 해당 상품 카트에서 삭제
+	public void cartDeleteAll(int pnum);
+	
 	
 	// 장바구니 넣기 전에 같은 제품이 존재하는지 체크
 	public int cartCheck(String userID, int pnum);

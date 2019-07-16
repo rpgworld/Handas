@@ -1,7 +1,5 @@
 package com.spring.handas.shop;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.spring.handas.PageMaker;
 import com.spring.handas.Upload;
-import com.spring.handas.user.UserDao;
 
 @Controller
 public class ShopController {
@@ -127,6 +124,7 @@ public class ShopController {
 		} 
 		
 		dao.shopDelete(Integer.parseInt(pnum));
+		dao.cartDeleteAll(Integer.parseInt(pnum));
 		
 		redirect.addFlashAttribute("msgType", "성공");
 		redirect.addFlashAttribute("msgContent", "삭제가 완료되었습니다.");
@@ -171,30 +169,22 @@ public class ShopController {
 	}
 	
 	// 구매하기 페이지 이동
-	@RequestMapping(value="/shop/purchaseForm")
-	public String readForm(HttpServletRequest request, HttpSession session, Model model, @RequestParam("list") ArrayList<CartDto> list) {
-		logger.info("shop/purchaseForm()");	
+	@RequestMapping(value="/shop/purchaseForm", method=RequestMethod.GET)
+	public String readForm(HttpSession session, Model model, 
+			@RequestParam("pnum")int[] pnum_array, 
+			@RequestParam("volume")String[] volume_array,
+			@RequestParam("check")int[] check_array
+			) {
 		
-		System.out.println(list.size());
 		
-		String pnum = request.getParameter("pnum");
-		String volume = request.getParameter("volume");
-		
-		System.out.println(volume);
-		
-		if(session.getAttribute("userID") == null) {
-			return "redirect:/index";
+		for(int i = 0; i < pnum_array.length; i++) {
+			if(check_array[i] == 1) {
+				System.out.println(pnum_array[i]);
+				System.out.println(check_array[i]);
+			}
 		}
-		String userID = (String) session.getAttribute("userID");
-		UserDao userDao = sqlSession.getMapper(UserDao.class);
-		model.addAttribute("user", userDao.read(userID));
-		
-		ShopDao shopDao = sqlSession.getMapper(ShopDao.class);
-		ShopDto shopDto = shopDao.shopRead(Integer.parseInt(pnum));
-		
-		shopDto.setVolume(Integer.parseInt(volume));
-		model.addAttribute("shop", shopDto);
-		
+		System.out.println("끝났당");
+
 		return "shop/purchase";
 	}
 	
@@ -225,11 +215,12 @@ public class ShopController {
 	public String cartForm(HttpSession session, Model model) {
 		logger.info("shop/cartForm");
 		
+		session.setAttribute("menu", "user");
+		
 		String userID = "";
 		if(session.getAttribute("userID") != null) {
 			userID = (String) session.getAttribute("userID");
 		}
-		System.out.println(userID);
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
 		model.addAttribute("list", dao.cartList(userID));
 		

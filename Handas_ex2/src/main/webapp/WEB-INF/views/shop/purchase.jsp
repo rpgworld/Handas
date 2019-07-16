@@ -47,6 +47,17 @@ width: 75%;
 .purchase_btn_group {
 margin-top: 20px;
 }
+.purchase_table1 th {
+vertical-align: middle;
+}
+.purchase_table2 th, .purchase_table2 td{
+height: 64px;
+padding-top: 25px;
+}
+.purchase_table3 th, .purchase_table3 td{
+height: 64px;
+padding-top: 25px;
+}
 
 </style>
 

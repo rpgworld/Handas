@@ -9,7 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <%@ include file="../header.jsp" %>
     <title>Handas</title>
-
 </head>
 <body>
 	<div class="container">
@@ -63,7 +62,7 @@
                             </tr>
                         </table>
                         <div class="join_btn_group">
-                            <input type="submit" class="btn btn-primary join_btn" id="join_btn" onClick="join_check()" value="가입하기">
+                            <input type="submit" class="btn btn-primary join_btn" id="join_btn" onclick="join_check()" value="가입하기">
                         </div>
                     </form>
                 </div>

@@ -104,7 +104,7 @@ public class BbsController {
 			redirect.addFlashAttribute("msgContent", "삭제 권한이 없습니다.");
 		}
 		
-		return "redirect:/bbs/read?bnum=" + bnum;
+		return "redirect:/bbs/list"; 
 	}
 	
 	// 글수정

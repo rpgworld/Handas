@@ -10,6 +10,13 @@
 <title>menu</title>
 </head>
 <body>
+	<div class="footer">
+		<p style="padding-top: 20px;">copyright&copy;1995.주식회사 한다스 </p>
+		<p>대표이사 강백호, 서울 영등포구 양평로 21길 10 한다스빌딩 </p>
+		<p>사업자등록번호 : 117-82-04549 통신판매업신고 : 제 2010-영등포-0281호</p>
+		<p style="padding-bottom: 20px;">이메일 : rpgworld@naver.com 개인정보 보호책임자 : 락토프리</p>
+    </div>
+
 	<!-- The Modal -->
     <div class="modal" id="myModal">
         <div class="modal-dialog">

@@ -63,7 +63,13 @@
 		                    </c:when>
 		                    <c:otherwise>
 		                    	<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-		                        회원관리
+		                        <c:if test="${sessionScope.role eq 'admin' }">
+		                        <img style="width: 17px;" src="${path}/resources/images/s_images/admin.png"> 
+		                        </c:if>
+		                        <c:if test="${sessionScope.role ne 'admin' }">
+		                        <img style="width: 17px;" src="${path}/resources/images/s_images/user.png"> 
+		                        </c:if>
+		                        &nbsp;${sessionScope.userID } 님
 		                        </a>
 		                        <div class="dropdown-menu">
 		                       	 	<a class="dropdown-item" href="${path }/shop/cartForm">장바구니</a>

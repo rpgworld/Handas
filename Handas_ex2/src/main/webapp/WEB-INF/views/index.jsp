@@ -53,6 +53,17 @@
                     </a>
                     
                  </div>
+                 <div id="sub_slider" style="display:flex; flex-flow: row nowrap">
+                 	<div style="width: 33.33%; height: 210px; background: red;">
+                 		<iframe style="width: 100%; height: 210px;" src="https://www.youtube.com/embed/BIbTM4bZHUM?list=PLhVQllHgkD4a9pes__-_PSdN-5uhVCEfX" frameborder="0" allowfullscreen></iframe>
+                 	</div>
+                 	<div style="width: 33.33%; height: 210px; background: blue;">
+                 		<iframe style="width: 100%; height: 210px;" src="https://www.youtube.com/embed/BIbTM4bZHUM?list=PLhVQllHgkD4a9pes__-_PSdN-5uhVCEfX" frameborder="0" allowfullscreen></iframe>
+                 	</div>
+                 	<div style="width: 33.33%; height: 210px; background: yellow;">
+                 		<iframe style="width: 100%; height: 210px;" src="https://www.youtube.com/embed/BIbTM4bZHUM?list=PLhVQllHgkD4a9pes__-_PSdN-5uhVCEfX" frameborder="0" allowfullscreen></iframe>
+                 	</div>
+                 </div>
             </div>
         </div>
         <div class="row">

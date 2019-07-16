@@ -9,6 +9,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <%@ include file="../header.jsp" %>
     <title>Handas</title>
+<style>
+.item_info li {
+margin-top: 20px;
+}
+.item_info h1 {
+font-size: 3em;
+margin-top: 20px;
+font-weight: bold;
+}
+.item_info .item_price {
+margin-top: 20px;
+font-size: 2em;
+}
+.item_info .btn-group {
+}
+.item_info .btn-group .btn:first-child, .item_info .btn-group .btn:last-child {
+width: 25px;
+}
+
+.item_info .total_group h3{
+font-size: 1em;
+font-weight: bold;
+}
+.item_btn_group div{
+width: 300px;
+padding: 20px;
+border-top: 1px solid #d9d9d9;
+border-bottom: 1px solid #d9d9d9;
+}
+.item_btn_group input {
+margin-left: 10px;
+}
+</style>
 <script>
 var count = 1;
 var maxCnt = ${dto.volume};
@@ -30,7 +63,7 @@ $('document').ready(function(){
 		}
 		
 		// 데이터도 함께 전송 해야됨
-		window.location.href = '${path}/shop/purchaseForm?pnum=${dto.pnum}&volume=' + count;
+		window.location.href = '${path}/shop/purchaseForm?pnum=${dto.pnum}&check=1&volume=' + count;
 	});
 	
 	// 개수 버튼 이벤트
@@ -136,11 +169,12 @@ function total_price() {
 					<img class="card-img-top rounded" src="${path }/resources/images/shop_images/${dto.img }" alt="">
 				</div>
            		<div class="item_info">
+           			<h1>${dto.pname }</h1>
            			<ul>
-           				<li class="item_name"><h1>${dto.pname }</h1></li>
-           				<li class="item_price">${dto.getPriceFormat() }원</li>
+           				<li class="item_price">${dto.getPriceFormat() }원<button type="button" style="" class="btn like_btn" id="like"><i class="fas fa-heart"></i></button></li>
+           				<li class="item_desc">${dto.pdesc }</li>
            				<li class="item_count">
-           					<div class="btn-group"> 
+           					<div class="btn-group btn-group-sm"> 
 								<button type="button" class="btn btn-primary count_down">-</button>
 								<button type="button" class="btn btn-light count" disabled>1</button>
 								<button type="button" id="count_up" class="btn btn-primary count_up">+</button>
@@ -148,17 +182,18 @@ function total_price() {
            				</li>
            				<li class="total_group">
            					<div>
-								<h3 class="total_price" style="display: inline-block;"></h3>
-								<button type="button" class="btn cart_btn" id="baguni" style="border: 1px solid #d9d9d9">장바구니&nbsp;<i class="fas fa-cart-plus"></i></button>
-								<button type="button" style="border: 1px solid #d9d9d9" class="btn like_btn" id="like">찜&nbsp;<i class="fas fa-heart"></i></button>
+								<h3 class="total_price" style="display: inline-block;"></h3>								
 							</div>
            				</li>
-           				<li>
+           				<li class="item_btn_group">
+           					<div>
+           					<button type="button" class="btn cart_btn" id="baguni" style="border: 1px solid #d9d9d9">장바구니&nbsp;<i class="fas fa-cart-plus"></i></button>
            					<input type="button" id="purchase_btn" class="btn btn-primary" value="바로구매">
+           					</div>
            				</li>
            			</ul>
            		</div>
-           		<div style="width: 100%; display:flex; justify-content: flex-end; padding-right: 10px;">
+           		<div style="width: 100%; display:flex; justify-content: flex-end; padding-right: 10px; margin-top: 15px">
            			<c:if test="${sessionScope.role == 'admin' }">
            				<a href="${path }/shop/updateForm?pnum=${dto.pnum}" class="btn btn-primary">수정하기</a>
            				<a href="${path }/shop/delete?pnum=${dto.pnum}" class="btn btn-primary" style="margin-left: 10px;">삭제하기</a>

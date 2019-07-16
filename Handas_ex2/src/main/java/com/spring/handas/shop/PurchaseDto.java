@@ -2,24 +2,22 @@ package com.spring.handas.shop;
 
 import java.util.List;
 
-public class CartDto {
+public class PurchaseDto {
 	private int num;
+	private int purNo;
 	private String userID;
 	private int pnum;
-	private String pname;
-	private String item;
 	private int volume;
 	private int price;
-	private String img;
-	
-	List<CartDto> dto;
-	
+	private String check;
+	private List<PurchaseDto> dto;
 	
 	
-	public List<CartDto> getDto() {
+	
+	public List<PurchaseDto> getDto() {
 		return dto;
 	}
-	public void setDto(List<CartDto> dto) {
+	public void setDto(List<PurchaseDto> dto) {
 		this.dto = dto;
 	}
 	public int getNum() {
@@ -27,6 +25,12 @@ public class CartDto {
 	}
 	public void setNum(int num) {
 		this.num = num;
+	}
+	public int getPurNo() {
+		return purNo;
+	}
+	public void setPurNo(int purNo) {
+		this.purNo = purNo;
 	}
 	public String getUserID() {
 		return userID;
@@ -40,18 +44,6 @@ public class CartDto {
 	public void setPnum(int pnum) {
 		this.pnum = pnum;
 	}
-	public String getPname() {
-		return pname;
-	}
-	public void setPname(String pname) {
-		this.pname = pname;
-	}
-	public String getItem() {
-		return item;
-	}
-	public void setItem(String item) {
-		this.item = item;
-	}
 	public int getVolume() {
 		return volume;
 	}
@@ -64,11 +56,12 @@ public class CartDto {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	public String getImg() {
-		return img;
+	public String getCheck() {
+		return check;
 	}
-	public void setImg(String img) {
-		this.img = img;
+	public void setCheck(String check) {
+		this.check = check;
 	}
+	
 	
 }
