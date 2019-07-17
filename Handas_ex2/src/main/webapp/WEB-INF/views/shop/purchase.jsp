@@ -111,8 +111,8 @@ $('document').ready(function(){
                         <c:forEach items="${shopList }" var="dto">
                         <tr>
                         	<td style="width: 20%"><div><img class="img-fluid" src="${path }/resources/images/shop_images/${dto.img}"></div></td>
-                            <th style="width: 45%">${dto.pname }</th>
-                            <td style="width: 35%">수량 ${dto.volume }개 / 무료배송</td>
+                            <th style="width: 45%">${dto.pname }<input type="hidden" name="pnum" value="${dto.pnum }"></th>
+                            <td style="width: 35%">수량 ${dto.volume }개 / 무료배송<input type="hidden" name="volume" value="${dto.volume }"></td>
                         </tr>
                         </c:forEach>
                     </table>
@@ -184,7 +184,7 @@ $('document').ready(function(){
 						</label>
 					</div>
                     <div class="purchase_btn_group">
-                        <input type="button" class="btn btn-primary" value="결제하기">
+                        <input type="submit" class="btn btn-primary" value="결제하기">
                     </div>
                 </form>
             </div>

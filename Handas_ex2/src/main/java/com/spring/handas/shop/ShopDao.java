@@ -24,4 +24,14 @@ public interface ShopDao {
 	public ArrayList<CartDto> cartList(String userID);
 	// 장바구니 삭제
 	public void cartDelete(String userID, int pnum);
+	
+	
+	// 주문
+	public void order(OrderDto orderDto);
+	public void orderD(ShopDto shopDto);
+	public void shopCntUpdate(int volume, int pnum);
+	public int orderDCnt(int orderNo);
+	public ArrayList<OrderDto> getOrderAll(String userID);
+	public OrderDto getOrder(String userID, int orderNo);
+	public OrderDDto getOrderD(int orderNo);
 }

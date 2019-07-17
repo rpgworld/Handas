@@ -16,6 +16,7 @@ public class ShopDto {
 	private int dateDiff; // 제품 출시 일수
 	private int volume;
 	
+	private int orderNo;
 	
 	public int getPnum() {     
 		return pnum;
@@ -100,5 +101,15 @@ public class ShopDto {
 	public void setVolume(int volume) {
 		this.volume = volume;
 	}
+
+	public int getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(int orderNo) {
+		this.orderNo = orderNo;
+	}
+	
+	
 	
 }

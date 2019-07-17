@@ -275,7 +275,7 @@ function cartCal() {
 	                    </div>
 	                    
 	                    <div class="cart_btn_group">
-	                        <a href="${path}/shop" class="btn btn-secondary" style="border: 1px soild #0000ff;">계속 쇼핑하기</a>
+	                        <a href="${path}/shop" class="btn btn-secondary" style="border: 1px soild #0000ff;">쇼핑 계속하기</a>
 	                        <input id="submit" type="submit" class="btn btn-primary purchase_btn" value="구매하기">
 	                    </div>
 	                </form>

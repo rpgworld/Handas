@@ -61,4 +61,39 @@
 		DELETE handas_cart WHERE userID = #{param1} AND pnum = #{param2}
 	</delete>
 	
+	<!-- 주문 내역 삽입 -->
+	<insert id="order" parameterType="com.spring.handas.shop.OrderDto">
+		INSERT INTO handas_order VALUES(handas_order_seq.nextval, #{orderNo}, #{userID}, #{name}, #{address1}, #{address2}, #{address3}, #{phone}, #{message}, #{totalPrice}, sysdate)
+	</insert>
+	
+	<!-- 주문 상세 내역에 삽입 -->
+	<insert id="orderD" parameterType="com.spring.handas.shop.ShopDto">
+		INSERT INTO handas_orderD VALUES(handas_orderD_seq.nextval, #{orderNo}, #{pnum}, #{item}, #{pname}, #{price}, #{img}, #{volume})
+	</insert>
+	
+	<!-- 주문 후 재고량 변경 -->
+	<update id="shopCntUpdate">
+		UPDATE handas_shop SET volume = volume - #{param1} WHERE pnum = #{param2}
+	</update>
+	
+	<!-- 해당 주문 상세 내역 주문 상품 숫자 -->
+	<select id="orderDCnt" resultType="int">
+		SELECT COUNT(*) as num FROM handas_orderD WHERE orderNo = #{param1}
+	</select>
+	
+	<!-- 해당 회원 주문 정보 가져오기 -->
+	<select id="getOrderAll" resultType="com.spring.handas.shop.OrderDto">
+		SELECT * FROM handas_order WHERE userID = #{param1}
+	</select>
+	
+	<!-- 해당 회원 주문 상세 정보 가져오기 -->
+	<select id="getOrder" resultType="com.spring.handas.shop.OrderDto">
+		SELECT * FROM handas_order WHERE userID = #{param1} AND orderNo = #{param2}
+	</select>
+	
+	<!-- 해당 회원 주문 상세 정보 가져오기 -->
+	<select id="getOrderD" resultType="com.spring.handas.shop.OrderDDto">
+		SELECT * FROM handas_order WHERE orderNo = #{param2}
+	</select>
+	
 </mapper>

@@ -1,6 +1,7 @@
 package com.spring.handas.shop;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -206,9 +207,56 @@ public class ShopController {
 	}
 	
 	@RequestMapping(value="/shop/purchase", method=RequestMethod.POST)
-	public String purchase() {
+	public String purchase(HttpSession session,
+			@RequestParam("pnum")int[] pnum_array, 
+			@RequestParam("volume")int[] volume_array, 
+			HttpServletRequest request) {
+			
+		String userID = (String) session.getAttribute("userID");
 		
-		return "";
+		String name = request.getParameter("name");
+		String address1 = request.getParameter("address1");
+		String address2 = request.getParameter("address2");
+		String address3 = request.getParameter("address3");
+		String phone = request.getParameter("phone");
+		String message = request.getParameter("message");
+		
+		int orderNo = (int) (new Date().getTime()/1000);
+			
+		// 총 가격
+		int total = 0;
+		ShopDao shopDao = sqlSession.getMapper(ShopDao.class);
+		System.out.println(pnum_array.length);
+		for(int i = 0; i < pnum_array.length; i++) {
+			
+			ShopDto dto = shopDao.shopRead(pnum_array[i]);
+			dto.setVolume(volume_array[i]);
+			dto.setOrderNo(orderNo);
+			
+			shopDao.orderD(dto);
+			
+			// 재고량 변경
+			shopDao.shopCntUpdate(volume_array[i], pnum_array[i]);
+			// 해당 카트 삭제
+			shopDao.cartDelete(userID, pnum_array[i]);
+			
+			total += volume_array[i] * dto.getPrice();
+		}
+		
+		OrderDto orderDto = new OrderDto();
+		orderDto.setOrderNo(orderNo);
+		orderDto.setUserID(userID);
+		orderDto.setName(name);
+		orderDto.setAddress1(address1);
+		orderDto.setAddress2(address2);
+		orderDto.setAddress3(address3);
+		orderDto.setPhone(phone);
+		orderDto.setMessage(message);
+		orderDto.setTotalPrice(total);
+		
+		shopDao.order(orderDto);
+			
+		return "shop/finish";
 	}
 	
 	// 장바구니 넣기

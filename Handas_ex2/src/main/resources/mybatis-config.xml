@@ -11,6 +11,7 @@
 	<typeAliases>
 		<typeAlias alias="BbsDto" type="com.spring.handas.bbs.BbsDto"/>
 		<typeAlias alias="ShopDto" type="com.spring.handas.shop.ShopDto"/>
+		<typeAlias alias="OrderDto" type="com.spring.handas.shop.OrderDto"/>
 	</typeAliases>
 	
 	
