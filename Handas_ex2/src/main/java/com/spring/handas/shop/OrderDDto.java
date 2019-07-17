@@ -4,6 +4,7 @@ public class OrderDDto {
 	private int num;
 	private int orderNo;
 	private int pnum;
+	private String pname;
 	private String item;
 	private int price;
 	private String img;
@@ -25,6 +26,13 @@ public class OrderDDto {
 	}
 	public void setPnum(int pnum) {
 		this.pnum = pnum;
+	}
+	
+	public String getPname() {
+		return pname;
+	}
+	public void setPname(String pname) {
+		this.pname = pname;
 	}
 	public String getItem() {
 		return item;

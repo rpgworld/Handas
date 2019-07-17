@@ -239,6 +239,7 @@ public class ShopController {
 			dto.setOrderNo(orderNo);
 			
 			if(i == 0) { 
+				orderDto.setTotalCnt(pnum_array.length);
 				orderDto.setSampleImg(dto.getImg());
 				orderDto.setSampleName(dto.getPname());
 			}
@@ -271,14 +272,24 @@ public class ShopController {
 	
 	// 주문내역 불러오기
 	@RequestMapping(value="/shop/orderList")
-	public String orderList(HttpSession session) {
+	public String orderList(HttpSession session, Model model) {
 		
 		String userID = (String) session.getAttribute("userID");
 		
-		ArrayList<OrderDto> list = new ArrayList<OrderDto>();
+		ShopDao dao = sqlSession.getMapper(ShopDao.class);
 		
-		
+		model.addAttribute("list", dao.getOrderAll(userID));
 		return "shop/orderList";
+	}
+	
+	@RequestMapping(value="/shop/orderRead")
+	public String orderList(@RequestParam(value="orderNo", defaultValue="0") int orderNo, Model model) {
+		
+		ShopDao dao = sqlSession.getMapper(ShopDao.class);
+		
+		System.out.println(dao.getOrderD(orderNo).size());
+		model.addAttribute("list", dao.getOrderD(orderNo));
+		return "shop/orderRead";
 	}
 	
 	// 장바구니 넣기

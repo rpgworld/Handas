@@ -72,6 +72,7 @@
 		                        &nbsp;${sessionScope.userID } 님
 		                        </a>
 		                        <div class="dropdown-menu">
+		                        	<a class="dropdown-item" href="${path }/shop/orderList">주문내역</a>
 		                       	 	<a class="dropdown-item" href="${path }/shop/cartForm">장바구니</a>
 		                            <a class="dropdown-item" href="${path }/user/read">회원정보보기</a>
 		                            <a class="dropdown-item" href="${path }/user/logout">로그아웃</a>

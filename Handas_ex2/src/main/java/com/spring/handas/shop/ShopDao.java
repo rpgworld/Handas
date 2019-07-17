@@ -33,5 +33,5 @@ public interface ShopDao {
 	public int orderDCnt(int orderNo);
 	public ArrayList<OrderDto> getOrderAll(String userID);
 	public OrderDto getOrder(String userID, int orderNo);
-	public OrderDDto getOrderD(int orderNo);
+	public ArrayList<OrderDDto> getOrderD(int orderNo);
 }

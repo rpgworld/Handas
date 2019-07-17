@@ -63,7 +63,7 @@
 	
 	<!-- 주문 내역 삽입 -->
 	<insert id="order" parameterType="com.spring.handas.shop.OrderDto">
-		INSERT INTO handas_order VALUES(handas_order_seq.nextval, #{orderNo}, #{userID}, #{name}, #{address1}, #{address2}, #{address3}, #{phone}, #{message}, #{totalPrice}, sysdate, #{sampleName}, #{sampleImg})
+		INSERT INTO handas_order VALUES(handas_order_seq.nextval, #{orderNo}, #{userID}, #{name}, #{address1}, #{address2}, #{address3}, #{phone}, #{message}, #{totalPrice}, sysdate, #{totalCnt}, #{sampleName}, #{sampleImg})
 	</insert>
 	
 	<!-- 주문 상세 내역에 삽입 -->
@@ -93,7 +93,7 @@
 	
 	<!-- 해당 회원 주문 상세 정보 가져오기 -->
 	<select id="getOrderD" resultType="com.spring.handas.shop.OrderDDto">
-		SELECT * FROM handas_order WHERE orderNo = #{param2}
+		SELECT * FROM handas_orderD WHERE orderNo = #{param2}
 	</select>
 	
 </mapper>

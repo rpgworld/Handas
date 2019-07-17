@@ -10,7 +10,31 @@
     <%@ include file="../header.jsp" %>
     <title>Handas</title>
 <style>
-
+h1 {
+margin-top: 20px;
+font-size: 1.8em;
+font-weight: bold;
+padding: 20px 0;
+}
+table th, td {
+text-align: center;
+vertical-align: middle;
+}
+table th:first-child {
+width: 20%;
+}
+table th:nth-child(2) {
+width: 15%;
+}
+table th:nth-child(3) {
+width: 35%;
+}
+table th:nth-child(4) {
+width: 15%;
+}
+table th:last-child {
+width: 15%;
+}
 </style>
 </head>
 <body>
@@ -24,23 +48,24 @@
         <div class="row">
             <div class="col-sm-12 user_list">
                 <div class="bbsList">
+                	<h1>주문내역</h1>
 		    		<table class="table table-striped">
 		    			<thead>
 		    				<tr>
+		    					<th>주문번호</th>
 		    					<th>날짜</th>
-		    					<th></th>
 		    					<th>상품</th>
 		    					<th>총금액</th>
 		    					<th>비고</th>
 		    				</tr>
 		    			</thead>
-		    				<c:forEach items="${bbsList }" var="list">
+		    				<c:forEach items="${list }" var="dto">
 		    					<tr>
-			    					<td>${list.bnum }</td>
-			    					<td class="bbs_title"><a href="${path}/bbs/read?bnum=${list.bnum}">${list.title }</a></td>
-			    					<td>${list.writer }</td>
-			    					<td>${list.writeDate }</td>
-			    					<td>${list.hit }</td>
+		    						<td>${dto.orderNo }</td>
+			    					<td>${dto.odate }</td>
+			    					<td><a href="${path }/shop/orderRead?orderNo=${dto.orderNo }"><img style="width: 70px;" class="card-img-top rounded" src="${path }/resources/images/shop_images/${dto.sampleImg}" alt="Card image">&nbsp;&nbsp;${dto.sampleName }외 ${dto.totalCnt }개</a></td>
+			    					<td>${dto.totalPrice }</td>
+			    					<td></td>
 				    			</tr>
 		    				</c:forEach>
 		    			</tbody>

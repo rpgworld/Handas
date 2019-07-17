@@ -10,6 +10,16 @@
     <%@ include file="../header.jsp" %>
     <title>Handas</title>
 <style>
+h1 {
+margin-top: 20px;
+font-size: 1.8em;
+font-weight: bold;
+padding: 20px 0;
+}
+table th, td {
+text-align: center;
+vertical-align: middle;
+}
 
 </style>
 </head>
@@ -24,37 +34,26 @@
         <div class="row">
             <div class="col-sm-12 user_list">
                 <div class="bbsList">
-	            	<ul class="nav nav-tabs">
-						<li class="nav-item">
-							<a class="nav-link active" href="#">전체</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">상품</a>
-						</li>
-						<li class="nav-item">
-					    	<a class="nav-link" href="#">배송</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">환불</a>
-						</li>
-					</ul>
+                	<h1>주문 상세내역</h1>
 		    		<table class="table table-striped">
 		    			<thead>
 		    				<tr>
-		    					<th>글번호</th>
-		    					<th>제목</th>
-		    					<th>작성자</th>
-		    					<th>작성일</th>
-		    					<th>조회수</th>
+		    					<th>주문번호</th>
+		    					<th>상품이름</th>
+		    					<th>옵션</th>
+		    					<th>가격</th>
+		    					<th>수량</th>
+		    					<th>비고</th>
 		    				</tr>
 		    			</thead>
-		    				<c:forEach items="${bbsList }" var="list">
+		    				<c:forEach items="${list }" var="dto">
 		    					<tr>
-			    					<td>${list.bnum }</td>
-			    					<td class="bbs_title"><a href="${path}/bbs/read?bnum=${list.bnum}">${list.title }</a></td>
-			    					<td>${list.writer }</td>
-			    					<td>${list.writeDate }</td>
-			    					<td>${list.hit }</td>
+		    						<td>${dto.orderNo }</td>
+			    					<td><img style="width: 70px;" class="card-img-top rounded" src="${path }/resources/images/shop_images/${dto.img}" alt="Card image">&nbsp;&nbsp;${dto.pname }</td>
+			    					<td>${dto.item }</td>
+			    					<td>${dto.price }</td>
+			    					<td>${dto.volume }</td>
+			    					<td></td>
 				    			</tr>
 		    				</c:forEach>
 		    			</tbody>
