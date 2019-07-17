@@ -63,7 +63,7 @@
 	
 	<!-- 주문 내역 삽입 -->
 	<insert id="order" parameterType="com.spring.handas.shop.OrderDto">
-		INSERT INTO handas_order VALUES(handas_order_seq.nextval, #{orderNo}, #{userID}, #{name}, #{address1}, #{address2}, #{address3}, #{phone}, #{message}, #{totalPrice}, sysdate)
+		INSERT INTO handas_order VALUES(handas_order_seq.nextval, #{orderNo}, #{userID}, #{name}, #{address1}, #{address2}, #{address3}, #{phone}, #{message}, #{totalPrice}, sysdate, #{sampleName}, #{sampleImg})
 	</insert>
 	
 	<!-- 주문 상세 내역에 삽입 -->

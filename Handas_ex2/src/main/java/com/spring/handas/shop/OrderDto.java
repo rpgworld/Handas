@@ -16,8 +16,8 @@ public class OrderDto {
 	private Date odate;
 	
 	private int totalCnt; // 상품 주문 총 개수
-	private int sampleName; // 상품 이름 하나,
-	private int sampleImg; // 상품 이미지 이름 하나.
+	private String sampleName; // 상품 이름 하나,
+	private String sampleImg; // 상품 이미지 이름 하나.
 	public int getNum() {
 		return num;
 	}
@@ -90,18 +90,19 @@ public class OrderDto {
 	public void setTotalCnt(int totalCnt) {
 		this.totalCnt = totalCnt;
 	}
-	public int getSampleName() {
+	public String getSampleName() {
 		return sampleName;
 	}
-	public void setSampleName(int sampleName) {
+	public void setSampleName(String sampleName) {
 		this.sampleName = sampleName;
 	}
-	public int getSampleImg() {
+	public String getSampleImg() {
 		return sampleImg;
 	}
-	public void setSampleImg(int sampleImg) {
+	public void setSampleImg(String sampleImg) {
 		this.sampleImg = sampleImg;
 	}
+	
 	
 	
 

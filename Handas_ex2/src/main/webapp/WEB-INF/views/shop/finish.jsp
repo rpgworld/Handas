@@ -70,7 +70,7 @@ color: #6E6E6E;
             <div class="finish_btn" style="width: 100%; display: flex; flex-flow: center">
             	<div style="margin: 0 auto; margin-top: 10px;">
             		<a href="${path}/shop" class="btn btn-secondary" style="border: 1px soild #0000ff;">쇼핑 계속하기</a>
-	            	<a href="#" class="btn btn-primary">주문내역 확인하기</a>
+	            	<a href="${path}/shop/orderList" class="btn btn-primary">주문내역 확인하기</a>
             	</div>
             </div>
         </div>

@@ -227,11 +227,21 @@ public class ShopController {
 		int total = 0;
 		ShopDao shopDao = sqlSession.getMapper(ShopDao.class);
 		System.out.println(pnum_array.length);
+		
+		OrderDto orderDto = new OrderDto();
+		
 		for(int i = 0; i < pnum_array.length; i++) {
+			
+			
 			
 			ShopDto dto = shopDao.shopRead(pnum_array[i]);
 			dto.setVolume(volume_array[i]);
 			dto.setOrderNo(orderNo);
+			
+			if(i == 0) { 
+				orderDto.setSampleImg(dto.getImg());
+				orderDto.setSampleName(dto.getPname());
+			}
 			
 			shopDao.orderD(dto);
 			
@@ -243,7 +253,7 @@ public class ShopController {
 			total += volume_array[i] * dto.getPrice();
 		}
 		
-		OrderDto orderDto = new OrderDto();
+		
 		orderDto.setOrderNo(orderNo);
 		orderDto.setUserID(userID);
 		orderDto.setName(name);
@@ -257,6 +267,18 @@ public class ShopController {
 		shopDao.order(orderDto);
 			
 		return "shop/finish";
+	}
+	
+	// 주문내역 불러오기
+	@RequestMapping(value="/shop/orderList")
+	public String orderList(HttpSession session) {
+		
+		String userID = (String) session.getAttribute("userID");
+		
+		ArrayList<OrderDto> list = new ArrayList<OrderDto>();
+		
+		
+		return "shop/orderList";
 	}
 	
 	// 장바구니 넣기
