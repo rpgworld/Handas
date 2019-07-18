@@ -1,6 +1,7 @@
 package com.spring.handas.shop;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 
 public class OrderDto {
 	private int num;
@@ -12,12 +13,16 @@ public class OrderDto {
 	private String address3;
 	private String phone;
 	private String message;
+	private int totalCnt; // 상품 주문 총 개수
 	private int totalPrice;
 	private Date odate;
+	private int sample_pnum;
 	
-	private int totalCnt; // 상품 주문 총 개수
-	private String sampleName; // 상품 이름 하나,
-	private String sampleImg; // 상품 이미지 이름 하나.
+	private String pname; // 상품 이름 하나,
+	private String img; // 상품 이미지 이름 하나.
+	
+	private String odateFormat; // 주문 날짜 포맷 변경
+	
 	public int getNum() {
 		return num;
 	}
@@ -83,6 +88,9 @@ public class OrderDto {
 	}
 	public void setOdate(Date odate) {
 		this.odate = odate;
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+		odateFormat = dateFormat.format(odate);
 	}
 	public int getTotalCnt() {
 		return totalCnt;
@@ -90,17 +98,29 @@ public class OrderDto {
 	public void setTotalCnt(int totalCnt) {
 		this.totalCnt = totalCnt;
 	}
-	public String getSampleName() {
-		return sampleName;
+	public String getPname() {
+		return pname;
 	}
-	public void setSampleName(String sampleName) {
-		this.sampleName = sampleName;
+	public void setPname(String pname) {
+		this.pname = pname;
 	}
-	public String getSampleImg() {
-		return sampleImg;
+	public String getImg() {
+		return img;
 	}
-	public void setSampleImg(String sampleImg) {
-		this.sampleImg = sampleImg;
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public int getSample_pnum() {
+		return sample_pnum;
+	}
+	public void setSample_pnum(int sample_pnum) {
+		this.sample_pnum = sample_pnum;
+	}
+	public String getOdateFormat() {
+		return odateFormat;
+	}
+	public void setOdateFormat(String odateFormat) {
+		this.odateFormat = odateFormat;
 	}
 	
 	

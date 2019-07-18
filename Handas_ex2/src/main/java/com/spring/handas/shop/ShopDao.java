@@ -34,4 +34,8 @@ public interface ShopDao {
 	public ArrayList<OrderDto> getOrderAll(String userID);
 	public OrderDto getOrder(String userID, int orderNo);
 	public ArrayList<OrderDDto> getOrderD(int orderNo);
+	
+	// 상품평
+	public void shopComment(CommentDto dto);
+	public ArrayList<CommentDto> shopCommentList(int pnum); 
 }

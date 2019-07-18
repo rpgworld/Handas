@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,10 +22,10 @@ text-align: center;
 vertical-align: middle;
 }
 table th:first-child {
-width: 20%;
+width: 10%;
 }
 table th:nth-child(2) {
-width: 15%;
+width: 25%;
 }
 table th:nth-child(3) {
 width: 35%;
@@ -62,9 +63,9 @@ width: 15%;
 		    				<c:forEach items="${list }" var="dto">
 		    					<tr>
 		    						<td>${dto.orderNo }</td>
-			    					<td>${dto.odate }</td>
-			    					<td><a href="${path }/shop/orderRead?orderNo=${dto.orderNo }"><img style="width: 70px;" class="card-img-top rounded" src="${path }/resources/images/shop_images/${dto.sampleImg}" alt="Card image">&nbsp;&nbsp;${dto.sampleName }외 ${dto.totalCnt }개</a></td>
-			    					<td>${dto.totalPrice }</td>
+			    					<td>${dto.odateFormat }</td>
+			    					<td style="text-align: left;"><a style="text-decoration: none;" href="${path }/shop/orderRead?orderNo=${dto.orderNo }"><img style="width: 70px;" class="card-img-top rounded" src="${path }/resources/images/shop_images/${dto.img}" alt="Card image">&nbsp;&nbsp;${dto.pname }<c:if test="${dto.totalCnt > 1}">외 ${dto.totalCnt - 1 }개</c:if></a></td>
+			    					<td><fmt:formatNumber value="${dto.totalPrice }" pattern="#,###" />원</td>
 			    					<td></td>
 				    			</tr>
 		    				</c:forEach>

@@ -30,11 +30,9 @@ var pwCheck = false;
 
 
 $('document').ready(function(){
-
 	if(msgType != '') {
-		modal_alert(msgType, msgContent);
+		message_alert(msgType, msgContent);
 	}
-
 });
 
 </script>

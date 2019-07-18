@@ -72,8 +72,8 @@
 		                        &nbsp;${sessionScope.userID } 님
 		                        </a>
 		                        <div class="dropdown-menu">
-		                        	<a class="dropdown-item" href="${path }/shop/orderList">주문내역</a>
 		                       	 	<a class="dropdown-item" href="${path }/shop/cartForm">장바구니</a>
+		                            <a class="dropdown-item" href="${path }/shop/orderList">주문내역</a>
 		                            <a class="dropdown-item" href="${path }/user/read">회원정보보기</a>
 		                            <a class="dropdown-item" href="${path }/user/logout">로그아웃</a>
 		                        </div>
@@ -83,6 +83,14 @@
                 </div> 
             </div>
         </div>
+    </div>
+   	<div class="row">
+         <div class="col-sm-12" id="test">
+             <div class="alert alert-danger alert-dismissible fade show" style="margin:0; display: none;">
+	    		<button type="button" class="close" data-dismiss="alert" style="padding-top: 7px;">&times;</button>
+	    		<p style="display:flex; justify-content: center; text-align: center;" id="alert_body"></p>
+			</div>
+    	</div>
     </div>
 </body>
 </html>

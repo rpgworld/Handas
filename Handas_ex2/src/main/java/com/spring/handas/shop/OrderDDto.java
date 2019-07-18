@@ -9,6 +9,7 @@ public class OrderDDto {
 	private int price;
 	private String img;
 	private int volume;
+	
 	public int getNum() {
 		return num;
 	}

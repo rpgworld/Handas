@@ -12,7 +12,7 @@
 	</select>
 	
 	<insert id="shopWrite" parameterType="com.spring.handas.shop.ShopDto">
-		INSERT INTO handas_shop VALUES(handas_shop_seq.nextval, #{pname}, #{item}, #{price}, #{pdesc}, #{img}, sysdate, #{volume})
+		INSERT INTO handas_shop VALUES(handas_shop_seq.nextval, #{pname}, #{item}, #{price}, #{pdesc}, #{img}, sysdate, #{totalVol})
 	</insert>
 	
 	<select id="shopRead" resultType="com.spring.handas.shop.ShopDto">
@@ -25,7 +25,7 @@
 	
 	<!-- 상품정보 수정 -->
 	<update id="shopUpdate" parameterType="com.spring.handas.shop.ShopDto">
-		UPDATE handas_shop SET pname = #{pname}, item = #{item}, price = #{price}, pdesc = #{pdesc}, img = #{img}, volume = #{volume} WHERE pnum = #{pnum}
+		UPDATE handas_shop SET pname = #{pname}, item = #{item}, price = #{price}, pdesc = #{pdesc}, img = #{img}, totalVol = #{totalVol} WHERE pnum = #{pnum}
 	</update>
 	
 	<select id="shopImgName" resultType="String">
@@ -34,7 +34,7 @@
 	
 	<!-- 상품정보 삭제 -->
 	<delete id="shopDelete">
-		DELETE handas_shop WHERE pnum = #{pnum}
+		DELETE handas_shop WHERE pnum = #{pnum} cascade constraints
 	</delete>
 	
 	<!-- 상품정보 삭제시 해당 카트 db에서 다 삭제 -->
@@ -48,13 +48,13 @@
 	</select>
 	
 	<!-- 장바구니 넣기 -->
-	<select id="cartWrite" parameterType="com.spring.handas.shop.CartDto">
-		INSERT INTO handas_cart VALUES(handas_cart_seq.nextval, #{userID}, #{pnum}, #{pname}, #{item}, #{volume}, #{totalVol}, #{price}, #{img})
-	</select>
+	<insert id="cartWrite" parameterType="com.spring.handas.shop.CartDto">
+		INSERT INTO handas_cart VALUES(handas_cart_seq.nextval, #{userID}, #{pnum}, #{volume})
+	</insert>
 	
 	<!-- 장바구니 정보 가져오기 -->
 	<select id="cartList" resultType="com.spring.handas.shop.CartDto">
-		SELECT * FROM handas_cart WHERE userID = #{userID} ORDER BY num DESC
+		select a.*, b.pname, b.item, b.price, b.img, b.totalVol from handas_cart a left outer join handas_shop b on a.pnum = b.pnum WHERE userID = #{userID} ORDER BY num DESC
 	</select>
 	
 	<delete id="cartDelete">
@@ -63,17 +63,17 @@
 	
 	<!-- 주문 내역 삽입 -->
 	<insert id="order" parameterType="com.spring.handas.shop.OrderDto">
-		INSERT INTO handas_order VALUES(handas_order_seq.nextval, #{orderNo}, #{userID}, #{name}, #{address1}, #{address2}, #{address3}, #{phone}, #{message}, #{totalPrice}, sysdate, #{totalCnt}, #{sampleName}, #{sampleImg})
+		INSERT INTO handas_order VALUES(handas_order_seq.nextval, #{orderNo}, #{userID}, #{name}, #{address1}, #{address2}, #{address3}, #{phone}, #{message}, #{totalCnt}, #{totalPrice}, sysdate, #{sample_pnum})
 	</insert>
 	
 	<!-- 주문 상세 내역에 삽입 -->
 	<insert id="orderD" parameterType="com.spring.handas.shop.ShopDto">
-		INSERT INTO handas_orderD VALUES(handas_orderD_seq.nextval, #{orderNo}, #{pnum}, #{item}, #{pname}, #{price}, #{img}, #{volume})
+		INSERT INTO handas_orderD VALUES(handas_orderD_seq.nextval, #{orderNo}, #{pnum}, #{volume})
 	</insert>
 	
 	<!-- 주문 후 재고량 변경 -->
 	<update id="shopCntUpdate">
-		UPDATE handas_shop SET volume = volume - #{param1} WHERE pnum = #{param2}
+		UPDATE handas_shop SET totalVol = totalVol - #{param1} WHERE pnum = #{param2}
 	</update>
 	
 	<!-- 해당 주문 상세 내역 주문 상품 숫자 -->
@@ -83,17 +83,30 @@
 	
 	<!-- 해당 회원 주문 정보 가져오기 -->
 	<select id="getOrderAll" resultType="com.spring.handas.shop.OrderDto">
-		SELECT * FROM handas_order WHERE userID = #{param1}
+		select a.*, b.pname, b.img from handas_order a 
+			left outer join handas_shop b on a.sample_pnum = b.pnum 
+		WHERE userID = #{param1} order by num desc
 	</select>
 	
 	<!-- 해당 회원 주문 상세 정보 가져오기 -->
 	<select id="getOrder" resultType="com.spring.handas.shop.OrderDto">
-		SELECT * FROM handas_order WHERE userID = #{param1} AND orderNo = #{param2}
+		select * from handas_order
 	</select>
 	
 	<!-- 해당 회원 주문 상세 정보 가져오기 -->
 	<select id="getOrderD" resultType="com.spring.handas.shop.OrderDDto">
-		SELECT * FROM handas_orderD WHERE orderNo = #{param2}
+		select a.*, b.pname, b.item, b.price, b.img from handas_orderD a
+			left outer join handas_shop b on a.pnum = b.pnum
+		where orderNo = #{param2}
 	</select>
+		
+	<!-- 상품평 쓰기 -->
+	<insert id="shopComment">
+		INSERT INTO handas_comment VALUES(handas_comment_seq.nextval, #{pnum}, #{userID}, #{comment}, #{star}, sysdate)
+	</insert>
 	
+	<!-- 상품평 가져오기 -->
+	<select id="shopCommentList" resultType="com.spring.handas.shop.CommentDto">
+		select * from handas_comment WHERE pnum = #{param1} order by num desc
+	</select>
 </mapper>

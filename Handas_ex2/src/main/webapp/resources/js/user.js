@@ -113,10 +113,10 @@ function join_check() {
 	var num = form.length - 1;
 
 	if(idCheck == false) {
-		modal_alert('경고창', '아이디 중복체크를 해주세요.');
+		message_alert('경고창', '아이디 중복체크를 해주세요.');
 		event.preventDefault();
 	} else if(pwCheck == false){
-		modal_alert('경고창', '비밀번호가 일치하지 않습니다.');
+		message_alert('경고창', '비밀번호가 일치하지 않습니다.');
 		event.preventDefault();
 	} else {
 		var form = $('.form-control');
@@ -142,14 +142,14 @@ function update_check() {
 	if($('join_pw1').val() == $('join_pw2').val()) {pwCheck = true;}
 	
 	if(pwCheck == false){
-		modal_alert('경고창', '비밀번호가 일치하지 않습니다.');
+		message_alert('경고창', '비밀번호가 일치하지 않습니다.');
 		event.preventDefault();
 	} else {
 		var form = $('.form-control');
 		var num = form.length;
 		for(var i = 0; i < num; i++) {
 			if($('.form-control')[i].value == '') {
-				modal_alert('경고창', '입력하지 않은 정보가 있습니다.');
+				message_alert('경고창', '입력하지 않은 정보가 있습니다.');
 				event.preventDefault();
 			}
 		}
@@ -184,4 +184,16 @@ function toast_alert(target, top_value, left_value, msgTop, msgBody) {
     $('.toast').css('top', top + top_value);
     
 	$('.toast').toast('show');
+}
+
+// 메시지 팝업
+function message_alert(msgType, msgContent){
+	if(msgType == '성공') {
+		$('#alert_body').html('<strong>Success!</strong>&nbsp;&nbsp;' + msgContent);
+		$('.alert').attr('class', 'alert alert-primary alert-dismissible fade show');
+		$('.alert').slideDown();
+	} else {
+		$('#alert_body').html('<strong>Warning!</strong>&nbsp;&nbsp;' + msgContent);
+		$('.alert').slideDown();
+	}
 }

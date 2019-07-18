@@ -88,7 +88,7 @@ padding-right: 10px;
 						</tr>
 						<tr>
 							<th>재고수량</th>
-							<td><input type="text" class="form-control" id="volume" name="volume"></td>
+							<td><input type="text" class="form-control" id="volume" name="totalVol"></td>
 						</tr>
 						<tr>
 							<th>이미지</th>

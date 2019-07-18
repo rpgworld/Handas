@@ -72,12 +72,9 @@ public class ShopController {
 	public String updateForm(HttpServletRequest request, Model model) {
 		
 		String pnum = request.getParameter("pnum");
-		
+		System.out.println(pnum);
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
-		ShopDto dto = dao.shopRead(Integer.parseInt(pnum));
-		System.out.println(dto.getImg());
 		model.addAttribute("dto", dao.shopRead(Integer.parseInt(pnum)));
-		
 		
 		return "shop/update";
 	}
@@ -232,16 +229,13 @@ public class ShopController {
 		
 		for(int i = 0; i < pnum_array.length; i++) {
 			
-			
-			
 			ShopDto dto = shopDao.shopRead(pnum_array[i]);
 			dto.setVolume(volume_array[i]);
 			dto.setOrderNo(orderNo);
 			
 			if(i == 0) { 
 				orderDto.setTotalCnt(pnum_array.length);
-				orderDto.setSampleImg(dto.getImg());
-				orderDto.setSampleName(dto.getPname());
+				orderDto.setSample_pnum(pnum_array[i]);
 			}
 			
 			shopDao.orderD(dto);
@@ -348,5 +342,33 @@ public class ShopController {
 		dao.cartDelete(userID, Integer.parseInt(pnum));
 		
 		return "true";
+	}
+	
+	// 상품평 쓰기
+	@RequestMapping(value="/shop/comment", method=RequestMethod.GET)
+	@ResponseBody
+	public String comment(CommentDto dto, HttpSession session) {
+		logger.info("shopComment");
+		String userID = "";
+		if(session.getAttribute("userID") != null) {
+			userID = (String) session.getAttribute("userID");
+		}
+		dto.setUserID(userID);
+		
+		ShopDao dao = sqlSession.getMapper(ShopDao.class);
+		dao.shopComment(dto);
+		
+		return "true";
+	}
+	
+	// 상품평 불러오기
+	@RequestMapping(value="/shop/commentList", method=RequestMethod.GET)
+	@ResponseBody
+	public ArrayList<CommentDto> commentList(@RequestParam("pnum") int pnum) {
+		logger.info("commentList");
+		ShopDao dao = sqlSession.getMapper(ShopDao.class);
+		ArrayList<CommentDto> dto = dao.shopCommentList(pnum);
+		
+		return dto;
 	}
 }

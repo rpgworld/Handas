@@ -24,7 +24,7 @@ public class PageMaker {
 		this.startPage = this.endPage - 9;
 		if(this.startPage < 1) { this.startPage = 1; }*/
 		
-		// 총 페이지 10개 + 현제 페이지 기준으로 옆으로 5개, 뒤로 4개씩 나올수 있도록
+		// 총 페이지 10개 + 현제 페이지 기준으로 왼쪽으로 5개, 오른쪽으로 4개씩 나올수 있도록
 		if(curPage < 6) {
 			this.endPage = 10;
 			if (this.endPage > this.totalPage) { this.endPage = this.totalPage; }

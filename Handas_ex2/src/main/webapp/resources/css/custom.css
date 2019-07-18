@@ -129,6 +129,17 @@ width: 48%;
 border: 1px solid #d9d9d9;
 }
 
+/* 상품 보기 별점 */
+.starChecked {
+color: #F7FE2E;
+}
+.checked {
+color: #F7FE2E;
+}
+.fa-star {
+cursor: pointer;
+}
+
 /* 푸터 css */
 .footer {
 margin-top: 30px;
@@ -163,6 +174,8 @@ font-weight: bold;
 padding: 30px;
 text-align: center;
 }
+
+/*  */
 
 /* 태블릿 css */
 @media all and (max-width: 768px) {

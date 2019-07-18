@@ -75,20 +75,6 @@ margin-right: 10px;
 }
 </style>
 <script>
-//토스트 메시지 팝업
-function toast_alert(target, top_value, left_value, msgTop, msgBody) {
-	// 장바구니 메세지 출력
-	$('.toast strong').html(msgTop);
-    $('.toast .toast-body').html(msgBody);
-    
-    var left = $(target).offset().left;
-    var top = $(target).offset().top;
-
-    $('.toast').css('left', left + left_value);
-    $('.toast').css('top', top + top_value);
-    
-	$('.toast').toast('show');
-}
 $('document').ready(function(){
 	cartCal();
 
@@ -111,10 +97,10 @@ $('document').ready(function(){
 	// 전체선택 체크박스 선택 이벤트
 	$('#check_all').change(function() {
 		if($(this).is(":checked") == true) {
-			$('.pcheck').attr('checked', 'checked');
+			$('.pcheck').prop('checked', true);
 			$('.pcheck').next().val('1');
 		} else {
-			$('.pcheck').removeAttr('checked');
+			$('.pcheck').prop('checked', false);
 			$('.pcheck').next().val('0');
 		}	
 		
@@ -181,7 +167,6 @@ function cartCal() {
 	var volArray = new Array();
 	var checkArray = new Array();
 	var totalArray = new Array();
-	
 	$('input[name=price]').each(function(){
 	    priceArray.push($(this).val());
 	});
@@ -195,7 +180,8 @@ function cartCal() {
 		var total = priceArray.shift() * volArray.shift();
 		totalArray.push(total);
 		$(this).val(total);
-	});	
+		$(this).prev().html(total.toLocaleString() + '원');
+	});
 	for(var i = 0; i < totalArray.length; i++) {
 		if (checkArray[i] == 1) {
 			super_total += totalArray[i];
@@ -248,7 +234,7 @@ function cartCal() {
 	                                    </td>
 	                                    <td rowspan="2" style="width: 100px; height: 100px;"><img class="img-fluid" src="${path }/resources/images/shop_images/${dto.img}"></td>
 	                                    <td style="display: flex; justify-content: space-between; border-top: none;"><span class="cart_pname"><a style="color: #000000; font-weight:bold; text-decoration: none;" href="${path }/shop/read?pnum=${dto.pnum}">${dto.pname }</a></span><span class="cart_price">상품금액 : <fmt:formatNumber value="${dto.price }" pattern="#,###" /></span></td>
-	                                    <td rowspan="2"><input type="text" name="total_price" value="" style="border:none; width: 150px; text-align: center;"></td>
+	                                    <td rowspan="2"><p style="display:inline;" id="total_price"></p><input type="hidden" name="total_price" value="" style="border:none; width: 150px; text-align: center;"></td>
 	                                    <td rowspan="2">무료배송</td>
 	                                </tr>
 	                                <tr>

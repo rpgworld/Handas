@@ -18,6 +18,7 @@ var maxUploadSize = 10485760;
 var fileChange = false;
 
 $('document').ready(function(){
+	
 	$('#file').change(function(){
 		if($('#file').val() != null) {
 			if($('#file')[0].files[0].size > maxUploadSize) {
@@ -99,19 +100,19 @@ padding-right: 10px;
 						</tr>
 						<tr>
 							<th>상품명</th>
-							<td><input type="text" class="form-control" id="pname" name="pname" value=${dto.pname }></td>
+							<td><input type="text" class="form-control" id="pname" name="pname" value="${dto.pname }"></td>
 						</tr>
 						<tr>
 							<th>옵션</th>
-							<td><input type="text" class="form-control" id="item" name="item" value=${dto.item }></td>
+							<td><input type="text" class="form-control" id="item" name="item" value="${dto.item }"></td>
 						</tr>
 						<tr>
 							<th>가격</th>
-							<td><input type="text" class="form-control" id="price" name="price" value=${dto.price }></td>
+							<td><input type="text" class="form-control" id="price" name="price" value="${dto.price }"></td>
 						</tr>
 						<tr>
 							<th>재고수량</th>
-							<td><input type="text" class="form-control" id="volume" name="volume" value=${dto.volume }></td>
+							<td><input type="text" class="form-control" id="volume" name="totalVol" value="${dto.totalVol }"></td>
 						</tr>
 						<tr>
 							<th>이미지</th>

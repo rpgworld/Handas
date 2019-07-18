@@ -13,10 +13,12 @@ public class ShopDto {
 	private String pdesc;
 	private String img;
 	private Date writeDate;
-	private int dateDiff; // 제품 출시 일수
-	private int volume;
+	private String writeDateFormat;
+	private int totalVol;
 	
+	private int dateDiff; // 제품 출시 일수
 	private int orderNo;
+	private int volume;
 	
 	public int getPnum() {     
 		return pnum;
@@ -82,24 +84,30 @@ public class ShopDto {
 		return writeDate;
 	}
 	public String getWriteDateFormat() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
 		
-		return dateFormat.format(writeDate);
+		return writeDateFormat;
 	}
 	public void setWriteDate(Date writeDate) {
 		this.writeDate = writeDate;
 		
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		// 날짜 형식 변경 지정 변수
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+		writeDateFormat = dateFormat.format(writeDate);
+		
+		// 출시이후 일수 세팅
 		Calendar today = Calendar.getInstance();
 		this.dateDiff = (int) ((today.getTimeInMillis() - this.writeDate.getTime()) / (1000 * 24 * 60 * 60));
 	}
-
-	public int getVolume() {
-		return volume;
+	public void setWriteDateFormat(String writeDateFormat) {
+		this.writeDateFormat = writeDateFormat;
 	}
 
-	public void setVolume(int volume) {
-		this.volume = volume;
+	public int getTotalVol() {
+		return totalVol;
+	}
+
+	public void setTotalVol(int totalVol) {
+		this.totalVol = totalVol;
 	}
 
 	public int getOrderNo() {
@@ -108,6 +116,14 @@ public class ShopDto {
 
 	public void setOrderNo(int orderNo) {
 		this.orderNo = orderNo;
+	}
+
+	public int getVolume() {
+		return volume;
+	}
+
+	public void setVolume(int volume) {
+		this.volume = volume;
 	}
 	
 	

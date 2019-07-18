@@ -49,7 +49,7 @@ vertical-align: middle;
 		    				<c:forEach items="${list }" var="dto">
 		    					<tr>
 		    						<td>${dto.orderNo }</td>
-			    					<td><img style="width: 70px;" class="card-img-top rounded" src="${path }/resources/images/shop_images/${dto.img}" alt="Card image">&nbsp;&nbsp;${dto.pname }</td>
+			    					<td style="text-align: left;"><img style="width: 70px;" class="card-img-top rounded" src="${path }/resources/images/shop_images/${dto.img}" alt="Card image">&nbsp;&nbsp;${dto.pname }</td>
 			    					<td>${dto.item }</td>
 			    					<td>${dto.price }</td>
 			    					<td>${dto.volume }</td>

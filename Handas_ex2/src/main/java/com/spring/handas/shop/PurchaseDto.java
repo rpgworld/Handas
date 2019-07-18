@@ -1,7 +1,5 @@
 package com.spring.handas.shop;
 
-import java.util.List;
-
 public class PurchaseDto {
 	private int num;
 	private int purNo;
@@ -10,16 +8,7 @@ public class PurchaseDto {
 	private int volume;
 	private int price;
 	private String check;
-	private List<PurchaseDto> dto;
 	
-	
-	
-	public List<PurchaseDto> getDto() {
-		return dto;
-	}
-	public void setDto(List<PurchaseDto> dto) {
-		this.dto = dto;
-	}
 	public int getNum() {
 		return num;
 	}

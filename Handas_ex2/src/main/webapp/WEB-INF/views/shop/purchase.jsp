@@ -146,7 +146,7 @@ $('document').ready(function(){
 									</div>
 									<div class="form-check-inline">
 									  <label class="form-check-label">
-									    <input type="radio" class="form-check-input" name="optradio">휴대폰
+									    <input type="radio" class="form-check-input" name="optradio" disabled>휴대폰
 									  </label>
 									</div>
 									<div class="form-check-inline">
