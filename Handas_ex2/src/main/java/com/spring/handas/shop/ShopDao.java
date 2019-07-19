@@ -38,4 +38,5 @@ public interface ShopDao {
 	// 상품평
 	public void shopComment(CommentDto dto);
 	public ArrayList<CommentDto> shopCommentList(int pnum); 
+	public void shopCommentDelete(int num);
 }

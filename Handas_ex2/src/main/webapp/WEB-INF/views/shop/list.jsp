@@ -28,7 +28,7 @@ var curPage = ${paging.curPage};
                 	<c:forEach items="${list }" var="dto">
                 		<li>
 	                        <div class="card" style="border: none;">
-	                            <a href="${path }/shop/read?pnum=${dto.pnum }"><img class="card-img-top rounded" style="border: 1px solid #d9d9d9;" src="${path }/resources/images/shop_images/${dto.img}" alt="Card image"></a>
+	                            <a href="${path }/shop/read?pnum=${dto.pnum }"><img class="card-img-top rounded" style="border: 1px solid #d9d9d9;" src="/resources/images/shop_images/${dto.img}" alt="Card image"></a>
 	                            <div class="card-body">
 	                                <h3 class="card-title"><a style="color:#000000; text-decoration:none; font-weight: bold;" href="${path }/shop/read?pnum=${dto.pnum }">${dto.pname }</a><c:if test="${dto.dateDiff < 30}">&nbsp;<span class="badge badge-primary">New</span></c:if><c:if test="${dto.totalVol < 1 }">&nbsp;<span class="badge badge-danger">품절</span></c:if></h3>
 	                                <p class="card-text">${dto.getPriceFormat() }원</p>

@@ -160,7 +160,8 @@ $('document').ready(function(){
 			$.ajax({
 				type : 'POST',
 				data : query,
-				url : '${path}/shop/cart',
+				url : '/shop/cart',
+				//url : '${path}/shop/cart',
 				dataType : 'json',
 				success : function(result) {
 					
@@ -213,18 +214,20 @@ $('document').ready(function(){
 		var pnum = ${dto.pnum};
 		var comment = $('textarea[name=comment]').val();
 		
-		var query = {'pnum': pnum, 'comment': comment, 'star': starCnt};
+		var query = {'pnum': pnum, 'content': comment, 'star': starCnt};
 		
 		$.ajax({
 			type : 'GET',
 			data : query,
-			url : '${path}/shop/comment',
+			url : '/shop/comment',
+			//url : '${path}/shop/comment',
 			dataType : 'json',
 			success : function(result) {
 				
 				if(result == true) {
 					// 상품평 쓰기 성공 메시지
-					modal_alert('성공', '상품평 쓰기가 완료되었습니다.')
+					modal_alert('성공', '상품평 쓰기가 완료되었습니다.');
+					commentList();
 				} 
 			},
 			error : function(error) {
@@ -235,37 +238,7 @@ $('document').ready(function(){
 	
 	// 상품평 가져오기 버튼 이벤트
 	$('#comment_list_btn').click(function(){
-		var pnum = ${dto.pnum};
-		var query = {'pnum': pnum};
-		
-		$.ajax({
-			type : 'GET',
-			data : query,
-			url : '${path}/shop/commentList',
-			dataType : 'json',
-			success : function(data) {
-				var html = '';
-				$.each(data, function(index, item){
-					html += '<div class="box">';
-       				html += '<div><div>' + item.userID + '</div>';
-       				html += '<div><input type="button" class="btn btn-outline-primary" id="comment_delete" onclick="test()" style="padding: 0 6px;" value="X"><input type="hidden" value="' + item.num + '"></div></div>';
-           			html += '<div class="list_star">';
-           			for(var i = 0; i < item.star; i++) {
-           				html += '<i class="fa fa-star starChecked"></i>';
-           			}
-           			for(var i = 0; i < 5 - item.star; i++) {
-           				html += '<i class="fa fa-star"></i>';
-           			}
-           			html += '&nbsp;<p>' + item.cdateFormat + '</p></div>';
-           			html += '<div>' + item.content + '</div></div>';
-				});
-				
-				$('.comment_list').html(html);
-			},
-			error : function(error) {
-				alert('error : ' + error);
-			}
-		});
+		commentList();
 	});
 	
 });
@@ -275,8 +248,66 @@ function total_price() {
 	$('.total_price').html('총상품금액 &nbsp;&nbsp;' + total_price.toLocaleString() + '원');
 }
 
-function test(){
-	alert($(this).next().val());
+// 상품평 삭제버튼 클릭 이벤트
+function commentDelete(num, id){
+	var query = {'num' : num, 'id' : id};
+	
+	$.ajax({
+		type : 'GET',
+		data : query,
+		url : '/shop/commentDelete',
+		//url : '${path}/shop/commentDelete',
+		dataType : 'json',
+		success : function(result) {
+			
+			if(result == true) {
+				// 상품평 쓰기 성공 메시지
+				modal_alert('성공', '상품평 삭제가 완료되었습니다.');
+				commentList();
+			} else {
+				modal_alert('경고창', '해당글의 삭제 권한이 없습니다.');
+			}
+		},
+		error : function(error) {
+			alert('error : ' + error);
+		}
+	});
+}
+
+//상품평 가져오기 버튼 이벤트
+function commentList() {
+	var pnum = ${dto.pnum};
+	var query = {'pnum': pnum};
+	
+	$.ajax({
+		type : 'GET',
+		data : query,
+		url : '/shop/commentList',
+		//url : '${path}/shop/commentList',
+		dataType : 'json',
+		success : function(data) {
+			var html = '';
+			$.each(data, function(index, item){
+				html += '<div class="box">';
+   				html += '<div><div>' + item.userID + '</div>';
+   				html += '<div><input type="button" class="btn btn-outline-primary" id="comment_delete" onclick="commentDelete(' + item.num + ', \'' + item.userID + '\')" style="padding: 0 6px;" value="X"></div></div>';
+       			html += '<div class="list_star">';
+       			for(var i = 0; i < item.star; i++) {
+       				html += '<i class="fa fa-star starChecked"></i>';
+       			}
+       			for(var i = 0; i < 5 - item.star; i++) {
+       				html += '<i class="fa fa-star"></i>';
+       			}
+       			html += '&nbsp;<p>' + item.cdateFormat + '</p></div>';
+       			html += '<div>' + item.content + '</div></div>';
+			});
+			
+			$('.comment_list').html(html);
+		},
+		error : function(error) {
+			alert('error : ' + error);
+		}
+	});
 }
 </script>
 </head>
@@ -340,24 +371,32 @@ function test(){
            				<a href="${path }/shop/delete?pnum=${dto.pnum}" class="btn btn-primary p_delete" style="margin-left: 10px;">삭제하기</a>
            			</c:if>
            		</div>
-           		<c:if test="${sessionScope.userID ne null }">
-	           		<div class="item_comment" style="width: 100%;">
-	           			<div><h1>상품평 쓰기</h1></div>
-	           			<div class="star"> 별점주기  
-	           				<i class="fa fa-star checked"></i>
-	           				<i class="fa fa-star"></i>
-	           				<i class="fa fa-star"></i>
-	           				<i class="fa fa-star"></i>
-	           				<i class="fa fa-star"></i>
-	           			</div>
+           		<div class="item_comment" style="width: 100%;">
+           			<div><h1>상품평 쓰기</h1></div>
+           			<div class="star"> 별점주기  
+           				<i class="fa fa-star checked"></i>
+           				<i class="fa fa-star"></i>
+           				<i class="fa fa-star"></i>
+           				<i class="fa fa-star"></i>
+           				<i class="fa fa-star"></i>
+           			</div>
+           			<c:if test="${sessionScope.userID ne null }">
 	           			<div>
 		           			<textarea name="comment" class="form-control"></textarea>
 		           		</div>
 		           		<div >
-		           			<input type="button" id="comment" class="btn btn-primary" value="상품평쓰기">
+		           			<input type="button" id="comment" class="btn btn-primary" value="상품평쓰기">	
 		           		</div>
-	           		</div>
-           		</c:if>
+	           		</c:if>
+	           		<c:if test="${sessionScope.userID eq null }">
+	           			<div>
+		           			<textarea name="comment" class="form-control" disabled>상품평쓰기는 로그인한 회원만 가능합니다.</textarea>
+		           		</div>
+		           		<div >
+		           			<input type="button" id="comment" class="btn btn-primary" value="상품평쓰기" disabled>	
+		           		</div>
+	           		</c:if>
+           		</div>
            		<div>
            			<input type="button" id="comment_list_btn" class="btn btn-primary" value="상품평보기">
            		</div>

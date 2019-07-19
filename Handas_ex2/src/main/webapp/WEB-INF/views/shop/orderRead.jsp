@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -51,7 +52,7 @@ vertical-align: middle;
 		    						<td>${dto.orderNo }</td>
 			    					<td style="text-align: left;"><img style="width: 70px;" class="card-img-top rounded" src="${path }/resources/images/shop_images/${dto.img}" alt="Card image">&nbsp;&nbsp;${dto.pname }</td>
 			    					<td>${dto.item }</td>
-			    					<td>${dto.price }</td>
+			    					<td><fmt:formatNumber value="${dto.price }" pattern="#,###" /></td>
 			    					<td>${dto.volume }</td>
 			    					<td></td>
 				    			</tr>

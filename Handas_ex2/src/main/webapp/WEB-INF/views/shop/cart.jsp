@@ -145,7 +145,8 @@ $('document').ready(function(){
 		$.ajax({
 			type : 'POST',
 			data : {'pnum' : pnum},
-			url : '${path}/shop/cartDelete',
+			url : '/shop/cartDelete',
+			//url : '${path}/shop/cartDelete', 
 			dataType : 'json',
 			success : function(result) {
 				

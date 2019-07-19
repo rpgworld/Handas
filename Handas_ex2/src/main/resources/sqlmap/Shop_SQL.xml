@@ -6,9 +6,7 @@
 <mapper namespace="com.spring.handas.shop.ShopDao">
 	
 	<select id="shopList" resultType="com.spring.handas.shop.ShopDto" parameterType="com.spring.handas.PageMaker">
-		SELECT * 
-		FROM (SELECT ROWNUM rnum, handas_shop.* FROM handas_shop ORDER BY pnum DESC) handas_shop 
-		WHERE rnum BETWEEN #{start} AND #{end}
+		SELECT * FROM (SELECT ROWNUM rnum, handas_shop.* FROM (select * from handas_shop ORDER BY pnum DESC) handas_shop) WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
 	
 	<insert id="shopWrite" parameterType="com.spring.handas.shop.ShopDto">
@@ -102,11 +100,17 @@
 		
 	<!-- 상품평 쓰기 -->
 	<insert id="shopComment">
-		INSERT INTO handas_comment VALUES(handas_comment_seq.nextval, #{pnum}, #{userID}, #{comment}, #{star}, sysdate)
+		INSERT INTO handas_comment VALUES(handas_comment_seq.nextval, #{pnum}, #{userID}, #{content}, #{star}, sysdate)
 	</insert>
 	
 	<!-- 상품평 가져오기 -->
 	<select id="shopCommentList" resultType="com.spring.handas.shop.CommentDto">
 		select * from handas_comment WHERE pnum = #{param1} order by num desc
 	</select>
+	
+	<!-- 상품평 삭제 -->
+	<delete id="shopCommentDelete">
+		delete handas_comment WHERE num = #{param1}
+	</delete>
+	
 </mapper>

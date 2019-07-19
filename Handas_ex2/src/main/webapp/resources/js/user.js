@@ -60,7 +60,8 @@ function id_check() {
 	$.ajax({
 		type : 'GET',
 		data : {'userID' :  userID},
-		url : '/handas/user/idCheck',
+		url : '/user/idCheck',
+		//url : '${path}/user/idCheck',
 		dataType : 'json',
 		contentType:'application/json; charset=utf-8',
 		success : function(result) {

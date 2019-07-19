@@ -81,7 +81,7 @@ public class ShopController {
 	
 	// 상품 정보 수정
 	@RequestMapping(value = "/shop/update", method = RequestMethod.POST)
-	public String update(ShopDto dto, @RequestParam(value="file", defaultValue = "file") MultipartFile file, RedirectAttributes redirect) throws Exception {
+	public String update(ShopDto dto, @RequestParam(value="file", defaultValue = "file") MultipartFile file, RedirectAttributes redirect, HttpSession session) throws Exception {
 		logger.info("shopUpdate()");
 		
 		logger.info("originalName: " + file.getOriginalFilename());
@@ -92,10 +92,12 @@ public class ShopController {
 		
 		Upload upload = new Upload();
 		
+		String uploadPath = session.getServletContext().getRealPath("/") + "resources\\/images\\/shop_images\\/";
+		
 		System.out.println(file.getOriginalFilename());
 		// 파일이 비어있지 않을 경우
 		if(file.getOriginalFilename() != "") {
-			 String savedName = upload.uploadFile(dto.getPname(), file.getOriginalFilename(), file.getBytes());
+			 String savedName = upload.uploadFile(dto.getPname(), file.getOriginalFilename(), file.getBytes(), uploadPath);
 			 dto.setImg(savedName);
 		}
 		
@@ -141,12 +143,14 @@ public class ShopController {
 	}
 	
 	@RequestMapping(value = "/shop/write", method = RequestMethod.POST)
-	public String shopWrite(ShopDto dto,  @RequestParam(value="file") MultipartFile file, RedirectAttributes redirect) throws Exception {
+	public String shopWrite(ShopDto dto,  @RequestParam(value="file") MultipartFile file, RedirectAttributes redirect, HttpSession session) throws Exception {
 		logger.info("shopWrite()");
 		
 		logger.info("originalName: " + file.getOriginalFilename());
 		logger.info("size: " + file.getSize());
 		logger.info("contentType: " + file.getContentType());
+		
+		String uploadPath = session.getServletContext().getRealPath("/") + "resources\\/images\\/shop_images\\/";
 		
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
 		
@@ -157,7 +161,7 @@ public class ShopController {
 		
 		// 파일이 비었을경우
 		if(file.getOriginalFilename() != "") {
-			 savedName = upload.uploadFile(dto.getPname(), file.getOriginalFilename(), file.getBytes());
+			 savedName = upload.uploadFile(dto.getPname(), file.getOriginalFilename(), file.getBytes(), uploadPath);
 		}
 		// db에 전달할 파일 이름세팅
 		dto.setImg(savedName);
@@ -286,6 +290,15 @@ public class ShopController {
 		return "shop/orderRead";
 	}
 	
+	@RequestMapping(value="/shop/orderDelete")
+	public String orderDelete(@RequestParam(value="orderNo", defaultValue="0") int orderNo) {
+		ShopDao dao = sqlSession.getMapper(ShopDao.class);
+		// 주문내역삭제
+		// 주문상세내역삭제
+		
+		return "redirect:/shop/orderList";
+	}
+	
 	// 장바구니 넣기
 	@RequestMapping(value="/shop/cart", method=RequestMethod.POST)
 	@ResponseBody
@@ -370,5 +383,24 @@ public class ShopController {
 		ArrayList<CommentDto> dto = dao.shopCommentList(pnum);
 		
 		return dto;
+	}
+	
+	// 상품평 삭제
+	@RequestMapping(value="/shop/commentDelete", method=RequestMethod.GET)
+	@ResponseBody
+	public String commentDelete(HttpServletRequest request, HttpSession session) {
+		String num = request.getParameter("num");
+		String writer = request.getParameter("id");
+		
+		// 작성자와 로그인한 아이디가 일치하지 않는다면
+		String userID = (String) session.getAttribute("userID");
+		if(!writer.equals(userID)) {
+			return "false";
+		}
+		
+		ShopDao dao = sqlSession.getMapper(ShopDao.class);
+		dao.shopCommentDelete(Integer.parseInt(num));
+		
+		return "true";
 	}
 }

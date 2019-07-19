@@ -11,7 +11,7 @@ public class Upload {
 	
 	// String uploadPath = "C:\\Users\\305\\Desktop\\Spring\\Handas\\Handas_ex2\\src\\main\\webapp\\resources\\images\\shop_images";
 	// 톰캣 이클립스 이미지 파일 저장 경로 : 집
-	String uploadPath ="C:\\Users\\Data\\oxyzen_eclipse\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Handas_ex2\\resources\\images\\shop_images";
+	//String uploadPath ="C:\\Users\\Data\\oxyzen_eclipse\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Handas_ex2\\resources\\images\\shop_images";
 	// 학원
 	//String uploadPath = "C:\\Users\\305\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Handas_ex2\\resources\\images\\shop_images";
 	
@@ -19,7 +19,7 @@ public class Upload {
 	//String uploadPath = "C:\\Users\\shinh\\Desktop\\JAVA Project\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\Handas_ex2\\resources\\images\\shop_images";
 	
 	// 업로드 메서드
-	public String uploadFile(String pname, String originalName, byte[] fileData) throws Exception {
+	public String uploadFile(String pname, String originalName, byte[] fileData, String uploadPath) throws Exception {
 		SimpleDateFormat format = new SimpleDateFormat ( "yyyyMMdd_HHmmss");
 		Date today = new Date();
 		
@@ -34,7 +34,7 @@ public class Upload {
 	}
 	
 	// 파일 삭제
-	public void deleteFile(String img) throws Exception {
+	public void deleteFile(String img, String uploadPath) throws Exception {
 		File file = new File(uploadPath);
      
 		if( file.exists() ){
