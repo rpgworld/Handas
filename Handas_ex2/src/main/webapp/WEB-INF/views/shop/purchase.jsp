@@ -61,9 +61,46 @@ padding-top: 25px;
 
 </style>
 <script>
+var agreement = false;
+
 $('document').ready(function(){
 	
+	// 약관 동의 버튼 클릭 이벤트
+	$('#agreement_check').click(function(){
+		if($(this).is(":checked") == true) {
+			agreement = true;
+		} else {
+			agreement = false;
+		}
+	});
+	
+	// 구매하기 버튼 클릭 이벤트
+	$('#purchase_btn').click(function(){
+		purChk();
+	});
 });
+
+// 구매하기 버튼 클릭 이벤트
+function purChk() {
+	
+	// 빈칸 체크
+	var input = $('input[type=text]');
+	var num = input.length;
+	for(var i = 0; i < num; i++) {
+		if(jQuery.trim($('input[type=text]')[i].value) == '') {
+			modal_alert('경고창', '입력하지 않은 정보가 있습니다.');
+			return false;
+		}
+	}
+
+	
+	if(agreement == false) {
+		modal_alert('경고창', '약관 동의에 체크가 되어있지 않습니다.');
+		return false;
+	}
+	
+	document.getElementById('purchase_form').submit();
+}
 </script>
 </head>
 <body>
@@ -180,11 +217,11 @@ $('document').ready(function(){
                     </table>
                     <div class="form-check-inline">
 						<label class="form-check-label">
-							<input type="checkbox" class="form-check-input" value=""> 위 주문 내용을 확인하였으며, 회원 본인은 결제에 동의합니다.
+							<input type="checkbox" id="agreement_check" class="form-check-input" value=""> 위 주문 내용을 확인하였으며, 회원 본인은 결제에 동의합니다.
 						</label>
 					</div>
                     <div class="purchase_btn_group">
-                        <input type="submit" class="btn btn-primary" value="결제하기">
+                        <input type="button" id="purchase_btn" class="btn btn-primary" value="결제하기">
                     </div>
                 </form>
             </div>

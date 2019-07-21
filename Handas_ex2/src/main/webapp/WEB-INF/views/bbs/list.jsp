@@ -20,6 +20,22 @@ margin-top: 30px;
 .bbsList table th {
 border-top: none; 
 border-bottom: none;
+text-align: center;
+}
+.bbsList th:first-child {
+width: 10%;
+}
+.bbsList th:nth-child(2), .bbsList th:nth-child(4) {
+width: 30%;
+}
+.bbsList th:nth-child(3) {
+width: 16%;
+}
+.bbsList th:last-child {
+width: 14%;
+}
+.bbsList table td {
+text-align: center;
 }
 </style>
 <script>
@@ -54,16 +70,36 @@ $('document').ready(function(){
             	<div class="bbsList">
 	            	<ul class="nav nav-tabs">
 						<li class="nav-item">
-							<a class="nav-link active" href="#">전체</a>
+							<c:if test="${sessionScope.category eq 'all' }">
+								<a class="nav-link active" href="${path }/bbs/list">전체</a>
+							</c:if>
+							<c:if test="${sessionScope.category ne 'all' }">
+								<a class="nav-link" href="${path }/bbs/list">전체</a>
+							</c:if>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">상품</a>
+							<c:if test="${sessionScope.category eq 'product' }">
+								<a class="nav-link active" href="${path }/bbs/list?category=product">상품</a>
+							</c:if>
+							<c:if test="${sessionScope.category ne 'product' }">
+								<a class="nav-link" href="${path }/bbs/list?category=product">상품</a>
+							</c:if>
 						</li>
 						<li class="nav-item">
-					    	<a class="nav-link" href="#">배송</a>
+							<c:if test="${sessionScope.category eq 'shipping' }">
+					    		<a class="nav-link active" href="${path }/bbs/list?category=shipping">배송</a>
+							</c:if>
+							<c:if test="${sessionScope.category ne 'shipping' }">
+					    		<a class="nav-link" href="${path }/bbs/list?category=shipping">배송</a>
+							</c:if>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="#">환불</a>
+							<c:if test="${sessionScope eq 'refund' }">
+								<a class="nav-link active" href="${path }/bbs/list?category=refund">환불</a>
+							</c:if>
+							<c:if test="${sessionScope ne 'refund' }">
+								<a class="nav-link" href="${path }/bbs/list?category=refund">환불</a>
+							</c:if>
 						</li>
 					</ul>
 		    		<table class="table table-striped">
@@ -79,7 +115,11 @@ $('document').ready(function(){
 		    				<c:forEach items="${bbsList }" var="list">
 		    					<tr>
 			    					<td>${list.bnum }</td>
-			    					<td class="bbs_title"><a href="${path}/bbs/read?bnum=${list.bnum}">${list.title }</a></td>
+			    					<td class="bbs_title" style="text-align: left;">
+			    						<c:if test="${list.secret == 1 }"><i class="fas fa-lock" ></i>&nbsp;</c:if>
+			    						<c:if test="${list.lev > 0 }">└&nbsp;</c:if>
+			    						<a href="${path}/bbs/read?bnum=${list.bnum}&writer=${list.writer }&secret=${list.secret }">${list.title }</a>
+			    					</td>
 			    					<td>${list.writer }</td>
 			    					<td>${list.writeDate }</td>
 			    					<td>${list.hit }</td>
@@ -99,24 +139,24 @@ $('document').ready(function(){
 	            	<div style="display: flex; justify-content: center; margin-top: 15px;">
 	               		<ul class="pagination">
 	               			<c:if test="${paging.curPage eq 1 }">
-	               				<li class="page-item disabled"><a class="page-link" href="${path }/bbs/list?curPage=${paging.curPage - 1}">Previous</a></li>
+	               				<li class="page-item disabled"><a class="page-link" href="${path }/bbs/list?curPage=${paging.curPage - 1}&category=${paging.category }">Previous</a></li>
 	               			</c:if>
 	               			<c:if test="${paging.curPage ne 1 }">
-	               				<li class="page-item"><a class="page-link" href="${path }/bbs/list?curPage=${paging.curPage - 1}">Previous</a></li>
+	               				<li class="page-item"><a class="page-link" href="${path }/bbs/list?curPage=${paging.curPage - 1}&category=${paging.category }">Previous</a></li>
 	               			</c:if>
 	                		<c:forEach var="i" begin="${paging.startPage }" end="${paging.endPage }" >
 	                			<c:if test="${paging.curPage eq i }">
-	                				<li class="page-item active"><a class="page-link" href="${path }/bbs/list?curPage=${i}">${i }</a></li>
+	                				<li class="page-item active"><a class="page-link" href="${path }/bbs/list?curPage=${i}&category=${paging.category }">${i }</a></li>
 	                			</c:if>
 	                			<c:if test="${paging.curPage ne i }">
-	                				<li class="page-item"><a class="page-link" href="${path }/bbs/list?curPage=${i}">${i }</a></li>
+	                				<li class="page-item"><a class="page-link" href="${path }/bbs/list?curPage=${i}&category=${paging.category }">${i }</a></li>
 	                			</c:if>
 	                		</c:forEach>
 	               			<c:if test="${paging.curPage eq paging.totalPage }">
-	               				<li class="page-item disabled"><a class="page-link" href="${path }/bbs/list?curPage=${paging.curPage + 1}">Next</a></li>
+	               				<li class="page-item disabled"><a class="page-link" href="${path }/bbs/list?curPage=${paging.curPage + 1}&category=${paging.category }">Next</a></li>
 	               			</c:if>
 	               			<c:if test="${paging.curPage ne paging.totalPage }">
-	               				<li class="page-item"><a class="page-link" href="${path }/bbs/list?curPage=${paging.curPage + 1}">Next</a></li>
+	               				<li class="page-item"><a class="page-link" href="${path }/bbs/list?curPage=${paging.curPage + 1}&category=${paging.category }">Next</a></li>
 	               			</c:if>
 	               		</ul> 
 	               	</div>

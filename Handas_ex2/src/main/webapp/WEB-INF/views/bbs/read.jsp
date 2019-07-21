@@ -79,6 +79,32 @@ $('document').ready(function(){
 	            	<form action="delete" method="get">
 	            		<table class="table table-bordered">
 	            			<tr>
+	            				<th>카테고리</th>
+	            				<td>
+	            					<c:choose>
+	            						<c:when test="${dto.category == 'product' }">
+	            							상품
+	            						</c:when>
+	            						<c:when test="${dto.category == 'shipping' }">
+	            							배송
+	            						</c:when>
+	            						<c:when test="${dto.category == 'refund' }">
+	            							환불
+	            						</c:when>
+	            						<c:otherwise>
+	            							전체
+	            						</c:otherwise>
+	            					</c:choose>
+	            				</td>
+	            				<th colspan="2">
+		            				<div class="form-check-inline">
+										<label class="form-check-label">
+											비밀글 체크&nbsp;&nbsp;<input style="margin-top: 3px;" type="checkbox" name="secret" class="form-check-input" value="1" ${dto.secret == 1 ? 'checked' : '' } disabled>
+										</label>
+									</div>
+		            			</th>
+	            			</tr>
+	            			<tr>
 	            				<th>글제목</th>
 	            				<td>${dto.title }</td>
 	            				<th>작성일자</th>
@@ -103,7 +129,7 @@ $('document').ready(function(){
 			         	<a href="${path }/bbs/updateForm?bnum=${dto.bnum}&writer=${dto.writer}" class="btn btn-primary" id="read_update">수정하기</a>
 			         	<a href="${path }/bbs/delete?bnum=${dto.bnum}&writer=${dto.writer}" class="btn btn-primary" id="read_delete">삭제하기</a>
 			         	<c:if test="${sessionScope.role == 'admin' }">
-			         		<a href="${path }/bbs/replyForm" class="btn btn-primary">답글달기</a>
+			         		<a href="${path }/bbs/replyForm?bnum=${dto.bnum}&ref=${dto.ref}" class="btn btn-primary">답글달기</a>
 			         	</c:if>
 			         </div>
 		         </div>

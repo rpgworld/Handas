@@ -22,7 +22,7 @@
 	
 	<!-- 회원가입 -->
 	<insert id="join" parameterType="com.spring.handas.user.UserDto">
-		INSERT INTO handas_user VALUES(handas_user_seq.nextval, #{userID}, #{userPW}, #{userName}, #{address1}, #{address2}, #{address3}, #{userEmail}, 'user')
+		INSERT INTO handas_user VALUES(handas_user_seq.nextval, #{userID}, #{userPW}, #{userName}, #{address1}, #{address2}, #{address3}, #{userEmail}, 'user', sysdate)
 	</insert>
 	
 	<!-- 회원 정보(수정폼) 가져오기 -->
@@ -35,4 +35,21 @@
 		UPDATE handas_user SET userPW = #{userPW}, userName = #{userName}, address1 = #{address1}, address2 = #{address2}, address3 = #{address3}, userEmail = #{userEmail} WHERE userID = #{userID}
 	</update>
 	
+	<!-- 회원 리스트 가져오기 -->
+	<select id="userList" resultType="com.spring.handas.user.UserDto">
+		select a.num, a.userID, a.userPW, a.userName, a.address1, a.address2, a.address3, a.userEmail, a.role, a.join_date, nvl(sum(b.total_price), 0) as total_purchase 
+	    from handas_user a left outer join handas_order b on a.userID = b.userID 
+	    group by a.num, a.userID, a.userPW, a.userName, a.address1, a.address2, a.address3, a.userEmail, a.role, a.join_date 
+	    order by num desc
+	</select>
+	
+	<!-- 회원 등급 조정 -->
+	<update id="roleUpdate">
+		UPDATE handas_user SET role = #{param1} WHERE userID = #{param2}
+	</update>
+	
+	<!-- 회원 탈퇴 -->
+	<delete id="userDelete">
+		delete handas_user where userID = #{param1}
+	</delete>
 </mapper>

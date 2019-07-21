@@ -33,15 +33,18 @@ public class BbsController {
 	}
 	
 	@RequestMapping(value="/bbs/list")
-	public String bbsList(Model model, @RequestParam(value="curPage", defaultValue="1") int curPage) {
+	public String bbsList(Model model, @RequestParam(value="curPage", defaultValue="1") int curPage, @RequestParam(value="category", defaultValue="all") String category, HttpSession session) {
 		logger.info("bbsList()");
+		
+		session.setAttribute("category", category);
 		
 		BbsDao dao = sqlSession.getMapper(BbsDao.class);
 		
 		int pageView = 10;
-		int total = dao.bbsCnt();
+		int total = dao.bbsCnt(category);
 		
 		PageMaker paging = new PageMaker(curPage, total, pageView);
+		paging.setCategory(category);
 
 		model.addAttribute("bbsList", dao.bbsList(paging));
 		model.addAttribute("paging", paging);
@@ -62,9 +65,10 @@ public class BbsController {
 	}
 	
 	@RequestMapping(value="/bbs/write")
-	public String bbsWrite(BbsDto dto, HttpSession session) {
+	public String bbsWrite(BbsDto dto, HttpSession session, @RequestParam(value="secret", defaultValue="0") int secret) {
 		
 		dto.setWriter((String) session.getAttribute("userID"));
+		dto.setSecret(secret);
 		
 		BbsDao dao = sqlSession.getMapper(BbsDao.class);
 		dao.bbsWrite(dto);
@@ -74,14 +78,24 @@ public class BbsController {
 	
 	// 글읽기
 	@RequestMapping(value="/bbs/read")
-	public String bbsRead(HttpServletRequest request, Model model) {
-		String bnum = request.getParameter("bnum");
+	public String bbsRead(@RequestParam(value="bnum", defaultValue="1") int bnum
+			, @RequestParam(value="writer", defaultValue="") String writer
+			, @RequestParam(value="secret", defaultValue="0") int secret, Model model, HttpSession session, RedirectAttributes redirect) {
 		
 		BbsDao dao = sqlSession.getMapper(BbsDao.class);
 		
+		String userID = (String) session.getAttribute("userID");
+		String role = (String) session.getAttribute("role");
+		// 비밀글일때!! 작성자 본인 또는 관리자가 아니라면!
+		if(secret == 1 && (userID == null || (!role.equals("admin") || !writer.equals(userID)))) {
+			redirect.addFlashAttribute("msgType", "경고창");
+			redirect.addFlashAttribute("msgContent", "비밀글 열람은 작성자 본인 또는 관리자 계정만 가능합니다.");
+			return "redirect:/bbs/list";
+		}
+
 		// 조회수 올리기
-		dao.bbsCntUp(Integer.parseInt(bnum));
-		model.addAttribute("dto", dao.bbsRead(Integer.parseInt(bnum)));
+		dao.bbsCntUp(bnum);
+		model.addAttribute("dto", dao.bbsRead(bnum));
 		return "bbs/read";
 	}
 	
@@ -154,4 +168,47 @@ public class BbsController {
 	// 검색
 	
 	// 답글
+	@RequestMapping(value="/bbs/replyForm")
+	public String replyForm(@RequestParam(value="bnum", defaultValue="0") int bnum
+			, @RequestParam(value="ref", defaultValue="0") int ref
+			, Model model, HttpSession session, RedirectAttributes redirect) {
+		
+		BbsDao dao = sqlSession.getMapper(BbsDao.class);
+		
+		String userID = (String) session.getAttribute("userID");
+		String role = (String) session.getAttribute("role");
+		if(userID == null || !role.equals("admin")) {
+			redirect.addFlashAttribute("msgType", "경고창");
+			redirect.addFlashAttribute("msgContent", "답글 권한이 없습니다.");
+			return "redirect:/bbs/read?bnum=" + bnum;
+		}
+		if(dao.replyChk(ref) > 1) {
+			redirect.addFlashAttribute("msgType", "경고창");
+			redirect.addFlashAttribute("msgContent", "해당글은 이미 답글이 존재하거나, 답글입니다.");
+			return "redirect:/bbs/read?bnum=" + bnum;
+		}
+		
+		model.addAttribute("dto", dao.bbsRead(bnum));
+		return "bbs/reply";
+	}
+	
+	@RequestMapping(value="/bbs/reply")
+	public String reply(BbsDto dto, HttpSession session, RedirectAttributes redirect) {
+
+		String userID = (String) session.getAttribute("userID");
+		String role = (String) session.getAttribute("role");
+		if(userID == null || !role.equals("admin")) {
+			redirect.addFlashAttribute("msgType", "경고창");
+			redirect.addFlashAttribute("msgContent", "답글 권한이 없습니다.");
+			return "redirect:/bbs/read?bnum=" + dto.getBnum();
+		}
+		System.out.println(dto.getCategory());
+		
+		dto.setTitle("해당 문의글 답변입니다.");
+		
+		BbsDao dao = sqlSession.getMapper(BbsDao.class);
+		dao.reply(dto);
+		
+		return "redirect:/bbs/list";
+	}
 }

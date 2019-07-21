@@ -11,6 +11,8 @@ public class PageMaker {
 	private int startPage;
 	private int endPage;
 	
+	private String category;
+	
 	public PageMaker() {}
 	
 	
@@ -39,7 +41,7 @@ public class PageMaker {
 		// 글번호 시작 번호, 끝번호 구하기
 		this.end = curPage * pageView;
 		if(this.end > total) { this.end = total; }
-		this.start = this.end - pageView  + 1;
+		this.start = (int) Math.ceil(this.end / 10.0) * 10 - 9;
 		if(this.start < 1) { this.start = 1; }
 	}
 
@@ -111,6 +113,16 @@ public class PageMaker {
 
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
+	}
+
+
+	public String getCategory() {
+		return category;
+	}
+
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	

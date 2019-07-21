@@ -8,18 +8,29 @@
 	<!-- 글목록 -->
 	<select id="bbsList" resultType="com.spring.handas.bbs.BbsDto" parameterType="com.spring.handas.PageMaker">
 		SELECT * 
-		FROM (SELECT ROWNUM rnum, handas_bbs.* FROM handas_bbs ORDER BY bnum DESC, step ASC) handas_bbs 
+		FROM (SELECT ROWNUM rnum, handas_bbs.* FROM (SELECT * FROM handas_bbs <include refid="category" /> ORDER BY ref DESC, step ASC) handas_bbs) 
 		WHERE rnum BETWEEN #{start} AND #{end}
 	</select>
 	
 	<!-- 글 총개수 -->
 	<select id="bbsCnt" resultType="int">
-		SELECT COUNT(*) AS num FROM handas_bbs
+		SELECT COUNT(*) AS num FROM handas_bbs <include refid="category" />
 	</select>
+	
+	<sql id="category">
+		<choose>
+			<when test="category == 'all'">
+				
+			</when>
+			<otherwise>
+				WHERE category = #{category}
+			</otherwise>
+		</choose>
+	</sql>
 	
 	<!-- 글쓰기 -->
 	<insert id="bbsWrite" parameterType="BbsDto">
-		INSERT INTO handas_bbs VALUES(handas_bbs_seq.nextval, #{writer}, #{title}, #{content}, sysdate, 0, handas_bbs_seq.currval, 0, 0)
+		INSERT INTO handas_bbs VALUES(handas_bbs_seq.nextval, #{writer}, #{title}, #{content}, sysdate, 0, handas_bbs_seq.currval, 0, 0, #{category}, #{secret})
 	</insert>
 	
 	<!-- 글읽기 -->
@@ -41,4 +52,14 @@
 	<update id="bbsUpdate" parameterType="com.spring.handas.bbs.BbsDto">
 		UPDATE handas_bbs SET title = #{title}, content = #{content} WHERE bnum = #{bnum}
 	</update>
+	
+	<!-- 답글 존재여부 체크 -->
+	<select id="replyChk" resultType="int">
+		SELECT COUNT(*) AS NUM FROM handas_bbs WHERE ref = #{param1}
+	</select>
+	
+	<!-- 답글작성 -->
+	<insert id="reply" parameterType="com.spring.handas.bbs.BbsDto">
+		INSERT INTO handas_bbs VALUES(handas_bbs_seq.nextval, #{writer}, #{title}, #{content}, sysdate, 0, #{bnum}, 1, 1, #{category}, #{secret})
+	</insert>
 </mapper>

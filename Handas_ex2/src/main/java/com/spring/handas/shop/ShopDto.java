@@ -20,6 +20,8 @@ public class ShopDto {
 	private int orderNo;
 	private int volume;
 	
+	private int commentCnt; // 댓글수
+	
 	public int getPnum() {     
 		return pnum;
 	}
@@ -124,6 +126,14 @@ public class ShopDto {
 
 	public void setVolume(int volume) {
 		this.volume = volume;
+	}
+
+	public int getCommentCnt() {
+		return commentCnt;
+	}
+
+	public void setCommentCnt(int commentCnt) {
+		this.commentCnt = commentCnt;
 	}
 	
 	

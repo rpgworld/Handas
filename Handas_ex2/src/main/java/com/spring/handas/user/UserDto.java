@@ -1,5 +1,7 @@
 package com.spring.handas.user;
 
+import java.sql.Date;
+
 public class UserDto {
 	private int num;
 	private String userID;
@@ -10,6 +12,9 @@ public class UserDto {
 	private String address3;
 	private String userEmail;
 	private String role;
+	private Date joinDate;
+	
+	private int totalPurchase; // 구매 총금액
 	
 	
 	public int getNum() {
@@ -66,5 +71,18 @@ public class UserDto {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	public Date getJoinDate() {
+		return joinDate;
+	}
+	public void setJoinDate(Date joinDate) {
+		this.joinDate = joinDate;
+	}
+	public int getTotalPurchase() {
+		return totalPurchase;
+	}
+	public void setTotalPurchase(int totalPurchase) {
+		this.totalPurchase = totalPurchase;
+	}
+	
 	
 }

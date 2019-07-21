@@ -14,7 +14,7 @@
 	</insert>
 	
 	<select id="shopRead" resultType="com.spring.handas.shop.ShopDto">
-		SELECT * FROM handas_shop WHERE pnum = #{pnum}
+		SELECT handas_shop.*, (select count(*) from handas_comment where pnum = #{param1}) as comment_cnt FROM handas_shop where pnum = #{param1}
 	</select>
 	
 	<select id="shopCnt" resultType="int">
@@ -61,7 +61,7 @@
 	
 	<!-- 주문 내역 삽입 -->
 	<insert id="order" parameterType="com.spring.handas.shop.OrderDto">
-		INSERT INTO handas_order VALUES(handas_order_seq.nextval, #{orderNo}, #{userID}, #{name}, #{address1}, #{address2}, #{address3}, #{phone}, #{message}, #{totalCnt}, #{totalPrice}, sysdate, #{sample_pnum})
+		INSERT INTO handas_order VALUES(handas_order_seq.nextval, #{orderNo}, #{userID}, #{name}, #{address1}, #{address2}, #{address3}, #{phone}, #{message}, #{totalCnt}, #{totalPrice}, sysdate, #{sample_pnum}, 1)
 	</insert>
 	
 	<!-- 주문 상세 내역에 삽입 -->
@@ -83,7 +83,7 @@
 	<select id="getOrderAll" resultType="com.spring.handas.shop.OrderDto">
 		select a.*, b.pname, b.img from handas_order a 
 			left outer join handas_shop b on a.sample_pnum = b.pnum 
-		WHERE userID = #{param1} order by num desc
+		WHERE userID = #{param1} and visible = 1 ORDER BY num desc
 	</select>
 	
 	<!-- 해당 회원 주문 상세 정보 가져오기 -->
@@ -97,6 +97,16 @@
 			left outer join handas_shop b on a.pnum = b.pnum
 		where orderNo = #{param2}
 	</select>
+	
+	<!-- 해당 회원 정보 가져오기 -->
+	<select id="getOrderRead" resultType="com.spring.handas.shop.OrderDto">
+		select * from handas_order where orderNo = #{param1}
+	</select>
+	
+	<!-- 주문내역 삭제 -->
+	<update id="orderDelete">
+		UPDATE handas_order SET visible = 0 WHERE num = #{param1}
+	</update>
 		
 	<!-- 상품평 쓰기 -->
 	<insert id="shopComment">

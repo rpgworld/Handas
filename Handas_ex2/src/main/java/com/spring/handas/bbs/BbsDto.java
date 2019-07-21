@@ -13,6 +13,8 @@ public class BbsDto {
 	private int ref;
 	private int step;
 	private int lev;
+	private String category;
+	private int secret;
 	
 	public int getBnum() {
 		return bnum;
@@ -70,7 +72,17 @@ public class BbsDto {
 	public void setLev(int lev) {
 		this.lev = lev;
 	}
-	
-	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	public int getSecret() {
+		return secret;
+	}
+	public void setSecret(int secret) {
+		this.secret = secret;
+	}
 	
 }

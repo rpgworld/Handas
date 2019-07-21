@@ -25,7 +25,7 @@ public class Upload {
 		
 		// 랜덤 이름 생성
 		//UUID uid = UUID.randomUUID();  // 사용법  : "_" + uid.toString() 
-		// 저장될 파일이름 :  날짜 + 파일 이름 + 랜덤이름 
+		// 저장될 파일이름 :  날짜 + 상품 이름 + 랜덤이름 
 		String savedName = format.format(today) + "_" + pname + "_" + originalName;
 		File file = new File(uploadPath, savedName);
 		// 실제 파일 저장

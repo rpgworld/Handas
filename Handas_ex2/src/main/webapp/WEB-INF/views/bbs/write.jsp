@@ -38,7 +38,7 @@ height: 300px;
 display: flex;
 justify-content: flex-end;
 }
-#write_btn_group input {
+#write_btn_group input, #write_btn_group a {
 margin-top: 10px;
 }
 </style>
@@ -57,17 +57,40 @@ margin-top: 10px;
             	<div id="write_form">
 	            	<table class="table-bordered">
 	            		<tr>
+	            			<th>카테고리</th>
+	            			<td>
+	            				<select class="form-control" name="category" style="height: 40px; width: 150px;">
+									<option value="all" selected>전체</option>
+									<option value="product">상품</option>
+									<option value="shipping">배송</option>
+									<option value="refund">환불</option>
+								</select>
+	            			</td>
+	            			<th colspan="2" style="width: 130px;">
+	            				<div class="form-check-inline">
+									<label class="form-check-label">
+										비밀글 체크&nbsp;&nbsp;<input style="margin-top: 3px;" type="checkbox" name="secret" class="form-check-input" value="1">
+									</label>
+								</div>
+	            			</th>
+	            		</tr>
+	            		<tr>
 	            			<th>제목</th>
-	            			<td><input type="text" class="form-control" name="title"></td>
+	            			<td colspan="3"><input type="text" class="form-control" name="title"></td>
 	            		</tr>
 	            		<tr>
 	            			<th>내용</th>
-	            			<td><textarea class="form-control" name="content"></textarea></td>
+	            			<td colspan="3"><textarea class="form-control" name="content"></textarea></td>
 	            		</tr>
 	            	</table>
 	            </div>
-	            <div id="write_btn_group">
-	            	<input type="submit" class="btn btn-primary" value="글쓰기">
+	            <div id="write_btn_group" style="display: flex; justify-content: space-between;">
+	            	<div>
+	            		<a href="${path }/bbs/list" class="btn btn-primary">목록으로</a>
+	            	</div>
+	            	<div>
+	            		<input type="submit" class="btn btn-primary" value="글쓰기">
+	            	</div>
 	            </div>
 	            </form>
 	    	</div>

@@ -53,7 +53,7 @@ margin-top: 10px;
         </div>
         <div class="row">
             <div class="col-sm-12">
-            	<form action="update" method="get">
+            	<form action="reply" method="get">
             	<input type="hidden" name="bnum" value="${dto.bnum }">
             	<input type="hidden" name="writer" value="${dto.writer }">
             	<div id="write_form">
@@ -78,11 +78,11 @@ margin-top: 10px;
 	            		</tr>
 	            		<tr>
 	            			<th>제목</th>
-	            			<td colspan="3"><input type="text" class="form-control" name="title" value="${dto.title }"></td>
+	            			<td colspan="3"><input type="text" class="form-control" name="title" value="원문제목 : ${dto.title }"></td>
 	            		</tr>
 	            		<tr>
 	            			<th>내용</th>
-	            			<td colspan="3"><textarea class="form-control" name="content">${dto.content }</textarea></td>
+	            			<td colspan="3"><textarea class="form-control" name="content">원문글&nbsp;:&nbsp;${dto.content }</textarea></td>
 	            		</tr>
 	            	</table>
 	            </div>
@@ -91,7 +91,7 @@ margin-top: 10px;
 	            		<a href="${path }/bbs/list" class="btn btn-primary" style="margin-top: 10px;">목록으로</a>
 	            	</div>
 	            	<div>
-	            		<input type="submit" class="btn btn-primary" value="수정하기">
+	            		<input type="submit" class="btn btn-primary" value="답글달기">
 	            	</div>
 	            </div>
 	            </form>

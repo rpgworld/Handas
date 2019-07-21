@@ -124,8 +124,21 @@ public class UserController {
 		return "redirect:loginForm";
 	}
 	
-	// 회원 탈퇴
+	// 더미 회원 생성
+	@RequestMapping(value="/user/dummyJoin", method=RequestMethod.POST)
+	public String dummyJoin(UserDto dto, RedirectAttributes redirect) {
+		UserDao dao = sqlSession.getMapper(UserDao.class);
+		
+		dto.setAddress1("06097");
+		dto.setAddress2("서울 강남구 봉은사로 403");
+		dto.setAddress3("개집");
+		
+		dao.join(dto);
+		
+		return "redirect:/user/list";
+	}
 	
+	// 회원 탈퇴
 	@RequestMapping(value="/user/read")
 	public String readForm(HttpSession session, Model model) {
 		logger.info("user/readForm()");
@@ -173,4 +186,69 @@ public class UserController {
 		redirect.addFlashAttribute("msgContent", "회원 정보 수정이 완료되었습니다.");
 		return "redirect:read";
 	}
+	
+	@RequestMapping(value="/user/list")
+	public String userList(HttpSession session, RedirectAttributes redirect, Model model) {
+		logger.info("user/list");
+		
+		String userID = (String) session.getAttribute("userID");
+		String role = (String) session.getAttribute("role");
+		if(userID == null || !role.equals("admin")) {
+			redirect.addAttribute("msgType", "경고창");
+			redirect.addAttribute("msgContent", "관리자 계정만 접근 가능합니다.");
+			return "redirect:/index";
+		}
+		
+		UserDao dao = sqlSession.getMapper(UserDao.class);
+		model.addAttribute("userList", dao.userList());
+		
+		return "user/list";
+	}
+	
+	// 권한 번경
+	@RequestMapping(value="/user/roleUpdate")
+	@ResponseBody
+	public String roleUpdate(HttpServletRequest request, HttpSession session, RedirectAttributes redirect) {
+		logger.info("roleUpdate");
+		
+		String yourUserID = (String) session.getAttribute("userID");
+		String yourRole = (String) session.getAttribute("role");
+		
+		if(yourUserID == null || !yourRole.equals("admin")) {
+			return "false";
+		}
+		
+		String userID = request.getParameter("userID");
+		String role = request.getParameter("role");
+		
+		UserDao dao = sqlSession.getMapper(UserDao.class);
+		dao.roleUpdate(role, userID);
+
+		return "true";
+	}
+	
+	// 회원 탈퇴
+	@RequestMapping(value="/user/delete")
+	public String userDelete(HttpServletRequest request, HttpSession session) {
+		logger.info("user/delete");
+		
+		String userID = request.getParameter("userID");
+		String role = (String) session.getAttribute("role");
+		
+		if(userID == null || !role.equals("admin")) {
+			return "redirect:/index";
+		}
+		
+		UserDao dao = sqlSession.getMapper(UserDao.class);
+		dao.userDelete(userID);
+		
+		return "redirect:/user/list";
+	}
 }
+
+
+
+
+
+
+

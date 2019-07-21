@@ -43,7 +43,7 @@ function id_check_reset() {
 // 아이디 중복체크
 function id_check() {
 	
-	var userID = $('.join_id').val();
+	var userID = jQuery.trim($('.join_id').val());
 	
 	if(userID == '') {
 		modal_alert('경고창', '아이디를 입력해주세요.');
@@ -53,15 +53,15 @@ function id_check() {
 	// 영 숫자만 입력 가능한 정규식
     var numPattern = /^[A-Za-z0-9+]*$/;
     if (!numPattern.test(userID)) {
-        alert("영숫자만 입력할 수 있습니다.");
+    	modal_alert('경고창', '영숫자만 입력할 수 있습니다.');
         return false;
     }
-	
+
 	$.ajax({
 		type : 'GET',
 		data : {'userID' :  userID},
-		url : '/user/idCheck',
-		//url : '${path}/user/idCheck',
+		//url : '/user/idCheck',
+		url : '/handas/user/idCheck',
 		dataType : 'json',
 		contentType:'application/json; charset=utf-8',
 		success : function(result) {
@@ -123,7 +123,7 @@ function join_check() {
 		var form = $('.form-control');
 		var num = form.length;
 		for(var i = 0; i < num; i++) {
-			if($('.form-control')[i].value == '') {
+			if(jQuery.trim($('.form-control')[i].value) == '') {
 				modal_alert('경고창', '입력하지 않은 정보가 있습니다.');
 				event.preventDefault();
 			}
@@ -189,6 +189,7 @@ function toast_alert(target, top_value, left_value, msgTop, msgBody) {
 
 // 메시지 팝업
 function message_alert(msgType, msgContent){
+	$('.alert').attr('class', 'alert alert-primary alert-dismissible fade show');
 	if(msgType == '성공') {
 		$('#alert_body').html('<strong>Success!</strong>&nbsp;&nbsp;' + msgContent);
 		$('.alert').attr('class', 'alert alert-primary alert-dismissible fade show');

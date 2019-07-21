@@ -17,6 +17,7 @@ public class OrderDto {
 	private int totalPrice;
 	private Date odate;
 	private int sample_pnum;
+	private int visible;
 	
 	private String pname; // 상품 이름 하나,
 	private String img; // 상품 이미지 이름 하나.
@@ -121,6 +122,12 @@ public class OrderDto {
 	}
 	public void setOdateFormat(String odateFormat) {
 		this.odateFormat = odateFormat;
+	}
+	public int getVisible() {
+		return visible;
+	}
+	public void setVisible(int visible) {
+		this.visible = visible;
 	}
 	
 	

@@ -66,7 +66,7 @@ width: 15%;
 			    					<td>${dto.odateFormat }</td>
 			    					<td style="text-align: left;"><a style="text-decoration: none;" href="${path }/shop/orderRead?orderNo=${dto.orderNo }"><img style="width: 70px;" class="card-img-top rounded" src="${path }/resources/images/shop_images/${dto.img}" alt="Card image">&nbsp;&nbsp;${dto.pname }<c:if test="${dto.totalCnt > 1}">외 ${dto.totalCnt - 1 }개</c:if></a></td>
 			    					<td><fmt:formatNumber value="${dto.totalPrice }" pattern="#,###" />원</td>
-			    					<td><a href="${path }/shop/orderRead?orderNo=${dto.orderNo }" style="font-size: 0.85em; width: 120px; margin-bottom: 4px;" class="btn btn-primary" >주문내역조회</a><a href="${path }/shop/orderDelete?orderNo=${dto.orderNo }" style="font-size: 0.85em; width: 120px; margin-bottom: 4px;" class="btn btn-danger" >주문내역삭제</a></td>
+			    					<td><a href="${path }/shop/orderRead?orderNo=${dto.orderNo }" style="font-size: 0.85em; width: 120px; margin-bottom: 4px;" class="btn btn-primary" >주문내역조회</a><a href="${path }/shop/orderDelete?num=${dto.num }" style="font-size: 0.85em; width: 120px; margin-bottom: 4px;" class="btn btn-danger" >주문내역삭제</a></td>
 				    			</tr>
 		    				</c:forEach>
 		    			</tbody>

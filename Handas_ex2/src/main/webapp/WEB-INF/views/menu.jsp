@@ -64,16 +64,22 @@
 		                    <c:otherwise>
 		                    	<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
 		                        <c:if test="${sessionScope.role eq 'admin' }">
-		                        <img style="width: 17px;" src="${path}/resources/images/s_images/admin.png"> 
+		                       		<i class="fas fa-user-secret"></i>
 		                        </c:if>
-		                        <c:if test="${sessionScope.role ne 'admin' }">
-		                        <img style="width: 17px;" src="${path}/resources/images/s_images/user.png"> 
+		                        <c:if test="${sessionScope.role eq 'vip' }">
+		                        	<i class="fas fa-user-astronaut"></i>
+		                        </c:if>
+		                        <c:if test="${sessionScope.role eq 'user' }">
+		                        	<i class="fas fa-user"></i>
 		                        </c:if>
 		                        &nbsp;${sessionScope.userID } 님
 		                        </a>
 		                        <div class="dropdown-menu">
 		                       	 	<a class="dropdown-item" href="${path }/shop/cartForm">장바구니</a>
 		                            <a class="dropdown-item" href="${path }/shop/orderList">주문내역</a>
+		                            <c:if test="${sessionScope.role == 'admin' }">
+		                            	<a class="dropdown-item" href="${path }/user/list">회원관리</a>
+		                            </c:if>
 		                            <a class="dropdown-item" href="${path }/user/read">회원정보보기</a>
 		                            <a class="dropdown-item" href="${path }/user/logout">로그아웃</a>
 		                        </div>

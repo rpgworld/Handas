@@ -56,6 +56,7 @@ public class ShopController {
 		return "shop/list";
 	}
 	
+	// 상품 상세보기
 	@RequestMapping(value="/shop/read")
 	public String shopRead(HttpServletRequest request, Model model) {
 		logger.info("shopRead()");
@@ -83,6 +84,14 @@ public class ShopController {
 	@RequestMapping(value = "/shop/update", method = RequestMethod.POST)
 	public String update(ShopDto dto, @RequestParam(value="file", defaultValue = "file") MultipartFile file, RedirectAttributes redirect, HttpSession session) throws Exception {
 		logger.info("shopUpdate()");
+		
+		String userID = (String) session.getAttribute("userID");
+		String role = (String) session.getAttribute("role");
+		if(userID == null || !role.equals("admin")) {
+			redirect.addFlashAttribute("msgType", "경고창");
+			redirect.addFlashAttribute("msgContent", "상품 수정은 관리자 계정만 가능합니다.");
+			return "redirect:/index"; 
+		}
 		
 		logger.info("originalName: " + file.getOriginalFilename());
 		logger.info("size: " + file.getSize());
@@ -136,8 +145,16 @@ public class ShopController {
 	}
 	
 	@RequestMapping(value="/shop/writeForm")
-	public String shopWriteForm() {
+	public String shopWriteForm(HttpSession session, RedirectAttributes redirect) {
 		logger.info("shopWriteForm()");
+		
+		String userID = (String) session.getAttribute("userID");
+		String role = (String) session.getAttribute("role");
+		if(userID == null || !role.equals("admin")) {
+			redirect.addFlashAttribute("msgType", "경고창");
+			redirect.addFlashAttribute("msgContent", "상품 등록은 관리자 계정만 가능합니다.");
+			return "redirect:/index"; 
+		}
 		
 		return "shop/write";
 	}
@@ -270,9 +287,10 @@ public class ShopController {
 	
 	// 주문내역 불러오기
 	@RequestMapping(value="/shop/orderList")
-	public String orderList(HttpSession session, Model model) {
+	public String orderList(HttpSession session, Model model, RedirectAttributes redirect) {
 		
 		String userID = (String) session.getAttribute("userID");
+		if(userID == null) { return "redirect:/index"; }
 		
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
 		
@@ -281,20 +299,23 @@ public class ShopController {
 	}
 	
 	@RequestMapping(value="/shop/orderRead")
-	public String orderList(@RequestParam(value="orderNo", defaultValue="0") int orderNo, Model model) {
+	public String orderList(@RequestParam(value="orderNo", defaultValue="0") int orderNo, Model model, HttpSession session) {
+		
+		String userID = (String) session.getAttribute("userID");
+		if(userID == null) { return "redirect:/index"; }
 		
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
 		
 		System.out.println(dao.getOrderD(orderNo).size());
-		model.addAttribute("list", dao.getOrderD(orderNo));
+		model.addAttribute("orderList", dao.getOrderD(orderNo));
+		model.addAttribute("dto", dao.getOrderRead(orderNo));
 		return "shop/orderRead";
 	}
 	
 	@RequestMapping(value="/shop/orderDelete")
-	public String orderDelete(@RequestParam(value="orderNo", defaultValue="0") int orderNo) {
+	public String orderDelete(@RequestParam(value="num", defaultValue="0") int num) {
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
-		// 주문내역삭제
-		// 주문상세내역삭제
+		dao.orderDelete(num);
 		
 		return "redirect:/shop/orderList";
 	}
@@ -305,10 +326,9 @@ public class ShopController {
 	public String cart(CartDto dto, HttpSession session) {
 		logger.info("cart()");
 		
-		String userID = "";
-		if(session.getAttribute("userID") != null) {
-			userID = (String) session.getAttribute("userID");
-		}
+		String userID = (String) session.getAttribute("userID");
+		if(userID == null) { return "redirect:/index"; }
+
 		dto.setUserID(userID);
 		
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
@@ -329,10 +349,10 @@ public class ShopController {
 		
 		session.setAttribute("menu", "user");
 		
-		String userID = "";
-		if(session.getAttribute("userID") != null) {
-			userID = (String) session.getAttribute("userID");
-		}
+		String userID = (String) session.getAttribute("userID");
+		if(userID == null) { return "redirect:/index"; }
+		
+		
 		ShopDao dao = sqlSession.getMapper(ShopDao.class);
 		model.addAttribute("list", dao.cartList(userID));
 		

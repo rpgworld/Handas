@@ -35,6 +35,11 @@ public interface ShopDao {
 	public OrderDto getOrder(String userID, int orderNo);
 	public ArrayList<OrderDDto> getOrderD(int orderNo);
 	
+	public OrderDto getOrderRead(int orderNo);
+	
+	// 상품평 삭제 (visible = 0 으로 변경)
+	public void orderDelete(int num);
+	
 	// 상품평
 	public void shopComment(CommentDto dto);
 	public ArrayList<CommentDto> shopCommentList(int pnum); 
