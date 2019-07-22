@@ -50,6 +50,9 @@ public class ShopController {
 		int total = dao.shopCnt(); // 전체 게시물 수
 		PageMaker paging = new PageMaker(curPage, total, pageView);
 		
+		System.out.println(paging.getStart());
+		System.out.println(paging.getEnd());
+		
 		model.addAttribute("list", dao.shopList(paging));
 		model.addAttribute("paging", paging);
 		

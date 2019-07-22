@@ -41,7 +41,7 @@ public class PageMaker {
 		// 글번호 시작 번호, 끝번호 구하기
 		this.end = curPage * pageView;
 		if(this.end > total) { this.end = total; }
-		this.start = (int) Math.ceil(this.end / 10.0) * 10 - 9;
+		this.start = (int) (Math.ceil(1.0 * this.end / pageView) * pageView - pageView) + 1;
 		if(this.start < 1) { this.start = 1; }
 	}
 

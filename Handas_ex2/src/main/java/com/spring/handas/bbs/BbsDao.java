@@ -18,4 +18,7 @@ public interface BbsDao {
 	//답글
 	public int replyChk(int ref);
 	public void reply(BbsDto dto);
+	
+	// 해당글이 답글인지 체크
+	public int levChk(int bnum);
 }

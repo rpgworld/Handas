@@ -120,7 +120,14 @@ $('document').ready(function(){
 			    						<c:if test="${list.lev > 0 }">└&nbsp;</c:if>
 			    						<a href="${path}/bbs/read?bnum=${list.bnum}&writer=${list.writer }&secret=${list.secret }">${list.title }</a>
 			    					</td>
-			    					<td>${list.writer }</td>
+			    					<td>
+			    						<c:if test="${list.lev > 0 }">
+			    							관리자
+			    						</c:if>
+			    						<c:if test="${list.lev eq 0 }">
+			    							${list.writer }
+			    						</c:if>	
+			    					</td>
 			    					<td>${list.writeDate }</td>
 			    					<td>${list.hit }</td>
 				    			</tr>

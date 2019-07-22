@@ -111,12 +111,13 @@ public class BbsController {
 		BbsDao dao = sqlSession.getMapper(BbsDao.class);
 		
 		// 삭제는 로그인한 회원 중 작성자 본인이거나, 관리자 계정일 경우 가능
-		if(userID != null && (writer.equals(userID)) || role.equals("admin")) {
-			dao.bbsDelete(Integer.parseInt(bnum));
-		} else {
+		if(userID == null || (!writer.equals(userID)) || !role.equals("admin")) {
 			redirect.addFlashAttribute("msgType", "경고창");
 			redirect.addFlashAttribute("msgContent", "삭제 권한이 없습니다.");
+			return "redirect:/bbs/read?bnum=" + bnum;
 		}
+		
+		dao.bbsDelete(Integer.parseInt(bnum));
 		
 		return "redirect:/bbs/list"; 
 	}
@@ -131,27 +132,40 @@ public class BbsController {
 		
 		// 로그인 아이디
 		String userID = (String) session.getAttribute("userID");
+		String role = (String) session.getAttribute("role");
 		
 		BbsDao dao = sqlSession.getMapper(BbsDao.class);
 		
-		// 수정은 로그인한 회원 중 작성자 본인만 가능
-		if(userID != null && writer.equals(userID)) {	
-			model.addAttribute("dto", dao.bbsRead(Integer.parseInt(bnum)));
-		} else {
+		// 답글인지 체크
+		int lev = dao.levChk(Integer.parseInt(bnum));
+		
+		System.out.println(lev);
+		System.out.println(role);
+		
+		// 수정은 로그인한 회원 중 작성자 본인만 가능 // 답글은 관리자 계정만 가능
+		if(( lev == 0 && (userID == null || !writer.equals(userID))) || (lev > 0 && !role.equals("admin"))) {
 			redirect.addFlashAttribute("msgType", "경고창");
 			redirect.addFlashAttribute("msgContent", "수정 권한이 없습니다.");
 			return "redirect:/bbs/read?bnum=" + bnum;
 		}
 		
+		
+		
+		model.addAttribute("dto", dao.bbsRead(Integer.parseInt(bnum)));
+		
 		return "bbs/update";
 	}
 	
 	@RequestMapping(value="/bbs/update")
-	public String bbsUpdate(BbsDto dto, RedirectAttributes redirect, HttpSession session) {
+	public String bbsUpdate(BbsDto dto, RedirectAttributes redirect, HttpSession session
+			, @RequestParam(value="secret", defaultValue="0") int secret
+			, @RequestParam(value="category", defaultValue="all") String category) {
 		
 		// 로그인 아이디
 		String userID = (String) session.getAttribute("userID");
 		
+		dto.setSecret(secret);
+		dto.setCategory(category);
 		BbsDao dao = sqlSession.getMapper(BbsDao.class);
 		
 		// 수정은 로그인한 회원 중 작성자 본인만 가능

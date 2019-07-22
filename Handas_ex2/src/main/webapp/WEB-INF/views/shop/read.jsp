@@ -160,8 +160,8 @@ $('document').ready(function(){
 			$.ajax({
 				type : 'POST',
 				data : query,
-				//url : '/shop/cart',
-				url : '${path}/shop/cart',
+				url : '/shop/cart',
+				//url : '${path}/shop/cart',
 				dataType : 'json',
 				success : function(result) {
 					
@@ -219,8 +219,8 @@ $('document').ready(function(){
 		$.ajax({
 			type : 'GET',
 			data : query,
-			//url : '/shop/comment',
-			url : '${path}/shop/comment',
+			url : '/shop/comment',
+			//url : '${path}/shop/comment',
 			dataType : 'json',
 			success : function(result) {
 				
@@ -255,8 +255,8 @@ function commentDelete(num, id){
 	$.ajax({
 		type : 'GET',
 		data : query,
-		//url : '/shop/commentDelete',
-		url : '${path}/shop/commentDelete',
+		url : '/shop/commentDelete',
+		//url : '${path}/shop/commentDelete',
 		dataType : 'json',
 		success : function(result) {
 			
@@ -282,8 +282,8 @@ function commentList() {
 	$.ajax({
 		type : 'GET',
 		data : query,
-		//url : '/shop/commentList',
-		url : '${path}/shop/commentList',
+		url : '/shop/commentList',
+		//url : '${path}/shop/commentList',
 		dataType : 'json',
 		success : function(data) {
 			var html = '';

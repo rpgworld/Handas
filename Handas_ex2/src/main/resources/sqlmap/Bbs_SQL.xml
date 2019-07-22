@@ -50,7 +50,7 @@
 	
 	<!-- 글수정 -->
 	<update id="bbsUpdate" parameterType="com.spring.handas.bbs.BbsDto">
-		UPDATE handas_bbs SET title = #{title}, content = #{content} WHERE bnum = #{bnum}
+		UPDATE handas_bbs SET title = #{title}, content = #{content}, secret = #{secret}, category = #{category} WHERE bnum = #{bnum}
 	</update>
 	
 	<!-- 답글 존재여부 체크 -->
@@ -62,4 +62,8 @@
 	<insert id="reply" parameterType="com.spring.handas.bbs.BbsDto">
 		INSERT INTO handas_bbs VALUES(handas_bbs_seq.nextval, #{writer}, #{title}, #{content}, sysdate, 0, #{bnum}, 1, 1, #{category}, #{secret})
 	</insert>
+	
+	<select id="levChk" resultType="int">
+		SELECT lev FROM handas_bbs WHERE bnum = #{bnum }
+	</select>
 </mapper>

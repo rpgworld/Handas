@@ -56,8 +56,8 @@ $('document').ready(function(){
 		$.ajax({
 			type : 'POST',
 			data : {'role' : role, 'userID' : userID},
-			//url : '/shop/cartDelete',
-			url : '${path}/user/roleUpdate', 
+			url : '/user/roleUpdate',
+			//url : '${path}/user/roleUpdate', 
 			dataType : 'json',
 			success : function(result) {
 				if(result == true) {
@@ -132,12 +132,12 @@ $('document').ready(function(){
 			    					<td><fmt:formatNumber value="${dto.totalPurchase }" pattern="#,###" />원</td>
 			    					<td style="padding: 5px;">
 			    						<c:if test="${dto.userID eq 'aaa' }">
-			    							<select class="form-control" id="${dto.userID }" style="height: 30px;" disabled>
+			    							<select class="form-control" id="${dto.userID }" style="height: 30px; font-size: 0.85em;" disabled>
 												<option>MASTER</option>
 											</select>
 			    						</c:if>
 			    						<c:if test="${dto.userID ne 'aaa' }">
-											<select class="form-control" id="${dto.userID }" style="height: 30px;">
+											<select class="form-control" id="${dto.userID }" style="height: 30px; font-size: 0.85em;">
 												<option ${dto.role eq 'user' ? 'selected' : '' }>USER</option>
 												<option ${dto.role eq 'vip' ? 'selected' : '' }>VIP</option>
 												<option ${dto.role eq 'admin' ? 'selected' : '' }>ADMIN</option>
