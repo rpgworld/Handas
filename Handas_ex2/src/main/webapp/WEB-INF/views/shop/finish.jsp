@@ -77,6 +77,6 @@ color: #6E6E6E;
     </div>
     
     
-    <%@ include file="../modal.jsp" %>
+    <%@ include file="../footer.jsp" %>
 </body>
 </html>

@@ -75,6 +75,6 @@ var curPage = ${paging.curPage};
             </div>
         </div>
     </div>
-    <%@ include file="../modal.jsp" %>
+    <%@ include file="../footer.jsp" %>
 </body>
 </html>

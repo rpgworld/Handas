@@ -233,6 +233,6 @@ function purChk() {
     </div>
     
     
-    <%@ include file="../modal.jsp" %>
+    <%@ include file="../footer.jsp" %>
 </body>
 </html>

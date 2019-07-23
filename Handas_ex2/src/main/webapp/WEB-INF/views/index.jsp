@@ -55,13 +55,13 @@
                  </div>
                  <div id="sub_slider" style="display:flex; flex-flow: row nowrap">
                  	<div style="width: 33.33%; height: 210px; background: red;">
-                 		<iframe style="width: 100%; height: 210px;" src="https://www.youtube.com/embed/BIbTM4bZHUM?list=PLhVQllHgkD4a9pes__-_PSdN-5uhVCEfX" frameborder="0" allowfullscreen></iframe>
+                 		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/ERBgdSHvnQQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                  	</div>
                  	<div style="width: 33.33%; height: 210px; background: blue;">
-                 		<iframe style="width: 100%; height: 210px;" src="https://www.youtube.com/embed/BIbTM4bZHUM?list=PLhVQllHgkD4a9pes__-_PSdN-5uhVCEfX" frameborder="0" allowfullscreen></iframe>
+                 		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/o7EMGKszg5k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                  	</div>
                  	<div style="width: 33.33%; height: 210px; background: yellow;">
-                 		<iframe style="width: 100%; height: 210px;" src="https://www.youtube.com/embed/BIbTM4bZHUM?list=PLhVQllHgkD4a9pes__-_PSdN-5uhVCEfX" frameborder="0" allowfullscreen></iframe>
+                 		<iframe width="100%" height="100%" src="https://www.youtube.com/embed/ZwgiT4DYrs8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                  	</div>
                  </div>
             </div>
@@ -76,6 +76,6 @@
         </div>
     </div>
     
-    <%@ include file="modal.jsp" %>
+    <%@ include file="footer.jsp" %>
 </body>
 </html>

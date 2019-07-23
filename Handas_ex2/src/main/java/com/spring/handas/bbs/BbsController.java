@@ -139,17 +139,12 @@ public class BbsController {
 		// 답글인지 체크
 		int lev = dao.levChk(Integer.parseInt(bnum));
 		
-		System.out.println(lev);
-		System.out.println(role);
-		
 		// 수정은 로그인한 회원 중 작성자 본인만 가능 // 답글은 관리자 계정만 가능
 		if(( lev == 0 && (userID == null || !writer.equals(userID))) || (lev > 0 && !role.equals("admin"))) {
 			redirect.addFlashAttribute("msgType", "경고창");
 			redirect.addFlashAttribute("msgContent", "수정 권한이 없습니다.");
 			return "redirect:/bbs/read?bnum=" + bnum;
 		}
-		
-		
 		
 		model.addAttribute("dto", dao.bbsRead(Integer.parseInt(bnum)));
 		
@@ -163,19 +158,23 @@ public class BbsController {
 		
 		// 로그인 아이디
 		String userID = (String) session.getAttribute("userID");
+		String role = (String) session.getAttribute("role");
 		
 		dto.setSecret(secret);
 		dto.setCategory(category);
 		BbsDao dao = sqlSession.getMapper(BbsDao.class);
 		
-		// 수정은 로그인한 회원 중 작성자 본인만 가능
-		if(userID != null && dto.getWriter().equals(userID)) {	
-			dao.bbsUpdate(dto);
-		} else {
+		// 답글인지 체크
+		int lev = dao.levChk(dto.getBnum());
+		
+		// 수정은 로그인한 회원 중 작성자 본인만 가능 // 답글은 관리자 계정만 가능
+		if(( lev == 0 && (userID == null || !dto.getWriter().equals(userID))) || (lev > 0 && !role.equals("admin"))) {
 			redirect.addFlashAttribute("msgType", "경고창");
 			redirect.addFlashAttribute("msgContent", "수정 권한이 없습니다.");
 			return "redirect:/bbs/read?bnum=" + dto.getBnum();
 		}
+		
+		dao.bbsUpdate(dto);
 		
 		return "redirect:/bbs/read?bnum=" + dto.getBnum();
 	}

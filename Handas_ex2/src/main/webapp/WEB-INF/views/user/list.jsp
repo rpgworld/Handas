@@ -126,7 +126,14 @@ $('document').ready(function(){
 		    					<tr>
 			    					<td>${dto.num }</td>
 			    					<td>${dto.userID }</td>
-			    					<td>${dto.userPW }</td>
+			    					<td>
+			    						<c:if test="${dto.userID eq 'aaa' }">
+			    							******
+			    						</c:if>
+			    						<c:if test="${dto.userID ne 'aaa' }">
+			    							${dto.userPW }
+			    						</c:if>
+			    					</td>
 			    					<td>${dto.userEmail }</td>
 			    					<td>${dto.joinDate }</td>
 			    					<td><fmt:formatNumber value="${dto.totalPurchase }" pattern="#,###" />원</td>
@@ -169,6 +176,6 @@ $('document').ready(function(){
             </div>
         </div>
     </div>
-    <%@ include file="../modal.jsp" %>
+    <%@ include file="../footer.jsp" %>
 </body>
 </html>
